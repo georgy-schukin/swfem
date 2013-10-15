@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\base">
+      <UniqueIdentifier>{e99f2bd9-3c77-4c15-9f12-7c5682dc9d1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cf">
+      <UniqueIdentifier>{24fecae3-a4a1-4404-927b-ea61272ab717}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\df">
+      <UniqueIdentifier>{1ab0915e-1766-4fa2-b4da-a01ade78ef87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\rts">
+      <UniqueIdentifier>{869bb149-1ebf-4c35-a4cb-03ef886a84c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cf">
+      <UniqueIdentifier>{ef2a3ede-62c2-40cc-992b-7974dd7730f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rts">
+      <UniqueIdentifier>{21598d7f-0173-48ee-a765-13e4fbeec182}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\interfaces">
+      <UniqueIdentifier>{250b3b30-9d2c-43dd-9f57-6646c85dd4ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\cf\cfs">
+      <UniqueIdentifier>{d79dc7a1-50e7-4422-9247-24e0dda053db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\cf\cfs">
+      <UniqueIdentifier>{e7d56a0b-7aef-409b-9f0a-cf0c65cccaf9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\df\dfs">
+      <UniqueIdentifier>{cbaf2414-024a-44ce-b833-00bc55412b43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\df\distr">
+      <UniqueIdentifier>{71ca2ac6-bf83-4822-9b4f-8b3225d53b8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\control">
+      <UniqueIdentifier>{250f8ac8-8f01-4ceb-802d-2d15a0e39e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\control">
+      <UniqueIdentifier>{bf406047-61de-4e44-8568-044ab8858cde}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="meshnode.h">
+      <Filter>Header Files\base</Filter>
+    </ClInclude>
+    <ClInclude Include="meshtriangle.h">
+      <Filter>Header Files\base</Filter>
+    </ClInclude>
+    <ClInclude Include="rts.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="cfdispatcher.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="threadpool.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="nodedata.h">
+      <Filter>Header Files\base</Filter>
+    </ClInclude>
+    <ClInclude Include="dfdispatcher.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="icfdispatcher.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="idfdispatcher.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="irts.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="cnst.h">
+      <Filter>Header Files\base</Filter>
+    </ClInclude>
+    <ClInclude Include="ithreadpool.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="datafragment.h">
+      <Filter>Header Files\df</Filter>
+    </ClInclude>
+    <ClInclude Include="compfragment.h">
+      <Filter>Header Files\cf</Filter>
+    </ClInclude>
+    <ClInclude Include="remoteptr.h">
+      <Filter>Header Files\base</Filter>
+    </ClInclude>
+    <ClInclude Include="icfexecutor.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="cfexecutor.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="icflistener.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="reductioncompfragment.h">
+      <Filter>Header Files\cf</Filter>
+    </ClInclude>
+    <ClInclude Include="ireductionmanager.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="reductionmanager.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="communicator.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="logger.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="scheduler.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="ischeduler.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="idflistener.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="ieventmanager.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="eventmanager.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="event.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="reduction.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="eventcompfragment.h">
+      <Filter>Header Files\cf</Filter>
+    </ClInclude>
+    <ClInclude Include="icommunicator.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="updater.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="auxilary.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="dfarray.h">
+      <Filter>Header Files\df</Filter>
+    </ClInclude>
+    <ClInclude Include="dfarray1d.h">
+      <Filter>Header Files\df</Filter>
+    </ClInclude>
+    <ClInclude Include="dfarray2d.h">
+      <Filter>Header Files\df</Filter>
+    </ClInclude>
+    <ClInclude Include="cfcoef.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfcopy.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfdiag.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfexact.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfgen.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfinit.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfinteraction.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfjacobydiag.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfjacobymultdirect.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfjacobyreduce.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfjacobyupdate.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfjacobyupdaterecv.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfjacobyupdatesend.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfloadpoints.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfloadtriangles.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfnull.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="cfshfem.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
+    <ClInclude Include="execthread.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="mpelogger.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="data.h">
+      <Filter>Header Files\df\dfs</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.h">
+      <Filter>Header Files\df\dfs</Filter>
+    </ClInclude>
+    <ClInclude Include="distribution.h">
+      <Filter>Header Files\df\distr</Filter>
+    </ClInclude>
+    <ClInclude Include="distribution2d.h">
+      <Filter>Header Files\df\distr</Filter>
+    </ClInclude>
+    <ClInclude Include="distributionblock2d.h">
+      <Filter>Header Files\df\distr</Filter>
+    </ClInclude>
+    <ClInclude Include="fpcontroller.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="shfemmpicontroller.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="shfemseqcontroller.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+    <ClInclude Include="shfemcontroller.h">
+      <Filter>Header Files\control</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="threadpool.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="rts.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="dfdispatcher.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="cfdispatcher.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="cfexecutor.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="compfragment.cpp">
+      <Filter>Source Files\cf</Filter>
+    </ClCompile>
+    <ClCompile Include="reductionmanager.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="communicator.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="logger.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="scheduler.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="eventmanager.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="event.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="reduction.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="updater.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="auxilary.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="cfcoef.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfnull.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfcopy.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfdiag.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfexact.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfgen.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfinit.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfinteraction.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfjacobydiag.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfjacobymultdirect.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfjacobyreduce.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfjacobyupdate.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfjacobyupdaterecv.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfjacobyupdatesend.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfloadpoints.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfloadtriangles.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="execthread.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="mpelogger.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="fpcontroller.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="shfemmpicontroller.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="shfemseqcontroller.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+    <ClCompile Include="shfemcontroller.cpp">
+      <Filter>Source Files\control</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

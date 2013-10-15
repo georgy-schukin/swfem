@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{16E00106-BBC7-47C0-8B0B-599D547265E1}</ProjectGuid>
+    <RootNamespace>SWFEM_Frag</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>C:\Program Files\Microsoft HPC Pack 2008 R2\Inc;D:\Distribs\boost\boost_1_54_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files\Microsoft HPC Pack 2008 R2\Lib\i386;D:\Distribs\boost\boost_1_54_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>msmpi.lib %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>C:\Program Files\Microsoft HPC Pack 2008 R2\Inc;D:\Distribs\boost\boost_1_54_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>C:\Program Files\Microsoft HPC Pack 2008 R2\Lib\i386;D:\Distribs\boost\boost_1_54_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>msmpi.lib %(AdditionalOptions)</AdditionalOptions>
+      <Profile>true</Profile>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="auxilary.h" />
+    <ClInclude Include="cfcoef.h" />
+    <ClInclude Include="cfcopy.h" />
+    <ClInclude Include="cfdiag.h" />
+    <ClInclude Include="cfexact.h" />
+    <ClInclude Include="cfexecutor.h" />
+    <ClInclude Include="cfinteraction.h" />
+    <ClInclude Include="cfgen.h" />
+    <ClInclude Include="cfjacobydiag.h" />
+    <ClInclude Include="cfdispatcher.h" />
+    <ClInclude Include="cfinit.h" />
+    <ClInclude Include="cfjacobymultdirect.h" />
+    <ClInclude Include="cfjacobyreduce.h" />
+    <ClInclude Include="cfjacobyupdate.h" />
+    <ClInclude Include="cfjacobyupdaterecv.h" />
+    <ClInclude Include="cfjacobyupdatesend.h" />
+    <ClInclude Include="cfloadpoints.h" />
+    <ClInclude Include="cfloadtriangles.h" />
+    <ClInclude Include="cfnull.h" />
+    <ClInclude Include="cfshfem.h" />
+    <ClInclude Include="communicator.h" />
+    <ClInclude Include="datafragment.h" />
+    <ClInclude Include="cnst.h" />
+    <ClInclude Include="data.h" />
+    <ClInclude Include="compfragment.h" />
+    <ClInclude Include="dfarray.h" />
+    <ClInclude Include="dfarray1d.h" />
+    <ClInclude Include="dfarray2d.h" />
+    <ClInclude Include="dfdispatcher.h" />
+    <ClInclude Include="distribution.h" />
+    <ClInclude Include="distribution2d.h" />
+    <ClInclude Include="distributionblock2d.h" />
+    <ClInclude Include="event.h" />
+    <ClInclude Include="eventcompfragment.h" />
+    <ClInclude Include="eventmanager.h" />
+    <ClInclude Include="execthread.h" />
+    <ClInclude Include="fpcontroller.h" />
+    <ClInclude Include="icfdispatcher.h" />
+    <ClInclude Include="icflistener.h" />
+    <ClInclude Include="icfexecutor.h" />
+    <ClInclude Include="icommunicator.h" />
+    <ClInclude Include="idfdispatcher.h" />
+    <ClInclude Include="idflistener.h" />
+    <ClInclude Include="ieventmanager.h" />
+    <ClInclude Include="ireductionmanager.h" />
+    <ClInclude Include="irts.h" />
+    <ClInclude Include="ischeduler.h" />
+    <ClInclude Include="ithreadpool.h" />
+    <ClInclude Include="logger.h" />
+    <ClInclude Include="mesh.h" />
+    <ClInclude Include="meshnode.h" />
+    <ClInclude Include="meshtriangle.h" />
+    <ClInclude Include="mpelogger.h" />
+    <ClInclude Include="nodedata.h" />
+    <ClInclude Include="reduction.h" />
+    <ClInclude Include="reductioncompfragment.h" />
+    <ClInclude Include="reductionmanager.h" />
+    <ClInclude Include="remoteptr.h" />
+    <ClInclude Include="rts.h" />
+    <ClInclude Include="scheduler.h" />
+    <ClInclude Include="shfemmpicontroller.h" />
+    <ClInclude Include="shfemseqcontroller.h" />
+    <ClInclude Include="shfemcontroller.h" />
+    <ClInclude Include="threadpool.h" />
+    <ClInclude Include="timer.h" />
+    <ClInclude Include="updater.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="auxilary.cpp" />
+    <ClCompile Include="cfcoef.cpp" />
+    <ClCompile Include="cfcopy.cpp" />
+    <ClCompile Include="cfdiag.cpp" />
+    <ClCompile Include="cfdispatcher.cpp" />
+    <ClCompile Include="cfexact.cpp" />
+    <ClCompile Include="cfexecutor.cpp" />
+    <ClCompile Include="cfinteraction.cpp" />
+    <ClCompile Include="cfgen.cpp" />
+    <ClCompile Include="cfjacobydiag.cpp" />
+    <ClCompile Include="cfinit.cpp" />
+    <ClCompile Include="cfjacobymultdirect.cpp" />
+    <ClCompile Include="cfjacobyreduce.cpp" />
+    <ClCompile Include="cfjacobyupdate.cpp" />
+    <ClCompile Include="cfjacobyupdaterecv.cpp" />
+    <ClCompile Include="cfjacobyupdatesend.cpp" />
+    <ClCompile Include="cfloadpoints.cpp" />
+    <ClCompile Include="cfloadtriangles.cpp" />
+    <ClCompile Include="cfnull.cpp" />
+    <ClCompile Include="communicator.cpp" />
+    <ClCompile Include="compfragment.cpp" />
+    <ClCompile Include="dfdispatcher.cpp" />
+    <ClCompile Include="event.cpp" />
+    <ClCompile Include="eventmanager.cpp" />
+    <ClCompile Include="execthread.cpp" />
+    <ClCompile Include="fpcontroller.cpp" />
+    <ClCompile Include="logger.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="mpelogger.cpp" />
+    <ClCompile Include="reduction.cpp" />
+    <ClCompile Include="reductionmanager.cpp" />
+    <ClCompile Include="rts.cpp" />
+    <ClCompile Include="scheduler.cpp" />
+    <ClCompile Include="shfemmpicontroller.cpp" />
+    <ClCompile Include="shfemseqcontroller.cpp" />
+    <ClCompile Include="shfemcontroller.cpp" />
+    <ClCompile Include="threadpool.cpp" />
+    <ClCompile Include="updater.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
