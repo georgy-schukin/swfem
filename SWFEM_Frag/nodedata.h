@@ -10,6 +10,17 @@ public:
 public:
 	NodeData() : u(0), v(0), xi(0) {} 
 	~NodeData() {}
+
+	void operator=(const NodeData& dt) {
+		u = dt.u;
+		v = dt.v;
+		xi = dt.xi;
+	}
+	void operator+=(const NodeData& dt) {
+		u += dt.u;
+		v += dt.v;
+		xi += dt.xi;
+	}
 };
 
 class NodeDataCoef {

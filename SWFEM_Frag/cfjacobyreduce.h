@@ -2,7 +2,7 @@
 
 #include "reductioncompfragment.h"
 #include "data.h"
-#include "mesh.h"
+#include "meshfragment.h"
 
 /**
 * Count part of local reduction

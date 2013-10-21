@@ -1,7 +1,7 @@
 #pragma once
 
 #include "compfragment.h"
-#include "mesh.h"
+#include "meshfragment.h"
 #include <string>
 
 /*
@@ -13,7 +13,7 @@
 */
 class CFLoadPoints: public CompFragment {
 protected:
-	string filename; 
+	std::string filename; 
 public:
 	CFLoadPoints(MeshFragment *mesh, const std::string& file) : filename(file) {
 		addArg(mesh);

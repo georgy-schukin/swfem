@@ -8,14 +8,15 @@ void FPController::addCF(CompFragment* cf, const int& node) {
 	rts->getCFDispatcher()->addCF(cf, node);	
 }
 
-/*void FPController::addReductionCF(const size_t& red_id, ReductionCompFragment* cf, const size_t& group_id) {
-	cf->setGroupId(group_id);
-	cfs_storage.push_back(cf);
-	new_cfs.push_back(cf);
-	reduction_cfs[red_id].push_back(cf);	
+void FPController::addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const int& node) {
+	//cf->setGroupId(group_id);
+	//cfs_storage.push_back(cf);
+	//new_cfs.push_back(cf);
+	//reduction_cfs[red_id].push_back(cf);	
+	rts->getCFDispatcher()->addCF(cf, node);	
 }
 
-void FPController::addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id) {
+/*void FPController::addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id) {
 	cf->setGroupId(group_id);
 	cfs_storage.push_back(cf);
 	new_cfs.push_back(cf);

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "compfragment.h"
-#include "mesh.h"
+#include "meshblockfragment.h"
 
 /**
 * Generate mesh fragment
@@ -24,7 +24,7 @@ public:
 		size_t stx, size_t sty, size_t nx, size_t ny) : 
 		beg_x(bx), beg_y(by), step_x(sx), step_y(sy), global_num_x(gnx), global_num_y(gny),
 			start_x(stx), start_y(sty), num_x(nx), num_y(ny) {}
-	CFGen(MeshFragment *mesh, double bx, double by, double sx, double sy, size_t gnx, size_t gny,
+	CFGen(MeshBlockFragment *mesh, double bx, double by, double sx, double sy, size_t gnx, size_t gny,
 		size_t stx, size_t sty, size_t nx, size_t ny) : 
 		beg_x(bx), beg_y(by), step_x(sx), step_y(sy), global_num_x(gnx), global_num_y(gny),
 		start_x(stx), start_y(sty), num_x(nx), num_y(ny) {
@@ -33,10 +33,10 @@ public:
 	~CFGen() {}
 
 	void execute() {
-		exec(getArg<MeshFragment>(0));
+		exec(getArg<MeshBlockFragment>(0));
 	}
 
-	void exec(MeshFragment& mesh);	
+	void exec(MeshBlockFragment& mesh);	
 
 	std::string toString() const {
 		return "Gen " + CompFragment::toString();

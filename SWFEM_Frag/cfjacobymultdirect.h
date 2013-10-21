@@ -2,7 +2,7 @@
 
 #include "compfragment.h"
 #include "data.h"
-#include "mesh.h"
+#include "meshfragment.h"
 
 /**
 * Do iteration of Jacoby method for mesh fragment

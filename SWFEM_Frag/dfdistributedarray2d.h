@@ -2,14 +2,14 @@
 
 #include "dfarray2d.h"
 #include "distribution2d.h"
-#include <boost/ptr_container/ptr_array.hpp>
+#include <boost/scoped_array.hpp>
 
 template<class T>
 class DFDistributedArray2D {
 private:
-	boost::ptr_array<T> content;	
-	Distribution2D distribution;
-	DistributionBlock2D my_block;
+	boost::scoped_array<T> content;	
+	//Distribution2D distribution;
+	Region2D my_block;
 	int my_node;
 
 private:

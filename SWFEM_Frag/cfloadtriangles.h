@@ -1,7 +1,7 @@
 #pragma once
 
 #include "compfragment.h"
-#include "mesh.h"
+#include "meshfragment.h"
 #include <string>
 
 /*

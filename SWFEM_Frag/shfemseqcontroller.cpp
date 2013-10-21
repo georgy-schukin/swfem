@@ -1,6 +1,6 @@
 #include "shfemseqcontroller.h"
 #include "cfshfem.h"
-#include "mesh.h"
+#include "meshfragment.h"
 #include "data.h"
 #include "cnst.h"
 #include <iostream>

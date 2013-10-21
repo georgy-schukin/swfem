@@ -228,16 +228,10 @@
     <ClInclude Include="data.h">
       <Filter>Header Files\df\dfs</Filter>
     </ClInclude>
-    <ClInclude Include="mesh.h">
-      <Filter>Header Files\df\dfs</Filter>
-    </ClInclude>
     <ClInclude Include="distribution.h">
       <Filter>Header Files\df\distr</Filter>
     </ClInclude>
     <ClInclude Include="distribution2d.h">
-      <Filter>Header Files\df\distr</Filter>
-    </ClInclude>
-    <ClInclude Include="distributionblock2d.h">
       <Filter>Header Files\df\distr</Filter>
     </ClInclude>
     <ClInclude Include="fpcontroller.h">
@@ -263,6 +257,24 @@
     </ClInclude>
     <ClInclude Include="icommlistener.h">
       <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="meshfragment.h">
+      <Filter>Header Files\df\dfs</Filter>
+    </ClInclude>
+    <ClInclude Include="meshblockfragment.h">
+      <Filter>Header Files\df\dfs</Filter>
+    </ClInclude>
+    <ClInclude Include="doublingdistribution2d.h">
+      <Filter>Header Files\df\distr</Filter>
+    </ClInclude>
+    <ClInclude Include="region2d.h">
+      <Filter>Header Files\df\distr</Filter>
+    </ClInclude>
+    <ClInclude Include="blockdistribution2d.h">
+      <Filter>Header Files\df\distr</Filter>
+    </ClInclude>
+    <ClInclude Include="region.h">
+      <Filter>Header Files\df\distr</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

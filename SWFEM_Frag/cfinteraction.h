@@ -2,7 +2,7 @@
 
 #include "compfragment.h"
 #include "data.h"
-#include "mesh.h"
+#include "meshfragment.h"
 
 /**
 * Calculate interactions (w1, w2, w3)

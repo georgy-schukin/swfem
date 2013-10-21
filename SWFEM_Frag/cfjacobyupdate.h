@@ -1,36 +1,41 @@
 #pragma once
 
 #include "compfragment.h"
+#include "meshblockfragment.h"
 #include "data.h"
 
 /**
 * Update bound values
 */
 class CFJacobyUpdate: public CompFragment {
+public:
+	enum BorderType {
+		LEFT = 0,
+		RIGHT,
+		TOP,
+		BOTTOM
+	};	
+
 protected:
-	size_t src_start;
-	size_t src_step;
-	size_t dst_start;	
-	size_t dst_step;
+	size_t start;
+	size_t step;	
 	size_t num;
+
+protected:
+	void init(MeshBlockFragment *mesh, const BorderType& border);
 
 public:
 	CFJacobyUpdate() {}
-	CFJacobyUpdate(Data *src, Data *dst, 
-		size_t src_st, size_t src_stp, size_t dst_st, size_t dst_stp, size_t n) :
-		src_start(src_st), src_step(src_stp), dst_start(dst_st), dst_step(dst_stp), num(n) {				
-		addArg(src);		
-		addArg(dst);		
+	CFJacobyUpdate(MeshBlockFragment *mesh, Data *data, Data *buf, const BorderType& border) {				
+		addArg(data);		
+		addArg(buf);
+		init(mesh, border);
 	}
-	~CFJacobyUpdate() {}
+	virtual ~CFJacobyUpdate() {}
 
 	void execute() {
 		exec(getArg<Data>(0), getArg<Data>(1));
 	}
 
-	void exec(Data& src, Data& dst);
-
-	std::string toString() const {
-		return "JacobyUpdate " + CompFragment::toString();
-	}
+	virtual void exec(Data& data, Data& buf) = 0;	
 };

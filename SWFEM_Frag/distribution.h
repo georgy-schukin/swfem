@@ -13,9 +13,9 @@ private:
 
 public:
 	Distribution() {}
-	Distribution(const Distribution<T>& d) {
-		this->distr = d.distr;
-	}
+	//Distribution(const Distribution<T>& d) {
+	//	this->distr = d.distr;
+	//}
 	~Distribution() {}
 
 	void set(const size_t& node, const T& elem) {

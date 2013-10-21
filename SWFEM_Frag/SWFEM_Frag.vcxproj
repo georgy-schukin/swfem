@@ -68,6 +68,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="auxilary.h" />
+    <ClInclude Include="blockdistribution2d.h" />
     <ClInclude Include="cfcoef.h" />
     <ClInclude Include="cfcopy.h" />
     <ClInclude Include="cfdiag.h" />
@@ -101,7 +102,9 @@
     <ClInclude Include="dfdistributedarray2d.h" />
     <ClInclude Include="distribution.h" />
     <ClInclude Include="distribution2d.h" />
-    <ClInclude Include="distributionblock2d.h" />
+    <ClInclude Include="region.h" />
+    <ClInclude Include="region2d.h" />
+    <ClInclude Include="doublingdistribution2d.h" />
     <ClInclude Include="event.h" />
     <ClInclude Include="eventcompfragment.h" />
     <ClInclude Include="eventmanager.h" />
@@ -120,7 +123,8 @@
     <ClInclude Include="ischeduler.h" />
     <ClInclude Include="ithreadpool.h" />
     <ClInclude Include="logger.h" />
-    <ClInclude Include="mesh.h" />
+    <ClInclude Include="meshblockfragment.h" />
+    <ClInclude Include="meshfragment.h" />
     <ClInclude Include="meshnode.h" />
     <ClInclude Include="meshtriangle.h" />
     <ClInclude Include="mpelogger.h" />

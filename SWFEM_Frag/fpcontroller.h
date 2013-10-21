@@ -34,7 +34,7 @@ private:
 
 protected:	
 	void addCF(CompFragment* cf, const int& node = -1);			
-	//void addReductionCF(const size_t& red_id, ReductionCompFragment* cf, const int& node = -1);
+	void addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const int& node = -1);
 	//void addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id = -1);	
 
 	//void lockDFs(const DataFragmentPtrArray& dfs);

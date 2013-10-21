@@ -2,7 +2,7 @@
 
 #include "compfragment.h"
 #include "data.h"
-#include "mesh.h"
+#include "meshfragment.h"
 
 /**
 * Count some coeffs on each time step before Jacoby method (diag + right hand side)

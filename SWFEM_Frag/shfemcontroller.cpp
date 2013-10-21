@@ -2,78 +2,60 @@
 #include "cfshfem.h"
 #include "cnst.h"
 #include "updater.h"
-#include "auxilary.h"
 #include "timer.h"
-#include "distribution2d.h"
-#include "dfarray2d.h"
 #include <iostream>
 #include <sstream>
 #include <boost/foreach.hpp>
 
-SHFEMController::SHFEMController(IRuntimeSystem* s) : FPController(s) {
+#define FORX(i) for (size_t i = this_block.getStartByX(); i < this_block.getEndByX(); i++)
+#define FORY(i) for (size_t i = this_block.getStartByY(); i < this_block.getEndByY(); i++)
+#define FOREACH(i,j) FORY(i) FORX(j)
+
+SHFEMController::SHFEMController(IRuntimeSystem* s, const size_t& mesh_size_x, const size_t& mesh_size_y, const size_t& fragment_num_x, const size_t& fragment_num_y) : FPController(s) {
 	this_node = getNodeId();
 	num_of_nodes = getNumOfNodes();	
+
+	mesh_fragmentation = DoublingDistribution2D(mesh_size_x, mesh_size_y, fragment_num_x, fragment_num_y); 
+	mesh_distribution = BlockDistribution2D(fragment_num_x, fragment_num_y, 1, num_of_nodes); // distr array of fragments by nodes
 }
 
-#define FOREACH(i,j) for (size_t i = 0; i < fy; i++) for (size_t j = 0; j < fx; j++)
+void SHFEMController::exec(const size_t& num_of_steps) {
+	const Region2D& this_block = mesh_distribution.getBlock(this_node);	
 
-void SHFEMController::exec(const size_t& mesh_size_x, const size_t& mesh_size_y, const size_t& fragment_num_x, const size_t& fragment_num_y, const size_t& num_of_steps) {
+	MeshArray mesh(mesh_distribution, this_node); 
+
+	DataArray data(mesh_distribution, this_node);	
+	DataArray data_new(mesh_distribution, this_node);	
+	DataArray data_prev(mesh_distribution, this_node);	
+	DataArray data_diag(mesh_distribution, this_node);	
+	DataArray data_exact(mesh_distribution, this_node);	
+	DataCoefArray data_coef(mesh_distribution, this_node);	
+	DataInteractionArray data_interaction(mesh_distribution, this_node);
+
+	DataArray upd_left(mesh_distribution, this_node);
+	DataArray upd_right(mesh_distribution, this_node);
+	DataArray upd_top(mesh_distribution, this_node);
+	DataArray upd_bottom(mesh_distribution, this_node);
+
+	Timer timer;
+	double td = 0, tc = 0, tp = 0, tu = 0, tpu = 0, tr = 0;
+
+	const size_t mesh_size_x = mesh_fragmentation.getSizeByX();
+	const size_t mesh_size_y = mesh_fragmentation.getSizeByY();
 	const double beg_x = 0.0;
 	const double beg_y = 90.0;		
 	const double step_x = (10.0 - beg_x)/(mesh_size_x - 1);
 	const double step_y = (100.0 - beg_y)/(mesh_size_y - 1);		
-
-	distribute(mesh_size_x, mesh_size_y, fragment_num_x, fragment_num_y, mesh_data);
-
-	mesh_distribution.init(fragment_num_x, fragment_num_y, 1, num_of_nodes); // distr array of fragments by nodes
-
-	const DistributionBlock2D& this_block = mesh_distribution.getBlock(this_node);
-
-	const size_t fy = this_block.getSizeByY();
-	const size_t fx = this_block.getSizeByX();
-		
-	//const size_t fx = mesh_data.nx.size();	// num of fragments on this node by X
-	//const size_t fy = mesh_data.ny.size();	// num of fragments on this node by Y
-
-	DFArray2D<MeshFragment> mesh(fy, fx); 
-
-	DFArray2D<Data> data(fy, fx);	
-	DFArray2D<Data> data_new(fy, fx);	
-	DFArray2D<Data> data_prev(fy, fx);	
-	DFArray2D<Data> data_diag(fy, fx);	
-	DFArray2D<Data> data_exact(fy, fx);	
-	DFArray2D<DataCoef> data_coef(fy, fx);	
-	DFArray2D<DataInteraction> data_interaction(fy, fx);
-
-	DFArray2D<Data> data_send_left(fy, fx), data_send_right(fy, fx), data_send_top(fy, fx), data_send_bottom(fy, fx); // for Jacoby update send
-	DFArray2D<Data> data_recv_left(fy, fx), data_recv_right(fy, fx), data_recv_top(fy, fx), data_recv_bottom(fy, fx); // for Jacoby update recv
-
-
-//	DFArray1D<Data> send_t(fx), send_b(fx);
-//	DFArray1D<Data> recv_t(fx), recv_b(fx);
-
-//	DFArray1D<Data> dg_send_t(fx), dg_send_b(fx);
-//	DFArray1D<Data> dg_recv_t(fx), dg_recv_b(fx);
-
-	//send_t.setId(0);	// set id for updates
-	//send_b.setId(1);	
-	//dg_send_t.setId(2);
-	//dg_send_b.setId(3);
-
-	Timer timer;
-	double td = 0, tc = 0, tp = 0, tu = 0, tpu = 0, tr = 0;
 	
 	FOREACH(i, j) {
-		const size_t& stx = mesh_data.start_x[j];
-		const size_t& sty = mesh_data.start_y[i];
-		const size_t& nx = mesh_data.nx[j];
-		const size_t& ny = mesh_data.ny[i];
+		const Region2D& block = mesh_fragmentation.getBlock(i, j);				
 
-		addCF(new CFGen(mesh(i, j), beg_x, beg_y, step_x, step_y, mesh_size_x, mesh_size_y, stx, sty, nx, ny), i*fx + j);	// generate mesh	
-		addCF(new CFInit(mesh(i, j), data(i, j), data_coef(i, j)), i*fx + j);	// init data	
-		addCF(new CFExact(mesh(i, j), data(i, j), 0), i*fx + j);				// init by exact solution	
-		addCF(new CFExact(mesh(i, j), data_exact(i, j), 0), i*fx + j);			// get exact solution	
-		addCF(new CFCoef(mesh(i, j), data_coef(i, j)), i*fx + j);				// compute coefs
+		addCF(new CFGen(mesh(i, j), beg_x, beg_y, step_x, step_y, mesh_size_x, mesh_size_y, 
+			block.getStartByX(), block.getStartByY(), block.getSizeByX(), block.getSizeByY()));	// generate mesh	
+		addCF(new CFInit(mesh(i, j), data(i, j), data_coef(i, j)));	// init data	
+		addCF(new CFExact(mesh(i, j), data(i, j), 0));				// init by exact solution	
+		addCF(new CFExact(mesh(i, j), data_exact(i, j), 0));			// get exact solution	
+		addCF(new CFCoef(mesh(i, j), data_coef(i, j)));				// compute coefs
 	}
 
 	timer.start();
@@ -95,38 +77,42 @@ void SHFEMController::exec(const size_t& mesh_size_x, const size_t& mesh_size_y,
 		processCFs();
 		tp += timer.stop();
 		
-		update(data_diag, dg_send_t, dg_recv_t, dg_send_b, dg_recv_b);	// update jacoby diag data
+		sendUpdates(mesh, data_diag, upd_left, upd_right, upd_top, upd_bottom);
+		recvUpdates(mesh, data_diag, upd_left, upd_right, upd_top, upd_bottom);
+		//update(data_diag, dg_send_t, dg_recv_t, dg_send_b, dg_recv_b);	// update jacoby diag data
 
 		timer.start();
 		processCFs();
 		tp += timer.stop();
 
-		timer.start();
-		performUpdate(dg_send_t, dg_recv_t, dg_send_b, dg_recv_b);	// perform data diag update
-		tpu += timer.stop();
+		//timer.start();
+		//performUpdate(dg_send_t, dg_recv_t, dg_send_b, dg_recv_b);	// perform data diag update
+		//tpu += timer.stop();
 
 		double eps = 1.0;
 		while(eps > cnst::EPS) {	// Jacoby method			
 			FOREACH(i, j)
-				addCF(new CFJacobyMultDirect(mesh(i, j), data_new(i, j), data(i, j), data_prev(i, j), data_coef(i, j)), i*fx + j);	// multiplication for Jacoby method			
+				addCF(new CFJacobyMultDirect(mesh(i, j), data_new(i, j), data(i, j), data_prev(i, j), data_coef(i, j)));	// multiplication for Jacoby method			
 
 			timer.start();
 			processCFs();
 			tp += timer.stop();
 			
-			update(data_new, send_t, recv_t, send_b, recv_b);	// update jacoby diag data // update Jacoby mult data						
+			sendUpdates(mesh, data_new, upd_left, upd_right, upd_top, upd_bottom);
+			recvUpdates(mesh, data_new, upd_left, upd_right, upd_top, upd_bottom);
+			//update(data_new, send_t, recv_t, send_b, recv_b);	// update jacoby diag data // update Jacoby mult data						
 
 			timer.start();
 			processCFs();
 			tp += timer.stop();
 
-			timer.start();
-			performUpdate(send_t, recv_t, send_b, recv_b);	// perform data new update
-			tpu += timer.stop();
+			//timer.start();
+			//performUpdate(send_t, recv_t, send_b, recv_b);	// perform data new update
+			//tpu += timer.stop();
 							
 			FOREACH(i, j) {
-				addReductionCF(red_id, new CFJacobyReduce(mesh(i, j), data_new(i, j), data(i, j), data_diag(i, j)), i*fx + j);	// reduction										
-				addCF(new CFCopy(data(i, j), data_new(i, j)), i*fx + j);	// copy data new to data
+				addReductionCF(new CFJacobyReduce(mesh(i, j), data_new(i, j), data(i, j), data_diag(i, j)), red_id);	// reduction										
+				addCF(new CFCopy(data(i, j), data_new(i, j)));	// copy data new to data
 			}
 
 			timer.start();
@@ -138,11 +124,11 @@ void SHFEMController::exec(const size_t& mesh_size_x, const size_t& mesh_size_y,
 			tr += timer.stop();							
 
 			iter++;
-			cout << "EPS: " << eps << endl;						
+			std::cout << "EPS: " << eps << std::endl;						
 		}				
 	}	
 	std::ostringstream out;
-	out << node_rank << " :"
+	out << this_node << " :"
 		//<< " Create " << tc
 		//<< " Data " << td
 		<< " Process " << tp 		
@@ -157,7 +143,35 @@ void SHFEMController::exec(const size_t& mesh_size_x, const size_t& mesh_size_y,
 	getRTS()->getCFDispatcher()->waitForAllDone();
 }
 
-void SHFEMController::update(DFArray2D<Data>& dt, DFArray1D<Data>& st, DFArray1D<Data>& rt, DFArray1D<Data>& sb, DFArray1D<Data>& rb) {
+void SHFEMController::sendUpdates(MeshArray& mesh, DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom) {
+	const Region2D& this_block = mesh_distribution.getBlock(this_node);	
+
+	for (size_t i = this_block.getStartByY(); i < this_block.getEndByY(); i++)
+	for (size_t j = this_block.getStartByX(); j < this_block.getEndByX(); j++)  {
+		addCF(new CFJacobyUpdateSend(mesh(i, j), data(i, j), left(i, j), CFJacobyUpdate::LEFT));
+		addCF(new CFJacobyUpdateSend(mesh(i, j), data(i, j), right(i, j), CFJacobyUpdate::RIGHT));
+		addCF(new CFJacobyUpdateSend(mesh(i, j), data(i, j), top(i, j), CFJacobyUpdate::TOP));
+		addCF(new CFJacobyUpdateSend(mesh(i, j), data(i, j), bottom(i, j), CFJacobyUpdate::BOTTOM));
+	}
+}
+
+void SHFEMController::recvUpdates(MeshArray& mesh, DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom) {
+	const Region2D& this_block = mesh_distribution.getBlock(this_node);	
+
+	for (size_t i = this_block.getStartByY(); i < this_block.getEndByY(); i++)
+	for (size_t j = this_block.getStartByX(); j < this_block.getEndByX(); j++)  {
+		if (j > 0) 
+			addCF(new CFJacobyUpdateRecv(mesh(i, j), data(i, j), right(i, j - 1), CFJacobyUpdate::LEFT)); // upd left with right
+		if (j < mesh_distribution.getSizeByX() - 1)
+			addCF(new CFJacobyUpdateRecv(mesh(i, j), data(i, j), left(i, j + 1), CFJacobyUpdate::RIGHT)); // upd right with left
+		if (i > 0)
+			addCF(new CFJacobyUpdateRecv(mesh(i, j), data(i, j), bottom(i - 1, j), CFJacobyUpdate::TOP)); // upd top with bottom
+		if (i < mesh_distribution.getSizeByY() - 1)
+			addCF(new CFJacobyUpdateRecv(mesh(i, j), data(i, j), top(i + 1, j), CFJacobyUpdate::BOTTOM)); // upd bottom with top
+	}
+}
+
+/*void SHFEMController::update(DFArray2D<Data>& dt, DFArray1D<Data>& st, DFArray1D<Data>& rt, DFArray1D<Data>& sb, DFArray1D<Data>& rb) {
 	innerUpdate(dt);
 	if (node_rank % 2 == 0) {
 		if (node_rank > 0)
@@ -250,5 +264,5 @@ void SHFEMController::distribute(const size_t& mesh_size_x, const size_t& mesh_s
 
 	m_data.start_y.insert(m_data.start_y.end(), global_data.start_y.begin() + f_start_y, global_data.start_y.begin() + f_end_y);	
 	m_data.ny.insert(m_data.ny.end(), global_data.ny.begin() + f_start_y, global_data.ny.begin() + f_end_y);	
-}
+}*/
 
