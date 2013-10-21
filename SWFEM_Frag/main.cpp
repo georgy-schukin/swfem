@@ -15,20 +15,20 @@ public:
 	Args(int ac, char **av) : argc(ac), argv(av) {}
 	~Args() {} 
        
-	unsigned int arg(int ind, unsigned int def) {
+	size_t arg(int ind, size_t def) {
 		return def;//(argc > ind) ? atoi(argv[ind]) : def;
 	}
 };
 
 int main(int argc, char **argv) {
 	Args a(argc, argv);
-	const unsigned int mode = a.arg(1, 0);					// mode
-	const unsigned int mesh_size_x = a.arg(2, 201);			// num of nodes in mesh by X
-	const unsigned int mesh_size_y = a.arg(3, 201);			// num of nodes in mesh by Y	
-	const unsigned int fragment_num_x = a.arg(4, 4);		// num of fragments by X
-	const unsigned int fragment_num_y = a.arg(5, 4);		// num of fragments by Y
-	const unsigned int num_of_exec_threads = a.arg(6, 1);	// num of exec threads to run fragments
-	const unsigned int num_of_time_steps = a.arg(7, 5);		// num of time steps to do
+	const size_t mode = a.arg(1, 0);					// mode
+	const size_t mesh_size_x = a.arg(2, 201);			// num of nodes in mesh by X
+	const size_t mesh_size_y = a.arg(3, 201);			// num of nodes in mesh by Y	
+	const size_t fragment_num_x = a.arg(4, 4);		// num of fragments by X
+	const size_t fragment_num_y = a.arg(5, 4);		// num of fragments by Y
+	const size_t num_of_exec_threads = a.arg(6, 1);	// num of exec threads to run fragments
+	const size_t num_of_time_steps = a.arg(7, 5);		// num of time steps to do
 		
 	RuntimeSystem rts(argc, argv, num_of_exec_threads);	// create and start rts
 	

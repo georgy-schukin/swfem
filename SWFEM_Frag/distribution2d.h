@@ -7,8 +7,10 @@
 /**
 * Block 2D distribution for 2d arrays
 */
-class Distribition2D : public Distribution<DistributionBlock2D> {
+class Distribution2D : private Distribution<DistributionBlock2D> {
 private:
+	size_t size_x;
+	size_t size_y;
 	size_t num_of_nodes_by_x;
 	size_t num_of_nodes_by_y;
 
@@ -19,6 +21,7 @@ private:
 		const size_t dx = size_x % num_of_nodes_by_x;
 		const size_t dy = size_y % num_of_nodes_by_y;
 
+		this->clear();
 		for ( size_t node_y = 0; node_y < num_of_nodes_by_y; node_y++) {
 			for ( size_t node_x = 0; node_x < num_of_nodes_by_x; node_x++) {		
 				const size_t start_x = node_x*sx + (node_x < dx ? node_x : dx); // distr by X
@@ -31,12 +34,21 @@ private:
 	}
 
 public:
-	Distribition2D(const size_t& size_x, const size_t& size_y, const size_t& num_of_nodes_by_x, const size_t& num_of_nodes_by_y) {
-		this->num_of_nodes_by_x = num_of_nodes_by_x;
-		this->num_of_nodes_by_y = num_of_nodes_by_y;
-		this->distribute(size_x, size_y, num_of_nodes_by_x, num_of_nodes_by_y);				
+	Distribution2D(const size_t& sx, const size_t& sy, const size_t& nx, const size_t& ny) :
+		size_x(sx), size_y(sy), num_of_nodes_by_x(nx), num_of_nodes_by_y(ny) {		
+		distribute(sx, sy, nx, ny);				
 	}
-	~Distribition2D() {}
+	Distribution2D(const Distribution2D& distr) : Distribution(distr), 
+		size_x(distr.size_x), size_y(distr.size_y), num_of_nodes_by_x(distr.num_of_nodes_by_x), num_of_nodes_by_y(distr.num_of_nodes_by_y) {}
+	~Distribution2D() {}
+
+	size_t getSizeByX() const {
+		return size_x;
+	}
+
+	size_t getSizeByY() const {
+		return size_y;
+	}
 
 	size_t getNumOfNodesByX() const {
 		return num_of_nodes_by_x;
@@ -46,7 +58,19 @@ public:
 		return num_of_nodes_by_y;
 	}
 
+	void init(const size_t& sx, const size_t& sy, const size_t& nx, const size_t& ny) {
+		size_x = sx;
+		size_y = sy;
+		num_of_nodes_by_x = nx;
+		num_of_nodes_by_y = ny;
+		distribute(sx, sy, nx, ny);
+	}
+
 	const DistributionBlock2D& getBlock(const size_t& node_x, const size_t& node_y) const {
 		return this->get(node_y*num_of_nodes_by_x + node_x);
+	}
+
+	const DistributionBlock2D& getBlock(const size_t& node) const {
+		return this->get(node);
 	}
 };

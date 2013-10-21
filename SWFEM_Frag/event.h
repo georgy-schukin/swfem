@@ -8,13 +8,13 @@
  */
 class Event {
 protected:
-	unsigned int size;	// num of steps to complete event
+	size_t size;	// num of steps to complete event
 	boost::mutex mutex;
 	boost::condition_variable cond;
 
 public:
 	Event() : size(0) {}
-	Event(const unsigned int& sz) : size(sz) {}
+	Event(const size_t& sz) : size(sz) {}
 	~Event() {}
 
 	void changeSize(const int& num);	

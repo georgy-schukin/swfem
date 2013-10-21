@@ -9,24 +9,24 @@
 */
 class SHFEMMPIController: public FPController {
 protected:		
-	std::vector<unsigned int> start_y;	// indices of first point of the mesh in nodes by Y
-	std::vector<unsigned int> ny;		// num of points in nodes by Y
+	std::vector<size_t> start_y;	// indices of first point of the mesh in nodes by Y
+	std::vector<size_t> ny;		// num of points in nodes by Y
 
-	unsigned int mesh_size_x;
-	unsigned int mesh_size_y;
+	size_t mesh_size_x;
+	size_t mesh_size_y;
 
-	unsigned int node_rank;
-	unsigned int node_size;
+	size_t node_rank;
+	size_t node_size;
 
 protected:
 	void update(Data& data);
-	void update(Data& data, unsigned int start, unsigned int num, int rank, int tag);
+	void update(Data& data, size_t start, size_t num, int rank, int tag);
 	void copyToBuffer(const Data& data, double* buf);
 	void copyFromBuffer(Data& data, const double* buf);
 
 public:
-	SHFEMMPIController(IRuntimeSystem* s, unsigned int mx, unsigned int my);
+	SHFEMMPIController(IRuntimeSystem* s, size_t mx, size_t my);
 	~SHFEMMPIController() {}
 
-	void exec(unsigned int num_of_steps);
+	void exec(size_t num_of_steps);
 };

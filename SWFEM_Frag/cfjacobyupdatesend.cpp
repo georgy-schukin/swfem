@@ -2,7 +2,7 @@
 
 void CFJacobyUpdateSend::exec(Data& src, Data& buf) {
 	buf.resize(num);
-	for(unsigned int i = 0;i < num;i++) {		
+	for(size_t i = 0;i < num;i++) {		
 		const NodeData& dt_src = src[start + i*step];		
 		NodeData& dt_dst = buf[i];		
 		dt_dst.u = dt_src.u;		

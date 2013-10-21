@@ -4,23 +4,23 @@
 
 class ReductionCompFragment : public CompFragment {
 private:
-	unsigned int red_id;
+	size_t reduction_id;
 
 public:
-	ReductionCompFragment() : red_id(0) {}
+	ReductionCompFragment() : reduction_id(0) {}
 	virtual ~ReductionCompFragment() {}
 
-	void setReductionId(unsigned int red_id) {
-		this->red_id = red_id;
+	void setReductionId(size_t reduction_id) {
+		this->reduction_id = reduction_id;
 	}
 
-	unsigned int getReductionId() const {
-		return red_id;
+	size_t getReductionId() const {
+		return reduction_id;
 	}	
 
-	bool isReductionCF() const {
+	/*bool isReductionCF() const {
 		return true;
-	}
+	}*/
 
 	virtual CompFragment::Type getType() const {
 		return CompFragment::REDUCTION;

@@ -8,16 +8,16 @@
 */
 class CFJacobyUpdate: public CompFragment {
 protected:
-	unsigned int src_start;
-	unsigned int src_step;
-	unsigned int dst_start;	
-	unsigned int dst_step;
-	unsigned int num;
+	size_t src_start;
+	size_t src_step;
+	size_t dst_start;	
+	size_t dst_step;
+	size_t num;
 
 public:
 	CFJacobyUpdate() {}
 	CFJacobyUpdate(Data *src, Data *dst, 
-		unsigned int src_st, unsigned int src_stp, unsigned int dst_st, unsigned int dst_stp, unsigned int n) :
+		size_t src_st, size_t src_stp, size_t dst_st, size_t dst_stp, size_t n) :
 		src_start(src_st), src_step(src_stp), dst_start(dst_st), dst_step(dst_stp), num(n) {				
 		addArg(src);		
 		addArg(dst);		

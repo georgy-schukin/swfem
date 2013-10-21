@@ -13,5 +13,5 @@
 */
 class CFLoadTriangles: public CompFragment {
 public:
-	void exec(MeshFragment& mesh, const std::string& filename, unsigned int step, unsigned int size);
+	void exec(MeshFragment& mesh, const std::string& filename, size_t step, size_t size);
 };

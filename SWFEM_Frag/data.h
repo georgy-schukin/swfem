@@ -11,10 +11,10 @@ template<class T>
 class DataVector: public DataFragment, public std::vector<T> {
 public:
 	DataVector() {}
-	DataVector(const unsigned int& size) : std::vector<T>(size) {}
+	DataVector(const size_t& size) : std::vector<T>(size) {}
 	~DataVector() {}
 
-	unsigned int getWeight() {
+	size_t getWeight() {
 		return sizeof(T)*(this->size()) + 1;
 	}
 };

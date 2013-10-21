@@ -87,6 +87,8 @@
     <ClInclude Include="cfloadtriangles.h" />
     <ClInclude Include="cfnull.h" />
     <ClInclude Include="cfshfem.h" />
+    <ClInclude Include="commsystem.h" />
+    <ClInclude Include="commthread.h" />
     <ClInclude Include="communicator.h" />
     <ClInclude Include="datafragment.h" />
     <ClInclude Include="cnst.h" />
@@ -96,6 +98,7 @@
     <ClInclude Include="dfarray1d.h" />
     <ClInclude Include="dfarray2d.h" />
     <ClInclude Include="dfdispatcher.h" />
+    <ClInclude Include="dfdistributedarray2d.h" />
     <ClInclude Include="distribution.h" />
     <ClInclude Include="distribution2d.h" />
     <ClInclude Include="distributionblock2d.h" />
@@ -107,6 +110,7 @@
     <ClInclude Include="icfdispatcher.h" />
     <ClInclude Include="icflistener.h" />
     <ClInclude Include="icfexecutor.h" />
+    <ClInclude Include="icommlistener.h" />
     <ClInclude Include="icommunicator.h" />
     <ClInclude Include="idfdispatcher.h" />
     <ClInclude Include="idflistener.h" />

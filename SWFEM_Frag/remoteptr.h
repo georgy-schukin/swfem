@@ -2,12 +2,12 @@
 
 class RemotePtr {
 private:
-	unsigned int id;
+	size_t id;
 	void *ptr;
 
 public:
-	RemotePtr(unsigned int i) : id(i), ptr(0) {}
-	RemotePtr(unsigned int i, void *p) : id(i), ptr(p) {}
+	RemotePtr(size_t i) : id(i), ptr(0) {}
+	RemotePtr(size_t i, void *p) : id(i), ptr(p) {}
 	RemotePtr(const RemotePtr& p) : id(p.getId()), ptr(p.getPtr()) {}
 	~RemotePtr() {}
 
@@ -19,7 +19,7 @@ public:
 		return ptr;
 	}
 
-	unsigned int getId() const {
+	size_t getId() const {
 		return id;
 	}
 };

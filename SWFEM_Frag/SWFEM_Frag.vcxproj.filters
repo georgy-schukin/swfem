@@ -46,10 +46,10 @@
     <Filter Include="Header Files\df\distr">
       <UniqueIdentifier>{71ca2ac6-bf83-4822-9b4f-8b3225d53b8a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\control">
+    <Filter Include="Header Files\controllers">
       <UniqueIdentifier>{250f8ac8-8f01-4ceb-802d-2d15a0e39e78}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\control">
+    <Filter Include="Source Files\controllers">
       <UniqueIdentifier>{bf406047-61de-4e44-8568-044ab8858cde}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -154,10 +154,10 @@
       <Filter>Header Files\interfaces</Filter>
     </ClInclude>
     <ClInclude Include="updater.h">
-      <Filter>Header Files\control</Filter>
+      <Filter>Header Files\controllers</Filter>
     </ClInclude>
     <ClInclude Include="auxilary.h">
-      <Filter>Header Files\control</Filter>
+      <Filter>Header Files\controllers</Filter>
     </ClInclude>
     <ClInclude Include="dfarray.h">
       <Filter>Header Files\df</Filter>
@@ -241,16 +241,28 @@
       <Filter>Header Files\df\distr</Filter>
     </ClInclude>
     <ClInclude Include="fpcontroller.h">
-      <Filter>Header Files\control</Filter>
+      <Filter>Header Files\controllers</Filter>
     </ClInclude>
     <ClInclude Include="shfemmpicontroller.h">
-      <Filter>Header Files\control</Filter>
+      <Filter>Header Files\controllers</Filter>
     </ClInclude>
     <ClInclude Include="shfemseqcontroller.h">
-      <Filter>Header Files\control</Filter>
+      <Filter>Header Files\controllers</Filter>
     </ClInclude>
     <ClInclude Include="shfemcontroller.h">
-      <Filter>Header Files\control</Filter>
+      <Filter>Header Files\controllers</Filter>
+    </ClInclude>
+    <ClInclude Include="commthread.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="dfdistributedarray2d.h">
+      <Filter>Header Files\df</Filter>
+    </ClInclude>
+    <ClInclude Include="commsystem.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="icommlistener.h">
+      <Filter>Header Files\interfaces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -297,10 +309,10 @@
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="updater.cpp">
-      <Filter>Source Files\control</Filter>
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
     <ClCompile Include="auxilary.cpp">
-      <Filter>Source Files\control</Filter>
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
     <ClCompile Include="cfcoef.cpp">
       <Filter>Source Files\cf\cfs</Filter>
@@ -357,16 +369,16 @@
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="fpcontroller.cpp">
-      <Filter>Source Files\control</Filter>
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
     <ClCompile Include="shfemmpicontroller.cpp">
-      <Filter>Source Files\control</Filter>
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
     <ClCompile Include="shfemseqcontroller.cpp">
-      <Filter>Source Files\control</Filter>
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
     <ClCompile Include="shfemcontroller.cpp">
-      <Filter>Source Files\control</Filter>
+      <Filter>Source Files\controllers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

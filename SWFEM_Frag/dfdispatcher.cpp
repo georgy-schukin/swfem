@@ -3,7 +3,7 @@
 
 /*void DFDispatcher::addDF(DataFragment *df, bool update) {	
 	boost::unique_lock<boost::mutex> lock(mutex);
-	unsigned int df_id = df->getId();	
+	size_t df_id = df->getId();	
 	dataFragments.insert(df_id, df);	
 	lock.unlock();
 	if (update)
@@ -14,7 +14,7 @@
 void DFDispatcher::addDFs(const vector<DataFragment*>& dfs, bool update) {	
 	boost::unique_lock<boost::mutex> lock(mutex);
 	BOOST_FOREACH(DataFragment *df, dfs) {
-		unsigned int df_id = df->getId();
+		size_t df_id = df->getId();
 		dataFragments.insert(df_id, df);
 	}	
 	lock.unlock();
@@ -23,15 +23,15 @@ void DFDispatcher::addDFs(const vector<DataFragment*>& dfs, bool update) {
 			l->onDFsCreated(dfs);
 }
 
-DataFragment* DFDispatcher::getDF(unsigned int df_id) {	
+DataFragment* DFDispatcher::getDF(size_t df_id) {	
 	boost::unique_lock<boost::mutex> lock(mutex);
 	DataFragments::iterator it = dataFragments.find(df_id);
 	return (it != dataFragments.end()) ? it->second : 0;
 }
 
-void DFDispatcher::getDFs(const vector<unsigned int>& df_ids, vector<DataFragment*>& dfs) {	
+void DFDispatcher::getDFs(const vector<size_t>& df_ids, vector<DataFragment*>& dfs) {	
 	boost::unique_lock<boost::mutex> lock(mutex);	
-	BOOST_FOREACH(unsigned int df_id, df_ids) {
+	BOOST_FOREACH(size_t df_id, df_ids) {
 		DataFragments::iterator it = dataFragments.find(df_id);
 		dfs.push_back((it != dataFragments.end()) ? it->second : 0);
 	}	
@@ -74,14 +74,14 @@ void DFDispatcher::unlockDFs(const DataFragmentPtrArray& dfs) {
 			l->onDFsUnlocked(dfs);
 }
 
-/*void DFDispatcher::removeDF(unsigned int df_id) {
+/*void DFDispatcher::removeDF(size_t df_id) {
 	boost::unique_lock<boost::mutex> lock(mutex);
 	dataFragments.erase(df_id);
 }
 
-void DFDispatcher::removeDFs(const vector<unsigned int>& df_ids) {	
+void DFDispatcher::removeDFs(const vector<size_t>& df_ids) {	
 	boost::unique_lock<boost::mutex> lock(mutex);
-	BOOST_FOREACH(unsigned int df_id, df_ids)
+	BOOST_FOREACH(size_t df_id, df_ids)
 		dataFragments.erase(df_id);
 }*/
 

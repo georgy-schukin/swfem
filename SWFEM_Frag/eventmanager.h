@@ -7,12 +7,12 @@
 
 class EventManager : public IEventManager, public ICFListener {
 protected:
-	boost::ptr_map<unsigned int, Event> events;
+	boost::ptr_map<size_t, Event> events;
 
 public:
-	//void registerEventCF(unsigned int event_id, EventCompFragment *cf);
-	void registerEventCFs(const unsigned int& event_id, const EventCompFragmentPtrArray& cfs);
-	void waitForEvent(const unsigned int& event_id);
+	//void registerEventCF(size_t event_id, EventCompFragment *cf);
+	void registerEventCFs(const size_t& event_id, const EventCompFragmentPtrArray& cfs);
+	void waitForEvent(const size_t& event_id);
 
 	//void onCFDone(CompFragment *cf);
 	void onCFsDone(const CompFragmentPtrArray& cfs);

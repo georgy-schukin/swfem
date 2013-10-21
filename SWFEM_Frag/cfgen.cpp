@@ -9,8 +9,8 @@ void CFGen::exec(MeshFragment& mesh) {
 	try {
 	//mesh.nodes.reserve(num_x*num_y);
 	mesh.nodes.resize(num_x*num_y);
-	for(unsigned int i = 0;i < num_y;i++)		// generate points
-	for(unsigned int j = 0;j < num_x;j++) {
+	for(size_t i = 0;i < num_y;i++)		// generate points
+	for(size_t j = 0;j < num_x;j++) {
 		MeshNode& n = mesh.nodes[i*num_x + j];
 		n.lambda = (beg_x + (j + start_x)*step_x)*cnst::PI_DIV_180;		// lambda coord (by x) in radians
 		n.phi = (beg_y + (i + start_y)*step_y)*cnst::PI_DIV_180;		// phi coord (by y) in radians
@@ -20,12 +20,12 @@ void CFGen::exec(MeshFragment& mesh) {
 
 	//mesh.triangles.reserve((num_x - 1)*(num_y - 1)*2);
 	mesh.triangles.resize((num_x - 1)*(num_y - 1)*2);
-	for(unsigned int i = 0;i < num_y - 1;i++)	// generate triangles
-	for(unsigned int j = 0;j < num_x - 1;j++) {
-		const unsigned int lb = i*num_x + j;
-		const unsigned int rb = i*num_x + j + 1;
-		const unsigned int lt = (i + 1)*num_x + j; 
-		const unsigned int rt = (i + 1)*num_x + j + 1;
+	for(size_t i = 0;i < num_y - 1;i++)	// generate triangles
+	for(size_t j = 0;j < num_x - 1;j++) {
+		const size_t lb = i*num_x + j;
+		const size_t rb = i*num_x + j + 1;
+		const size_t lt = (i + 1)*num_x + j; 
+		const size_t rt = (i + 1)*num_x + j + 1;
 		MeshTriangle& t1 = mesh.triangles[2*(i*(num_x - 1) + j)];
 		MeshTriangle& t2 = mesh.triangles[2*(i*(num_x - 1) + j) + 1];
 		t1.n[0] = lb;	// top triangle

@@ -27,7 +27,7 @@ void CFInteraction::exec(MeshFragment& mesh, DataInteraction& data_interaction) 
 
 	const double friction = 1.0e-5; // friction
 
-    for(unsigned int i = 0;i < mesh.nodes.size();i++) {
+    for(size_t i = 0;i < mesh.nodes.size();i++) {
 		const MeshNode& n = mesh.nodes[i];
 		NodeDataInteraction& dt = data_interaction[i];
 		

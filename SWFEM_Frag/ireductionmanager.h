@@ -7,9 +7,9 @@
  */
 class IReductionManager {
 public:
-	virtual void registerReductionCF(const unsigned int& red_id, ReductionCompFragment *cf) = 0;
-	virtual void registerReductionCFs(const unsigned int& red_id, const ReductionCompFragmentPtrArray& cfs) = 0;	
-	virtual double waitForReductionResult(const unsigned int& red_id) = 0;
+	virtual void registerReductionCF(const size_t& red_id, ReductionCompFragment *cf) = 0;
+	virtual void registerReductionCFs(const size_t& red_id, const ReductionCompFragmentPtrArray& cfs) = 0;	
+	virtual double waitForReductionResult(const size_t& red_id) = 0;
 
 	virtual ~IReductionManager() {}
 };

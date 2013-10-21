@@ -13,10 +13,10 @@ private:
 	boost::ptr_vector<ExecThread> threads;
 
 public:
-	ThreadPool(const unsigned int& num_of_threads, const int& rank);
+	ThreadPool(const size_t& num_of_threads, const int& rank);
 	~ThreadPool();
 
-	//void execCF(CompFragment *cf, unsigned int thread_id);
-	void execCFs(const CompFragmentPtrArray& cfs, const unsigned int& thread_id);
+	//void execCF(CompFragment *cf, size_t thread_id);
+	void execCFs(const CompFragmentPtrArray& cfs, const size_t& thread_id);
 	void addCFListener(ICFListener *l);
 };

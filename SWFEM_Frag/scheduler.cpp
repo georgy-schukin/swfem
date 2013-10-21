@@ -3,17 +3,17 @@
 #include <boost/foreach.hpp>
 #include <iostream>
 
-Scheduler::Scheduler(const unsigned int& nt) : num_of_threads(nt), step(0) {	
+Scheduler::Scheduler(const size_t& nt) : num_of_threads(nt), step(0) {	
 	//thread_weight.resize(num_of_threads, 0);	
 }
 
-/*unsigned int Scheduler::scheduleCF(CompFragment *cf) {	
-	vector<unsigned int> t_weight(num_of_threads, 0);
-	unsigned int new_dfs_weight = 0;
-	unsigned int old_dfs_weight = 0;
+/*size_t Scheduler::scheduleCF(CompFragment *cf) {	
+	vector<size_t> t_weight(num_of_threads, 0);
+	size_t new_dfs_weight = 0;
+	size_t old_dfs_weight = 0;
 	BOOST_FOREACH(const RemotePtr& arg, cf->getArgs()) {
-		const unsigned int df_id = arg.getId();
-		const unsigned int df_weight = ((DataFragment*)arg.getPtr())->getWeight();		
+		const size_t df_id = arg.getId();
+		const size_t df_weight = ((DataFragment*)arg.getPtr())->getWeight();		
 		if (dfs_placement.find(df_id) != dfs_placement.end()) {	// dfs was placed before
 			t_weight[dfs_placement[df_id]] += df_weight;
 			old_dfs_weight += df_weight;
@@ -22,9 +22,9 @@ Scheduler::Scheduler(const unsigned int& nt) : num_of_threads(nt), step(0) {
 		}
 	}
 
-	unsigned int min_thread = getIndexWithMinValue(thread_weight);
-	unsigned int max_thread = getIndexWithMaxValue(t_weight);
-	unsigned int sched_thread = (new_dfs_weight > old_dfs_weight ? min_thread : max_thread);
+	size_t min_thread = getIndexWithMinValue(thread_weight);
+	size_t max_thread = getIndexWithMaxValue(t_weight);
+	size_t sched_thread = (new_dfs_weight > old_dfs_weight ? min_thread : max_thread);
 
 	BOOST_FOREACH(const RemotePtr& arg, cf->getArgs())
 		dfs_placement[arg.getId()] = sched_thread;		
@@ -32,24 +32,24 @@ Scheduler::Scheduler(const unsigned int& nt) : num_of_threads(nt), step(0) {
 
 	//cout << sched_thread << endl;	
 
-	static unsigned int thread = 0;
-	unsigned int sched_thread = thread;
+	static size_t thread = 0;
+	size_t sched_thread = thread;
 	thread = (thread + 1) % num_of_threads;
 	return sched_thread;
 }*/
 
-void Scheduler::scheduleCFs(const CompFragmentPtrArray& cfs, std::vector<unsigned int>& thread_ids) {
-	//static unsigned int step = 0;
+void Scheduler::scheduleCFs(const CompFragmentPtrArray& cfs, std::vector<size_t>& thread_ids) {
+	//static size_t step = 0;
 	thread_ids.resize(cfs.size());
-	for(unsigned int i = 0;i < cfs.size();i++)
+	for(size_t i = 0;i < cfs.size();i++)
 		thread_ids[i] = (i + step) % num_of_threads;
 	step = (step + cfs.size()) % num_of_threads;
 }
 
-unsigned int Scheduler::getIndexWithMinValue(const std::vector<unsigned int>& v) {
-	unsigned int min_index = 0;
-	unsigned int min_value = v[0];
-	for(unsigned int i = 1;i < v.size();i++) {
+size_t Scheduler::getIndexWithMinValue(const std::vector<size_t>& v) {
+	size_t min_index = 0;
+	size_t min_value = v[0];
+	for(size_t i = 1;i < v.size();i++) {
 		if(v[i] < min_value) {
 			min_value = v[i];
 			min_index = i;
@@ -58,10 +58,10 @@ unsigned int Scheduler::getIndexWithMinValue(const std::vector<unsigned int>& v)
 	return min_index;
 }
 
-unsigned int Scheduler::getIndexWithMaxValue(const std::vector<unsigned int>& v) {
-	unsigned int max_index = 0;
-	unsigned int max_value = v[0];
-	for(unsigned int i = 1;i < v.size();i++) {
+size_t Scheduler::getIndexWithMaxValue(const std::vector<size_t>& v) {
+	size_t max_index = 0;
+	size_t max_value = v[0];
+	for(size_t i = 1;i < v.size();i++) {
 		if(v[i] > max_value) {
 			max_value = v[i];
 			max_index = i;

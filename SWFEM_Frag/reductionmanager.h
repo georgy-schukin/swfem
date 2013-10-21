@@ -8,7 +8,7 @@
 
 class ReductionManager : public IReductionManager, public ICFListener {
 private:
-	typedef boost::ptr_map<unsigned int, Reduction> ReductionsMap;
+	typedef boost::ptr_map<size_t, Reduction> ReductionsMap;
 
 private:
 	ReductionsMap reductions;
@@ -18,9 +18,9 @@ public:
 	ReductionManager(ICommunicator *cm) : comm(cm) {}
 	~ReductionManager() {}
 
-	//void registerReductionCF(unsigned int red_id, ReductionCompFragment *cf);
-	void registerReductionCFs(const unsigned int& red_id, const ReductionCompFragmentPtrArray& cfs);
-	double waitForReductionResult(const unsigned int& red_id);
+	//void registerReductionCF(size_t red_id, ReductionCompFragment *cf);
+	void registerReductionCFs(const size_t& red_id, const ReductionCompFragmentPtrArray& cfs);
+	double waitForReductionResult(const size_t& red_id);
 
 	//void onCFDone(CompFragment *cf);
 	void onCFsDone(const CompFragmentPtrArray& cfs);

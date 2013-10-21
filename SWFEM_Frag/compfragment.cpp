@@ -25,7 +25,7 @@ bool CompFragment::isReady() const {
 std::string CompFragment::toString() const {
 	std::ostringstream out;
 	out << " (";
-	for(unsigned int i = 0;i < args.size() - 1;i++) 
+	for(size_t i = 0;i < args.size() - 1;i++) 
 		out << args[i] << ", ";
 	if(args.size() > 0)
 		out << args.back();

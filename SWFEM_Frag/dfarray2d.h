@@ -1,30 +1,26 @@
 #pragma once
 
-#include "dfarray.h"
-#include "distribution2d.h"
+#include <boost/ptr_container/ptr_array.hpp>
 
-template<class T, class D>
-class DFArray2D /*: public DFArray*/ {
+template<class T>
+class DFArray2D {
 private:
-	Distribution2D distr;
-	size_t size_x;
-	size_t size_y;	
+	boost::ptr_array<T> content;
+	size_t num_of_rows;
+	size_t num_of_cols;
+
+private:
+	void init(const size_t& num_of_rows, const size_t& num_of_cols) {
+		content.reset(new T[num_of_rows*num_of_cols]);
+	}
 
 public:
-	DFArray2D(const size_t& sz_i, const size_t& sz_j) : size_i(sz_i), size_j(sz_j) {
-		init<T>(size_i*size_j);
-	}
-	~DFArray2D() {}
+	DFArray2D(const size_t& rows, const size_t& cols) : num_of_rows(rows), num_of_cols(cols) {
+		this->init(rows, cols);
+	}		
+	~DFDistributedArray2D() {}
 
-	T* operator()(const size_t& ind_i, const size_t& ind_j) {
-		return (T*)content.at(ind_i*size_j + ind_j);
-	}
-
-	const size_t getSizeByY() const {
-		return size_i;
-	}
-
-	const size_t getSizeByX() const {
-		return size_j;
+	T* operator()(const size_t& row, const size_t& col) {
+		return content[row*num_of_cols + col];
 	}
 };

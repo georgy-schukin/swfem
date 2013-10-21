@@ -11,7 +11,7 @@
 class DFArray {
 private:	
 	boost::ptr_vector<DataFragment> storage; // to store data fragments	
-	unsigned int id;
+	size_t id;
 
 protected:
 	DataFragmentPtrArray content; // for general access to data fragments
@@ -29,7 +29,7 @@ protected:
 
 public:
 	DFArray() {}
-	DFArray(const unsigned int& i) : id(i) {}
+	DFArray(const size_t& i) : id(i) {}
 	virtual ~DFArray() {}
 
 	size_t getSize() const {
@@ -40,11 +40,11 @@ public:
 		return content;
 	}	
 
-	void setId(const unsigned int& id) {
+	void setId(const size_t& id) {
 		this->id = id;
 	}
 
-	const unsigned int& getId() const {
+	const size_t& getId() const {
 		return id;
 	}
 };

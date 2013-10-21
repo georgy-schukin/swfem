@@ -6,7 +6,7 @@
 #include "reductionmanager.h"
 #include "eventmanager.h"
 
-RuntimeSystem::RuntimeSystem(int argc, char **argv, unsigned int num_of_threads) {
+RuntimeSystem::RuntimeSystem(int argc, char **argv, size_t num_of_threads) {
 	Communicator *comm = new Communicator(argc, argv);
 	CFExecutor *cf_exec = new CFExecutor(num_of_threads, comm->getRank());
 	DFDispatcher *df_disp = new DFDispatcher();

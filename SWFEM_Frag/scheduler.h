@@ -5,19 +5,19 @@
 
 class Scheduler : public IScheduler {
 protected:
-	unsigned int num_of_threads;
-	//map<unsigned int, unsigned int> dfs_placement;	// affinity of data to threads
-	//vector<unsigned int> thread_weight;		// accum weight of data on threads
+	size_t num_of_threads;
+	//map<size_t, size_t> dfs_placement;	// affinity of data to threads
+	//vector<size_t> thread_weight;		// accum weight of data on threads
 	int step;
 
 protected:
-	unsigned int getIndexWithMinValue(const std::vector<unsigned int>& v);
-	unsigned int getIndexWithMaxValue(const std::vector<unsigned int>& v);
+	size_t getIndexWithMinValue(const std::vector<size_t>& v);
+	size_t getIndexWithMaxValue(const std::vector<size_t>& v);
 
 public:
-	Scheduler(const unsigned int& num_of_threads);
+	Scheduler(const size_t& num_of_threads);
 	~Scheduler() {}
 
-	//unsigned int scheduleCF(CompFragment *cf);
-	void scheduleCFs(const CompFragmentPtrArray& cfs, std::vector<unsigned int>& thread_ids);
+	//size_t scheduleCF(CompFragment *cf);
+	void scheduleCFs(const CompFragmentPtrArray& cfs, std::vector<size_t>& thread_ids);
 };

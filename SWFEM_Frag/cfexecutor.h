@@ -15,10 +15,10 @@ protected:
 	boost::scoped_ptr<IThreadPool> threadPool;
 	boost::scoped_ptr<IScheduler> scheduler;	
 	boost::mutex mutex;
-	unsigned int num_of_threads;
+	size_t num_of_threads;
 
 public:
-	CFExecutor(const unsigned int& num_of_threads, const int& rank);
+	CFExecutor(const size_t& num_of_threads, const int& rank);
 	~CFExecutor() {}
 
 	//void execCF(CompFragment *cf);

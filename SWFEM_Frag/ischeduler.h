@@ -8,8 +8,8 @@
  */
 class IScheduler {
 public:	
-	//virtual unsigned int scheduleCF(CompFragment *cf) = 0;
-	virtual void scheduleCFs(const CompFragmentPtrArray& cfs, std::vector<unsigned int>& thread_ids) = 0;
+	//virtual size_t scheduleCF(CompFragment *cf) = 0;
+	virtual void scheduleCFs(const CompFragmentPtrArray& cfs, std::vector<size_t>& thread_ids) = 0;
 
 	virtual ~IScheduler() {}
 };

@@ -16,12 +16,12 @@ void CFJacobyDiag::exec(MeshFragment& mesh, Data& data_diag, DataCoef& data_coef
 	}
 
 	BOOST_FOREACH(const MeshTriangle &tr, mesh.triangles) {	// for each triangle	
-		const unsigned int ind[3] = {tr.n[0], tr.n[1], tr.n[2]};
+		const size_t ind[3] = {tr.n[0], tr.n[1], tr.n[2]};
 			/*mesh.global_to_local[tr.n[0]],	// local indices for nodes
 			mesh.global_to_local[tr.n[1]],
 			mesh.global_to_local[tr.n[2]]};				*/
 
-		for(unsigned int j = 0; j < 3; j++){	// for each point in triangle						
+		for(size_t j = 0; j < 3; j++){	// for each point in triangle						
 			NodeData& diagj = data_diag[ind[j]];	// get diag data, corresponding to the node
 			const NodeDataCoef& coefj = data_coef[ind[j]];		// get coef data, corresponding to the node 			
 
@@ -30,7 +30,7 @@ void CFJacobyDiag::exec(MeshFragment& mesh, Data& data_diag, DataCoef& data_coef
 			diagj.xi = diagj.xi + coefj.a3*tr.square;	// the third equation		
 			
 			/*if ((tr.edge[j] == -1) || (tr.edge[j] == -7)) {
-				const unsigned int k = (j + 1)%3;
+				const size_t k = (j + 1)%3;
 				//const NodeDataDiag& diagk = data_diag.data[ind[k]];	
 				const MeshNode& nj = mesh.nodes[ind[j]];
 				const MeshNode& nk = mesh.nodes[ind[k]];

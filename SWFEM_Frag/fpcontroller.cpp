@@ -8,27 +8,27 @@ void FPController::addCF(CompFragment* cf, const int& node) {
 	rts->getCFDispatcher()->addCF(cf, node);	
 }
 
-void FPController::addReductionCF(const unsigned int& red_id, ReductionCompFragment* cf, const unsigned int& group_id) {
+/*void FPController::addReductionCF(const size_t& red_id, ReductionCompFragment* cf, const size_t& group_id) {
 	cf->setGroupId(group_id);
 	cfs_storage.push_back(cf);
 	new_cfs.push_back(cf);
 	reduction_cfs[red_id].push_back(cf);	
 }
 
-void FPController::addEventCF(const unsigned int& event_id, EventCompFragment* cf, const unsigned int& group_id) {
+void FPController::addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id) {
 	cf->setGroupId(group_id);
 	cfs_storage.push_back(cf);
 	new_cfs.push_back(cf);
 	event_cfs[event_id].push_back(cf);	
-}
+}*/
 
-void FPController::lockDFs(const DataFragmentPtrArray& dfs) {
+/*void FPController::lockDFs(const DataFragmentPtrArray& dfs) {
 	rts->getCFDispatcher()->lockDFs(dfs);
 }
 
 void FPController::unlockDFs(const DataFragmentPtrArray& dfs) {
 	rts->getCFDispatcher()->unlockDFs(dfs);
-}
+}*/
 
 void FPController::processCFs() {
 	deleteDoneCFs(); // clear garbage first
@@ -50,19 +50,19 @@ void FPController::deleteDoneCFs() {
 		else it++;
 }
 
-double FPController::getReductionResult(const unsigned int& red_id) {
+double FPController::getReductionResult(const size_t& red_id) {
 	return rts->getReductionManager()->waitForReductionResult(red_id);
 }
 
-void FPController::waitForEvent(const unsigned int& event_id) {
+/*void FPController::waitForEvent(const size_t& event_id) {
 	return rts->getEventManager()->waitForEvent(event_id);
-}
+}*/
 
 int FPController::getNodeId() {
 	return rts->getCommunicator()->getRank();
 }
 
-int FPController::getNodesNum() {
+int FPController::getNumOfNodes() {
 	return rts->getCommunicator()->getSize();
 }
 

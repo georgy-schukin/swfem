@@ -12,20 +12,20 @@ protected:
 	double beg_y;				// start coordinate by phi
 	double step_x;				// step (between points) by lambda
 	double step_y;				// step by phi
-	unsigned int global_num_x;	// num of points by lambda in the whole mesh
-	unsigned int global_num_y;	// num of points by phi
-	unsigned int start_x;		// start index of points by lambda for the mesh fragment
-	unsigned int start_y;		// start index by phi
-	unsigned int num_x;			// num of points in the mesh fragment by lambda
-	unsigned int num_y;			// num of points by phi
+	size_t global_num_x;	// num of points by lambda in the whole mesh
+	size_t global_num_y;	// num of points by phi
+	size_t start_x;		// start index of points by lambda for the mesh fragment
+	size_t start_y;		// start index by phi
+	size_t num_x;			// num of points in the mesh fragment by lambda
+	size_t num_y;			// num of points by phi
 
 public:
-	CFGen(double bx, double by, double sx, double sy, unsigned int gnx, unsigned int gny,
-		unsigned int stx, unsigned int sty, unsigned int nx, unsigned int ny) : 
+	CFGen(double bx, double by, double sx, double sy, size_t gnx, size_t gny,
+		size_t stx, size_t sty, size_t nx, size_t ny) : 
 		beg_x(bx), beg_y(by), step_x(sx), step_y(sy), global_num_x(gnx), global_num_y(gny),
 			start_x(stx), start_y(sty), num_x(nx), num_y(ny) {}
-	CFGen(MeshFragment *mesh, double bx, double by, double sx, double sy, unsigned int gnx, unsigned int gny,
-		unsigned int stx, unsigned int sty, unsigned int nx, unsigned int ny) : 
+	CFGen(MeshFragment *mesh, double bx, double by, double sx, double sy, size_t gnx, size_t gny,
+		size_t stx, size_t sty, size_t nx, size_t ny) : 
 		beg_x(bx), beg_y(by), step_x(sx), step_y(sy), global_num_x(gnx), global_num_y(gny),
 		start_x(stx), start_y(sty), num_x(nx), num_y(ny) {
 		addArg(mesh);

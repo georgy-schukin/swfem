@@ -18,8 +18,9 @@ public:
 
 private:	
 	std::vector<DataFragment*> args;
-	unsigned int ready_cnt;
-	//unsigned int group_id;
+	size_t ready_cnt;
+	size_t group_id;
+	size_t priority;
 	bool is_done;
 
 protected:
@@ -30,23 +31,31 @@ public:
 	bool isReady() const;
 
 public:	
-	CompFragment() : ready_cnt(0), is_done(false) {}
+	CompFragment() : ready_cnt(0), group_id(0), priority(0), is_done(false) {}
 	
 	const std::vector<DataFragment*>& getArgs() const {
 		return args;
 	}
 
-	template<class T> T& getArg(const unsigned int& num) const {
+	template<class T> T& getArg(const size_t& num) const {
 		return *(T*)(args[num]);
 	}
 
-	/*void setGroupId(const unsigned int& group_id) {
+	void setGroupId(const size_t& group_id) {
 		this->group_id = group_id;
 	}
 
-	unsigned int getGroupId() const {
+	size_t getGroupId() const {
 		return group_id;
-	}*/
+	}
+
+	void setPriority(const size_t& priority) {
+		this->priority = priority;
+	}
+
+	size_t getPriority() const {
+		return priority;
+	}
 
 	void setDone() {
 		this->is_done = true;
@@ -55,14 +64,14 @@ public:
 	bool isDone() const {
 		return is_done;
 	}
-	
-	virtual bool isReductionCF() const {
-		return false;
-	}
 
 	virtual CompFragment::Type getType() const {
 		return CompFragment::SIMPLE;
 	}
+	
+	/*virtual bool isReductionCF() const {
+		return false;
+	}*/	
 
 	/*virtual bool isEventCF() const {
 		return false;

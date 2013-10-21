@@ -5,7 +5,7 @@
 #include <boost/foreach.hpp>
 #include <sstream>
 
-ExecThread::ExecThread(const unsigned int& t_id, const int& rnk) : thread_id(t_id), rank(rnk), is_working(true) {	
+ExecThread::ExecThread(const size_t& t_id, const int& rnk) : thread_id(t_id), rank(rnk), is_working(true) {	
 	thread = boost::thread(boost::bind(&ExecThread::threadFunc, this));	// start thread
 }
 
@@ -27,7 +27,7 @@ void ExecThread::addCFListener(ICFListener *l) {
 
 void ExecThread::threadFunc() {
 	double tw = 0, ts = 0;
-	unsigned int cnt = 0;
+	size_t cnt = 0;
 
 	Timer timer;
 	MPELogger mpe_logger;

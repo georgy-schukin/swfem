@@ -15,13 +15,13 @@ void CFJacobyMultDirect::exec(MeshFragment& mesh, Data& data_new, Data& data, Da
 	}
 
 	BOOST_FOREACH(const MeshTriangle& tr, mesh.triangles) {	// for each triangle in mesh
-		/*const unsigned int i1 = mesh.global_to_local[tr.n[0]];
-		const unsigned int i2 = mesh.global_to_local[tr.n[1]];
-		const unsigned int i3 = mesh.global_to_local[tr.n[2]];*/
-		const unsigned int i1 = tr.n[0];
-		const unsigned int i2 = tr.n[1];
-		const unsigned int i3 = tr.n[2];
-		const unsigned int ind[3] = {i1, i2, i3};			
+		/*const size_t i1 = mesh.global_to_local[tr.n[0]];
+		const size_t i2 = mesh.global_to_local[tr.n[1]];
+		const size_t i3 = mesh.global_to_local[tr.n[2]];*/
+		const size_t i1 = tr.n[0];
+		const size_t i2 = tr.n[1];
+		const size_t i3 = tr.n[2];
+		const size_t ind[3] = {i1, i2, i3};			
 
 		const MeshNode& n1 = mesh.nodes[i1];	// get points of triangle
 		const MeshNode& n2 = mesh.nodes[i2];
@@ -31,7 +31,7 @@ void CFJacobyMultDirect::exec(MeshFragment& mesh, Data& data_new, Data& data, Da
 		const NodeData& dt2 = data[i2];	
 		const NodeData& dt3 = data[i3];	
 		
-		for (unsigned int j = 0; j < 3; j++) {			// for each node in triangle
+		for (size_t j = 0; j < 3; j++) {			// for each node in triangle
 			NodeData& dnew = data_new[ind[j]];			// get data, corresponding to the node 
 			NodeData& dt = data[ind[j]];				// get data, corresponding to the node 
 			NodeData& dprev = data_prev[ind[j]];		// get data, corresponding to the node 
@@ -84,8 +84,8 @@ void CFJacobyMultDirect::exec(MeshFragment& mesh, Data& data_new, Data& data, Da
 			+ sum3*(n2.lambda - n1.lambda)
 			- tr.square*(coef3.e3 + data_prev[i3].xi*coef3.a3);									
 
-		/*for(unsigned int j = 0; j < 3; j++) { // the side of triangle cycle
-			const unsigned int k = (j + 1)%3;
+		/*for(size_t j = 0; j < 3; j++) { // the side of triangle cycle
+			const size_t k = (j + 1)%3;
 			if ((tr.edge[j] == -1) || (tr.edge[j] == -7)) {
 				const MeshNode& nj = mesh.nodes[ind[j]];
 				const MeshNode& nk = mesh.nodes[ind[k]];				

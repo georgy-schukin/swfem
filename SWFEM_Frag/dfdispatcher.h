@@ -7,7 +7,7 @@
 
 class DFDispatcher: public IDFDispatcher {
 private:
-	//typedef boost::ptr_map<unsigned int, DataFragment> DataFragments;
+	//typedef boost::ptr_map<size_t, DataFragment> DataFragments;
 
 private:
 	//DataFragments dataFragments;	

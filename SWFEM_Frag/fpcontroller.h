@@ -14,8 +14,8 @@
 */
 class FPController {
 private:
-	typedef std::map<unsigned int, ReductionCompFragmentPtrArray> ReductionCFsMap;
-	//typedef std::map<unsigned int, EventCompFragmentPtrArray> EventCFsMap;
+	typedef std::map<size_t, ReductionCompFragmentPtrArray> ReductionCFsMap;
+	//typedef std::map<size_t, EventCompFragmentPtrArray> EventCFsMap;
 
 private:
 	IRuntimeSystem* rts;	// link to runtime system interface for access to its functions
@@ -34,19 +34,19 @@ private:
 
 protected:	
 	void addCF(CompFragment* cf, const int& node = -1);			
-	void addReductionCF(const unsigned int& red_id, ReductionCompFragment* cf, const int& node = -1);
-	//void addEventCF(const unsigned int& event_id, EventCompFragment* cf, const unsigned int& group_id = -1);	
+	//void addReductionCF(const size_t& red_id, ReductionCompFragment* cf, const int& node = -1);
+	//void addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id = -1);	
 
 	//void lockDFs(const DataFragmentPtrArray& dfs);
 	//void unlockDFs(const DataFragmentPtrArray& dfs);	
 
 	void processCFs();
 
-	double getReductionResult(const unsigned int& red_id);
-	//void waitForEvent(const unsigned int& event_id);
+	double getReductionResult(const size_t& red_id);
+	//void waitForEvent(const size_t& event_id);
 
 	int getNodeId();
-	int getNodesNum();
+	int getNumOfNodes();
 
 	void waitForAllDone();
 

@@ -20,7 +20,7 @@ private:
 	boost::scoped_ptr<Logger> logger;
 
 public:
-	RuntimeSystem(int argc, char **argv, unsigned int num_of_threads);
+	RuntimeSystem(int argc, char **argv, size_t num_of_threads);
 	~RuntimeSystem();	
 
 	ICFDispatcher* getCFDispatcher();

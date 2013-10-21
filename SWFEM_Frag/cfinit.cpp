@@ -11,7 +11,7 @@ void CFInit::exec(MeshFragment& mesh, Data& data, DataCoef& data_coef) {
 		data_coef.resize(mesh.nodes.size());	// create data elems
 
 	BOOST_FOREACH(MeshTriangle& tr, mesh.triangles) {	// update mesh - count square of triangles
-		/*const unsigned int ind[3] = {
+		/*const size_t ind[3] = {
 			mesh.global_to_local[tr.n[0]],	// local indices for nodes
 			mesh.global_to_local[tr.n[1]],
 			mesh.global_to_local[tr.n[2]]};*/

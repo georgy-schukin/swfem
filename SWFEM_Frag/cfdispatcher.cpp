@@ -3,7 +3,7 @@
 #include <iostream>
 #include <set>
 
-void CFDispatcher::addCFs(const CompFragmentPtrArray& cfs) {	
+/*void CFDispatcher::addCFs(const CompFragmentPtrArray& cfs) {	
 	boost::unique_lock<boost::mutex> lock(mutex);
 
 	cfs_count += cfs.size();	
@@ -15,6 +15,13 @@ void CFDispatcher::addCFs(const CompFragmentPtrArray& cfs) {
 	DataFragmentPtrArray args;
 	getArgs(cfs, args);	
 	pushArgsAndExec(args);
+}*/
+
+void CFDispatcher::addCF(CompFragment *cf, const int& node) {
+	//if ((node == -1) || (node == this_node)) {
+		BOOST_FOREACH(DataFragment *df, cf->getArgs()) 
+			df->addRoutePoint(cf, node); // add to route	
+	//}
 }
 
 void CFDispatcher::pushArgsAndExec(const DataFragmentPtrArray& dfs) {

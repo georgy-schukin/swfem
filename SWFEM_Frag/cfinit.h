@@ -9,8 +9,8 @@
 */
 class CFInit: public CompFragment {
 protected:
-	unsigned int start_x;
-	unsigned int start_y;
+	size_t start_x;
+	size_t start_y;
 public:
 	CFInit() {}
 	CFInit(MeshFragment *mesh, Data *data, DataCoef *data_coef) {		

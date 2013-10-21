@@ -8,14 +8,14 @@
 */
 class CFJacobyUpdateSend: public EventCompFragment {
 protected:
-	unsigned int start;
-	unsigned int step;	
-	unsigned int num;
+	size_t start;
+	size_t step;	
+	size_t num;
 
 public:
 	CFJacobyUpdateSend() {}
-	CFJacobyUpdateSend(const unsigned int& str, const unsigned int& stp, const unsigned int& n) : start(str), step(stp), num(n) {}
-	CFJacobyUpdateSend(Data *src, Data *buf, const unsigned int& str, const unsigned int& stp, const unsigned int& n) : start(str), step(stp), num(n) {				
+	CFJacobyUpdateSend(const size_t& str, const size_t& stp, const size_t& n) : start(str), step(stp), num(n) {}
+	CFJacobyUpdateSend(Data *src, Data *buf, const size_t& str, const size_t& stp, const size_t& n) : start(str), step(stp), num(n) {				
 		addArg(src);		
 		addArg(buf);		
 	}

@@ -8,7 +8,7 @@ double CFJacobyReduce::exec(MeshFragment& mesh, Data& data_new, Data& data, Data
 
 	err_max = 0;
 
-	for(unsigned int i = 0;i < data_new.size();i++) {
+	for(size_t i = 0;i < data_new.size();i++) {
 		NodeData& dnew = data_new[i];
 		const NodeData& dt = data[i];
 		const NodeData& diag = data_diag[i];

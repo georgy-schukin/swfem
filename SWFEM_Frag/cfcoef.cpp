@@ -3,10 +3,10 @@
 #include <boost/foreach.hpp>
 
 void CFCoef::exec(MeshFragment& mesh, DataCoef& data_coef) {	
-	if(data_coef.empty())
+	if (data_coef.empty())
 		data_coef.resize(mesh.nodes.size());
 
-	for(unsigned int i = 0;i < data_coef.size();i++) {	// for each data elem
+	for (size_t i = 0; i < data_coef.size(); i++) {	// for each data elem
 		NodeDataCoef& dt = data_coef[i];
 		const MeshNode& n = mesh.nodes[i];
 		const double sin_phi = sin(n.phi);	

@@ -13,7 +13,7 @@
  */
 class ExecThread {
 private:
-	unsigned int thread_id;
+	size_t thread_id;
 	int rank;
 
 	std::vector<CompFragment*> cfs_queue;
@@ -28,7 +28,7 @@ protected:
 	void threadFunc();
 
 public:
-	ExecThread(const unsigned int& t_id, const int& rnk);
+	ExecThread(const size_t& t_id, const int& rnk);
 	~ExecThread();
 
 	//void start();

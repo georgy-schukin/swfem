@@ -18,35 +18,43 @@ public:
 	DistributionBlock2D(const DistributionBlock2D& b) : start_x(b.start_x), start_y(b.start_y), end_x(b.end_x), end_y(b.end_y) {}
 	~DistributionBlock2D() {}
 
-	void setStartX(const size_t& x) {
+	/*void setStartByX(const size_t& x) {
 		this->start_x = x;
 	}
 
-	void setStartY(const size_t& y) {
+	void setStartByY(const size_t& y) {
 		this->start_y = y;
 	}
 
-	void setEndX(const size_t& x) {
+	void setEndByX(const size_t& x) {
 		this->end_x = x;
 	}
 
-	void setEndY(const size_t& y) {
+	void setEndByY(const size_t& y) {
 		this->end_y = y;
-	}
+	}*/
 
-	size_t getStartX() const {
+	size_t getStartByX() const {
 		return start_x;
 	}
 
-	size_t getStartY() const {
+	size_t getStartByY() const {
 		return start_y;
 	}
 
-	size_t getEndX() const {
+	size_t getEndByX() const {
 		return end_x;
 	}
 
-	size_t getEndY() const {
+	size_t getEndByY() const {
 		return end_y;
+	}
+
+	size_t getSizeByX() const {
+		return end_x - start_x;
+	}
+
+	size_t getSizeByY() const {
+		return end_y - start_y;
 	}
 };

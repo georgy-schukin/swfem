@@ -25,4 +25,8 @@ public:
 	const T& get(const size_t& node) const {
 		return distr.at(node);
 	}
+
+	void clear() {
+		distr.clear();
+	}
 };

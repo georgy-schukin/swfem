@@ -24,5 +24,5 @@ public:
 		exec(getArg<MeshFragment>(0), filename, 0, 0);
 	}
 
-	void exec(MeshFragment& mesh, const std::string& filename, unsigned int step, unsigned int size);	
+	void exec(MeshFragment& mesh, const std::string& filename, size_t step, size_t size);	
 };

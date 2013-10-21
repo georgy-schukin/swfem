@@ -12,7 +12,7 @@
 
 using namespace std;
 
-SHFEMMPIController::SHFEMMPIController(IRuntimeSystem *s, unsigned int mx, unsigned int my) : 
+SHFEMMPIController::SHFEMMPIController(IRuntimeSystem *s, size_t mx, size_t my) : 
 	FPController(s), mesh_size_x(mx), mesh_size_y(my) {
 
 	node_rank = getNodeId();
@@ -21,7 +21,7 @@ SHFEMMPIController::SHFEMMPIController(IRuntimeSystem *s, unsigned int mx, unsig
 	aux::sliceMesh(mesh_size_y, node_size, start_y, ny); // slice mesh between nodes by Y
 }
 
-void SHFEMMPIController::exec(unsigned int num_of_steps) {
+void SHFEMMPIController::exec(size_t num_of_steps) {
 	const double bx = 0.0;
 	const double by = 90.0;	
 	const double sx = (10.0 - bx)/(mesh_size_x - 1);
@@ -42,8 +42,8 @@ void SHFEMMPIController::exec(unsigned int num_of_steps) {
 	CFExact(0).exec(mesh, data_exact);
 	CFCoef().exec(mesh, data_coef);		
 	
-	unsigned int iter = 0;
-	for(unsigned int s = 1;s <= num_of_steps;s++) {		
+	size_t iter = 0;
+	for(size_t s = 1;s <= num_of_steps;s++) {		
 		CFInteraction(s*cnst::TAU).exec(mesh, data_interaction);		
 		CFDiag().exec(mesh, data_coef, data_interaction);
 		CFJacobyDiag().exec(mesh, data_diag, data_coef);
@@ -83,7 +83,7 @@ void SHFEMMPIController::update(Data& data) {
 	}
 }
 
-void SHFEMMPIController::update(Data& data, unsigned int start, unsigned int num, int rank, int tag) {
+void SHFEMMPIController::update(Data& data, size_t start, size_t num, int rank, int tag) {
 	Data send(num);
 	Data recv(num);
 	CFJacobyUpdateSend(start, 1, num).exec(data, send);
@@ -95,7 +95,7 @@ void SHFEMMPIController::update(Data& data, unsigned int start, unsigned int num
 }
 
 void SHFEMMPIController::copyToBuffer(const Data& data, double* buf) {	
-	unsigned int p = 0;
+	size_t p = 0;
 	BOOST_FOREACH(const NodeData& dt, data) {
 		buf[p] = dt.u;
 		buf[p + 1] = dt.v;
@@ -105,7 +105,7 @@ void SHFEMMPIController::copyToBuffer(const Data& data, double* buf) {
 }
 
 void SHFEMMPIController::copyFromBuffer(Data& data, const double* buf) {
-	unsigned int p = 0;
+	size_t p = 0;
 	BOOST_FOREACH(NodeData& dt, data) {
 		dt.u = buf[p];
 		dt.v = buf[p + 1];

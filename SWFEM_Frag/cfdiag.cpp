@@ -5,7 +5,7 @@ void CFDiag::exec(MeshFragment& mesh, DataCoef& data_coef, DataInteraction& data
 	if(data_coef.empty()) 
 		data_coef.resize(mesh.nodes.size());
 
-	for(unsigned int i = 0;i < data_coef.size();i++) {
+	for(size_t i = 0;i < data_coef.size();i++) {
 		NodeDataCoef& dt = data_coef[i];
 		NodeDataInteraction& dti = data_interaction[i];
 		const MeshNode& n = mesh.nodes[i];		

@@ -8,14 +8,14 @@
 */
 class CFJacobyUpdateRecv: public CompFragment {
 protected:
-	unsigned int start;
-	unsigned int step;	
-	unsigned int num;
+	size_t start;
+	size_t step;	
+	size_t num;
 
 public:
 	CFJacobyUpdateRecv() {}
-	CFJacobyUpdateRecv(const unsigned int& str, const unsigned int& stp, const unsigned int& n) : start(str), step(stp), num(n) {}
-	CFJacobyUpdateRecv(Data *dst, Data *buf, const unsigned int& str, const unsigned int& stp, const unsigned int& n) : start(str), step(stp), num(n) {				
+	CFJacobyUpdateRecv(const size_t& str, const size_t& stp, const size_t& n) : start(str), step(stp), num(n) {}
+	CFJacobyUpdateRecv(Data *dst, Data *buf, const size_t& str, const size_t& stp, const size_t& n) : start(str), step(stp), num(n) {				
 		addArg(dst);		
 		addArg(buf);		
 	}

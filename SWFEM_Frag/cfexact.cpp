@@ -18,7 +18,7 @@ void CFExact::exec(MeshFragment& mesh, Data& data) {
 	const double t3 = 72.0;
 	const double t4 = 72.0*72.0;	
 
-	for(unsigned int i = 0;i < data.size();i++) {
+	for(size_t i = 0;i < data.size();i++) {
 		const MeshNode& n = mesh.nodes[i];
 		NodeData& dt = data[i];
 

@@ -2,7 +2,7 @@
 #include <boost/foreach.hpp>
 #include <map>
 
-/*void ReductionManager::registerReductionCF(unsigned int red_id, ReductionCompFragment *cf) {	
+/*void ReductionManager::registerReductionCF(size_t red_id, ReductionCompFragment *cf) {	
 	ReductionsMap::iterator it = reductions.find(red_id);
 	if (it == reductions.end()) {	// new reduction				
 		reductions.insert(red_id, new Reduction(1)); // create new reducer for reduction		
@@ -12,10 +12,10 @@
 	cf->setReductionId(red_id);
 }*/
 
-void ReductionManager::registerReductionCFs(const unsigned int& red_id, const ReductionCompFragmentPtrArray& cfs) {	
+void ReductionManager::registerReductionCFs(const size_t& red_id, const ReductionCompFragmentPtrArray& cfs) {	
 	ReductionsMap::iterator it = reductions.find(red_id);
 	if (it == reductions.end()) {	// new reduction				
-		unsigned int rd_id = red_id;
+		size_t rd_id = red_id;
 		reductions.insert(rd_id, new Reduction(cfs.size())); // create new reducer for reduction		
 	} else {	// redution already exists		
 		it->second->changeSize(cfs.size());		// increment local size by array size
@@ -24,7 +24,7 @@ void ReductionManager::registerReductionCFs(const unsigned int& red_id, const Re
 		cf->setReductionId(red_id);
 }
 
-double ReductionManager::waitForReductionResult(const unsigned int& red_id) {
+double ReductionManager::waitForReductionResult(const size_t& red_id) {
 	double local_result = reductions.at(red_id).waitForResult();
 	double total_result = comm->allReduce(local_result);	// call internode comm for final result			
 	reductions.erase(red_id); // delete reduction after getting result
@@ -39,10 +39,10 @@ double ReductionManager::waitForReductionResult(const unsigned int& red_id) {
 }*/
 
 void ReductionManager::onCFsDone(const CompFragmentPtrArray& cfs) {		
-	unsigned int red_id = -1;	// ATTENTION: we think that there is only ONE active reduction among cfs
-	unsigned int cnt = 0;
+	size_t red_id = -1;	// ATTENTION: we think that there is only ONE active reduction among cfs
+	size_t cnt = 0;
 	double val = 0;
-	//typedef std::map<unsigned int, std::pair<unsigned int, double> > ReductionMap;
+	//typedef std::map<size_t, std::pair<size_t, double> > ReductionMap;
 	//ReductionMap red_map;
 	BOOST_FOREACH(CompFragment *cf, cfs) {
 		if (cf->isReductionCF()) {

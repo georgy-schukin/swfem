@@ -4,17 +4,17 @@
 
 class EventCompFragment : public CompFragment {
 private:
-	unsigned int event_id;
+	size_t event_id;
 
 public:
 	EventCompFragment() : event_id(0) {}
 	virtual ~EventCompFragment() {}
 
-	void setEventId(unsigned int event_id) {
+	void setEventId(size_t event_id) {
 		this->event_id = event_id;
 	}
 
-	unsigned int getEventId() const {
+	size_t getEventId() const {
 		return event_id;
 	}
 
