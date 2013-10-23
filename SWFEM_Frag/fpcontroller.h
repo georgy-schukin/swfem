@@ -33,8 +33,8 @@ private:
 	void deleteDoneCFs();
 
 protected:	
-	void addCF(CompFragment* cf, const int& node = -1);			
-	void addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const int& node = -1);
+	void addCF(CompFragment* cf, const int& node = -1, const size_t& priority = 0, const size_t& group_id = 0);
+	void addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const int& node = -1, const size_t& priority = 0, const size_t& group_id = 0);
 	//void addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id = -1);	
 
 	//void lockDFs(const DataFragmentPtrArray& dfs);

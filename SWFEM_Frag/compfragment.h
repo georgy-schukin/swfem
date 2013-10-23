@@ -45,7 +45,7 @@ public:
 		this->group_id = group_id;
 	}
 
-	size_t getGroupId() const {
+	const size_t& getGroupId() const {
 		return group_id;
 	}
 
@@ -53,7 +53,7 @@ public:
 		this->priority = priority;
 	}
 
-	size_t getPriority() const {
+	const size_t& getPriority() const {
 		return priority;
 	}
 

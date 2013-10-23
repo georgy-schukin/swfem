@@ -10,8 +10,12 @@ ThreadPool::ThreadPool(const size_t& num_of_threads, const int& rnk) {
 ThreadPool::~ThreadPool() {	
 }
 
-void ThreadPool::execCFs(const CompFragmentPtrArray& cfs, const size_t& thread_id) {
+/*void ThreadPool::execCFs(const CompFragmentPtrArray& cfs, const size_t& thread_id) {
 	threads.at(thread_id).execCFs(cfs);
+}*/
+
+void ThreadPool::execCFGroup(const CompFragmentGroup& group, const size_t& thread_id) {
+	threads.at(thread_id).execCFGroup(group);
 }
 
 void ThreadPool::addCFListener(ICFListener *l) {

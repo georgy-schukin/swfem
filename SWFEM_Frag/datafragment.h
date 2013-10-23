@@ -15,8 +15,8 @@ public:
 		CompFragment* cf;
 		int node;
 	public:
-		RoutePoint(CompFragment *c, const int& n): cf(c), node(n) {}
-		RoutePoint(const RoutePoint& p) : cf(p.cf), node(p.node) {}
+		RoutePoint() : cf(0), node(-1) {}
+		RoutePoint(CompFragment *c, const int& n): cf(c), node(n) {}		
 		~RoutePoint() {}
 
 		CompFragment* getCF() const {
@@ -51,19 +51,17 @@ public:
 		return (!is_locked && !route.empty());
 	}
 
-	void addRoutePoint(CompFragment *cf, const int& node = -1) {
-		route.push(DataFragment::RoutePoint(cf, node));
+	void addRoutePoint(const DataFragment::RoutePoint& point) {
+		route.push(point);
 	}	
 
-	int getNextRoutePoint(CompFragment **cf, int& node) {
+	DataFragment::RoutePoint getNextRoutePoint() {
 		if (!route.empty()) {
-			const DataFragment::RoutePoint& point = route.front();			
-			*cf = point.getCF();
-			node = point.getNode();
-			route.pop();
-			return 0;
-		}
-		return -1;
+			DataFragment::RoutePoint point = route.front();						
+			route.pop();		
+			return point;
+		}		
+		return DataFragment::RoutePoint(0, -1);
 	}
 
 	bool isRouteEmpty() const {

@@ -17,14 +17,14 @@
 	pushArgsAndExec(args);
 }*/
 
-void CFDispatcher::addCF(CompFragment *cf, const int& node) {
+/*void CFDispatcher::addCF(CompFragment *cf, const int& node) {
 	//if ((node == -1) || (node == this_node)) {
 		BOOST_FOREACH(DataFragment *df, cf->getArgs()) 
 			df->addRoutePoint(cf, node); // add to route	
 	//}
-}
+}*/
 
-void CFDispatcher::pushArgsAndExec(const DataFragmentPtrArray& dfs) {
+/*void CFDispatcher::pushArgsAndExec(const DataFragmentPtrArray& dfs) {
 	CompFragmentPtrArray ready_cfs;		
 	//pushArgsAndGetReadyCFs(dfs, ready_cfs);	
 	pushArgsAndGetReadyCFsMultiple(dfs, ready_cfs);	
@@ -54,6 +54,42 @@ void CFDispatcher::pushArgsAndGetReadyCFs(const DataFragmentPtrArray& dfs, CompF
 				ready_cfs.push_back(cf); // add to ready				
 			df->setLocked(true);			
 		}	
+}*/
+
+void CFDispatcher::getGroups(const CompFragmentPtrArray& cfs, std::vector<CompFragmentGroup>& groups) {
+	DataFragmentPtrArray args;
+	getArgs(cfs, args);
+	CompFragmentPtrArray ready;
+	getGeneration(args, ready);
+	BOOST_FOREACH(CompFragment *cf, ready)
+		groups[cf->getGroupId()].add(cf);
+}
+
+void CFDispatcher::getGeneration(const DataFragmentPtrArray& dfs, CompFragmentPtrArray& cfs) {
+	BOOST_FOREACH(DataFragment *df, dfs) {
+		if (df->isReady()) {
+			DataFragment::RoutePoint next_point = df->getNextRoutePoint();
+			CompFragment *cf = next_point.getCF();
+			if (cf->pushArgAndCheckReady(df))
+				cfs.push_back(cf);
+		}
+	}
+}
+
+void CFDispatcher::getArgs(const CompFragmentPtrArray& cfs, DataFragmentPtrArray& args) {
+	std::set<DataFragment*> dfs;
+	BOOST_FOREACH(CompFragment *cf, cfs) {		
+		dfs.insert(cf->getArgs().begin(), cf->getArgs().end()); // get unique dfs by using set
+	}
+	args.insert(args.end(), dfs.begin(), dfs.end());
+}
+
+void CFDispatcher::getReadyArgs(const CompFragmentPtrArray& cfs, std::set<DataFragment*>& ready_args) {
+	BOOST_FOREACH(CompFragment *cf, cfs) 
+		BOOST_FOREACH(DataFragment *df, cf->getArgs()) {
+			if (df->isReady())
+				ready_args.insert(df);
+	}
 }
 
 void CFDispatcher::waitForAllDone() {
@@ -63,7 +99,7 @@ void CFDispatcher::waitForAllDone() {
 	}
 }
 
-void CFDispatcher::onCFsDone(const CompFragmentPtrArray& cfs) {
+/*void CFDispatcher::onCFsDone(const CompFragmentPtrArray& cfs) {
 	boost::unique_lock<boost::mutex> lock(mutex);			
 
 	DataFragmentPtrArray dfs;	
@@ -79,9 +115,9 @@ void CFDispatcher::onCFsDone(const CompFragmentPtrArray& cfs) {
 	} else {
 		pushArgsAndExec(dfs);
 	}
-}
+}*/
 
-void CFDispatcher::onDFsUnlocked(const DataFragmentPtrArray& dfs) {
+/*void CFDispatcher::onDFsUnlocked(const DataFragmentPtrArray& dfs) {
 	boost::unique_lock<boost::mutex> lock(mutex);
 	pushArgsAndExec(dfs);
 }
@@ -107,4 +143,4 @@ void CFDispatcher::unlockDFs(const DataFragmentPtrArray& dfs) {
 	unlkDFs(dfs);
 	pushArgsAndExec(dfs);
 	//onDFsUnlocked(dfs);
-}
+}*/

@@ -74,6 +74,8 @@
     <ClInclude Include="cfdiag.h" />
     <ClInclude Include="cfexact.h" />
     <ClInclude Include="cfexecutor.h" />
+    <ClInclude Include="cfgroupdispatcher.h" />
+    <ClInclude Include="cfgroupscheduler.h" />
     <ClInclude Include="cfinteraction.h" />
     <ClInclude Include="cfgen.h" />
     <ClInclude Include="cfjacobydiag.h" />
@@ -91,6 +93,7 @@
     <ClInclude Include="commsystem.h" />
     <ClInclude Include="commthread.h" />
     <ClInclude Include="communicator.h" />
+    <ClInclude Include="compfragmentgroup.h" />
     <ClInclude Include="datafragment.h" />
     <ClInclude Include="cnst.h" />
     <ClInclude Include="data.h" />
@@ -102,6 +105,7 @@
     <ClInclude Include="dfdistributedarray2d.h" />
     <ClInclude Include="distribution.h" />
     <ClInclude Include="distribution2d.h" />
+    <ClInclude Include="icommsystem.h" />
     <ClInclude Include="region.h" />
     <ClInclude Include="region2d.h" />
     <ClInclude Include="doublingdistribution2d.h" />
@@ -120,7 +124,7 @@
     <ClInclude Include="ieventmanager.h" />
     <ClInclude Include="ireductionmanager.h" />
     <ClInclude Include="irts.h" />
-    <ClInclude Include="ischeduler.h" />
+    <ClInclude Include="icfscheduler.h" />
     <ClInclude Include="ithreadpool.h" />
     <ClInclude Include="logger.h" />
     <ClInclude Include="meshblockfragment.h" />
@@ -134,7 +138,7 @@
     <ClInclude Include="reductionmanager.h" />
     <ClInclude Include="remoteptr.h" />
     <ClInclude Include="rts.h" />
-    <ClInclude Include="scheduler.h" />
+    <ClInclude Include="cfscheduler.h" />
     <ClInclude Include="shfemmpicontroller.h" />
     <ClInclude Include="shfemseqcontroller.h" />
     <ClInclude Include="shfemcontroller.h" />
@@ -150,6 +154,7 @@
     <ClCompile Include="cfdispatcher.cpp" />
     <ClCompile Include="cfexact.cpp" />
     <ClCompile Include="cfexecutor.cpp" />
+    <ClCompile Include="cfgroupscheduler.cpp" />
     <ClCompile Include="cfinteraction.cpp" />
     <ClCompile Include="cfgen.cpp" />
     <ClCompile Include="cfjacobydiag.cpp" />
@@ -175,7 +180,7 @@
     <ClCompile Include="reduction.cpp" />
     <ClCompile Include="reductionmanager.cpp" />
     <ClCompile Include="rts.cpp" />
-    <ClCompile Include="scheduler.cpp" />
+    <ClCompile Include="cfscheduler.cpp" />
     <ClCompile Include="shfemmpicontroller.cpp" />
     <ClCompile Include="shfemseqcontroller.cpp" />
     <ClCompile Include="shfemcontroller.cpp" />

@@ -3,6 +3,8 @@
 #include "irts.h"
 #include "icfexecutor.h"
 #include "icommunicator.h"
+#include "ithreadpool.h"
+#include "icfscheduler.h"
 #include "logger.h"
 #include <boost/scoped_ptr.hpp>
 
@@ -11,13 +13,15 @@
 */
 class RuntimeSystem: public IRuntimeSystem {
 private:	
-	boost::scoped_ptr<ICFExecutor> cfExecutor;
-	boost::scoped_ptr<ICFDispatcher> cfDispatcher;
-	boost::scoped_ptr<IDFDispatcher> dfDispatcher;
-	boost::scoped_ptr<IReductionManager> reductionManager;
-	boost::scoped_ptr<IEventManager> eventManager;
+	boost::scoped_ptr<ICFExecutor> cf_executor;
+	boost::scoped_ptr<ICFDispatcher> cf_dispatcher;
+	boost::scoped_ptr<IDFDispatcher> df_dispatcher;
+	boost::scoped_ptr<IReductionManager> reduction_manager;
+	//boost::scoped_ptr<IEventManager> event_manager;
 	boost::scoped_ptr<ICommunicator> communicator;
-	boost::scoped_ptr<Logger> logger;
+	boost::scoped_ptr<IThreadPool> thread_pool;
+	boost::scoped_ptr<ICFScheduler> scheduler;
+	boost::scoped_ptr<Logger> logger;	
 
 public:
 	RuntimeSystem(int argc, char **argv, size_t num_of_threads);

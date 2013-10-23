@@ -43,14 +43,14 @@
     <Filter Include="Header Files\df\dfs">
       <UniqueIdentifier>{cbaf2414-024a-44ce-b833-00bc55412b43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\df\distr">
-      <UniqueIdentifier>{71ca2ac6-bf83-4822-9b4f-8b3225d53b8a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\controllers">
       <UniqueIdentifier>{250f8ac8-8f01-4ceb-802d-2d15a0e39e78}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\controllers">
       <UniqueIdentifier>{bf406047-61de-4e44-8568-044ab8858cde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\df\distribution">
+      <UniqueIdentifier>{71ca2ac6-bf83-4822-9b4f-8b3225d53b8a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -122,12 +122,6 @@
     </ClInclude>
     <ClInclude Include="logger.h">
       <Filter>Header Files\rts</Filter>
-    </ClInclude>
-    <ClInclude Include="scheduler.h">
-      <Filter>Header Files\rts</Filter>
-    </ClInclude>
-    <ClInclude Include="ischeduler.h">
-      <Filter>Header Files\interfaces</Filter>
     </ClInclude>
     <ClInclude Include="timer.h">
       <Filter>Header Files</Filter>
@@ -229,10 +223,10 @@
       <Filter>Header Files\df\dfs</Filter>
     </ClInclude>
     <ClInclude Include="distribution.h">
-      <Filter>Header Files\df\distr</Filter>
+      <Filter>Header Files\df\distribution</Filter>
     </ClInclude>
     <ClInclude Include="distribution2d.h">
-      <Filter>Header Files\df\distr</Filter>
+      <Filter>Header Files\df\distribution</Filter>
     </ClInclude>
     <ClInclude Include="fpcontroller.h">
       <Filter>Header Files\controllers</Filter>
@@ -265,16 +259,34 @@
       <Filter>Header Files\df\dfs</Filter>
     </ClInclude>
     <ClInclude Include="doublingdistribution2d.h">
-      <Filter>Header Files\df\distr</Filter>
+      <Filter>Header Files\df\distribution</Filter>
     </ClInclude>
     <ClInclude Include="region2d.h">
-      <Filter>Header Files\df\distr</Filter>
+      <Filter>Header Files\df\distribution</Filter>
     </ClInclude>
     <ClInclude Include="blockdistribution2d.h">
-      <Filter>Header Files\df\distr</Filter>
+      <Filter>Header Files\df\distribution</Filter>
     </ClInclude>
     <ClInclude Include="region.h">
-      <Filter>Header Files\df\distr</Filter>
+      <Filter>Header Files\df\distribution</Filter>
+    </ClInclude>
+    <ClInclude Include="icommsystem.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="cfgroupscheduler.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="cfscheduler.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="icfscheduler.h">
+      <Filter>Header Files\interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="cfgroupdispatcher.h">
+      <Filter>Header Files\rts</Filter>
+    </ClInclude>
+    <ClInclude Include="compfragmentgroup.h">
+      <Filter>Header Files\cf</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -306,9 +318,6 @@
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="logger.cpp">
-      <Filter>Source Files\rts</Filter>
-    </ClCompile>
-    <ClCompile Include="scheduler.cpp">
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="eventmanager.cpp">
@@ -391,6 +400,12 @@
     </ClCompile>
     <ClCompile Include="shfemcontroller.cpp">
       <Filter>Source Files\controllers</Filter>
+    </ClCompile>
+    <ClCompile Include="cfscheduler.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="cfgroupscheduler.cpp">
+      <Filter>Source Files\rts</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

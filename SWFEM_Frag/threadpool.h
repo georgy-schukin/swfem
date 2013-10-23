@@ -16,7 +16,10 @@ public:
 	ThreadPool(const size_t& num_of_threads, const int& rank);
 	~ThreadPool();
 
-	//void execCF(CompFragment *cf, size_t thread_id);
-	void execCFs(const CompFragmentPtrArray& cfs, const size_t& thread_id);
-	void addCFListener(ICFListener *l);
+	//void execCF(CompFragment *cf, const size_t& thread_id);
+	//void execCFs(const CompFragmentPtrArray& cfs, const size_t& thread_id);
+
+	void execCFGroup(const CompFragmentGroup& group, const size_t& thread_id);
+
+	void addCFListener(ICFListener *listener);
 };

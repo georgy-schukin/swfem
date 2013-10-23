@@ -34,19 +34,19 @@ public:
 		this->end_y = y;
 	}*/
 
-	size_t getStartByX() const {
+	const size_t& getStartByX() const {
 		return start_x;
 	}
 
-	size_t getStartByY() const {
+	const size_t& getStartByY() const {
 		return start_y;
 	}
 
-	size_t getEndByX() const {
+	const size_t& getEndByX() const {
 		return end_x;
 	}
 
-	size_t getEndByY() const {
+	const size_t& getEndByY() const {
 		return end_y;
 	}
 

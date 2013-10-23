@@ -11,11 +11,11 @@ public:
 	Region(const Region& r) : start(r.start), end(r.end) {}
 	~Region() {}
 
-	size_t getStart() const {
+	const size_t& getStart() const {
 		return start;
 	}
 	
-	size_t getEnd() const {
+	const size_t& getEnd() const {
 		return end;
 	}
 

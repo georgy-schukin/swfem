@@ -3,7 +3,7 @@
 #include "icfexecutor.h"
 #include "ithreadpool.h"
 #include "icflistener.h"
-#include "ischeduler.h"
+#include "icfscheduler.h"
 #include <boost/scoped_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 
@@ -13,7 +13,7 @@
 class CFExecutor: public ICFExecutor {
 protected:
 	boost::scoped_ptr<IThreadPool> threadPool;
-	boost::scoped_ptr<IScheduler> scheduler;	
+	boost::scoped_ptr<ICFScheduler> scheduler;	
 	boost::mutex mutex;
 	size_t num_of_threads;
 
