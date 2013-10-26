@@ -9,7 +9,7 @@
 	cout << out.str();
 }*/
 
-void Logger::onCFsDone(const CompFragmentPtrArray& cfs) {		
+void Logger::onCFsDone(CompFragmentBunch& cfs) {		
 	std::ostringstream out;
 	BOOST_FOREACH(CompFragment *cf, cfs)
 		out << "Done " << cf->toString() << std::endl;

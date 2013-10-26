@@ -22,9 +22,10 @@ private:
 
 	boost::ptr_list<CompFragment> cfs_storage; // to store created cfs
 
-	CompFragmentPtrArray new_cfs;	
+	//CompFragmentPtrArray new_cfs;	
 	ReductionCFsMap reduction_cfs;
 	//EventCFsMap event_cfs;
+	CompFragmentBunch added_cfs;
 
 	boost::mutex mutex;
 	boost::condition_variable cond;
@@ -33,8 +34,8 @@ private:
 	void deleteDoneCFs();
 
 protected:	
-	void addCF(CompFragment* cf, const int& node = -1, const size_t& priority = 0, const size_t& group_id = 0);
-	void addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const int& node = -1, const size_t& priority = 0, const size_t& group_id = 0);
+	void addCF(CompFragment* cf, const size_t& priority = 0, const size_t& group_id = 0, const int& node = -1);
+	void addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const size_t& priority = 0, const size_t& group_id = 0, const int& node = -1);
 	//void addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id = -1);	
 
 	//void lockDFs(const DataFragmentPtrArray& dfs);

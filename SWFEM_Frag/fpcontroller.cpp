@@ -1,19 +1,26 @@
 #include "fpcontroller.h"
 #include <boost/foreach.hpp>
 
-void FPController::addCF(CompFragment* cf, const int& node) {
+void FPController::addCF(CompFragment* cf, const size_t& priority, const size_t& group_id, const int& node) {
 	//cf->setGroupId(group_id);
 	//cfs_storage.push_back(cf);
 	//new_cfs.push_back(cf);	
-	rts->getCFDispatcher()->addCF(cf, node);	
+	//rts->getCFDispatcher()->addCF(cf, node);	
+	cf->setPriority(priority);
+	cf->setGroupId(group_id);
+	added_cfs.add(cf);
 }
 
-void FPController::addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const int& node) {
+void FPController::addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const size_t& priority, const size_t& group_id, const int& node) {
 	//cf->setGroupId(group_id);
 	//cfs_storage.push_back(cf);
 	//new_cfs.push_back(cf);
 	//reduction_cfs[red_id].push_back(cf);	
-	rts->getCFDispatcher()->addCF(cf, node);	
+	//rts->getCFDispatcher()->addCF(cf, node);	
+	cf->setReductionId(red_id);
+	cf->setPriority(priority);
+	cf->setGroupId(group_id);	
+	added_cfs.add(cf);
 }
 
 /*void FPController::addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id) {
@@ -32,15 +39,17 @@ void FPController::unlockDFs(const DataFragmentPtrArray& dfs) {
 }*/
 
 void FPController::processCFs() {
-	deleteDoneCFs(); // clear garbage first
+	//deleteDoneCFs(); // clear garbage first
 	BOOST_FOREACH(ReductionCFsMap::value_type& p, reduction_cfs)
 		rts->getReductionManager()->registerReductionCFs(p.first, p.second);
 	/*BOOST_FOREACH(EventCFsMap::value_type& p, event_cfs)
 		rts->getEventManager()->registerEventCFs(p.first, p.second);*/
-	rts->getCFDispatcher()->addCFs(new_cfs);
-	reduction_cfs.clear();
-	event_cfs.clear();
-	new_cfs.clear();
+	//rts->getCFDispatcher()->addCFs(new_cfs);
+	//reduction_cfs.clear();
+	//event_cfs.clear();
+	//new_cfs.clear();
+	rts->getCFDispatcher()->addCFs(added_cfs);
+	added_cfs = CompFragmentBunch(); // clear
 }
 
 void FPController::deleteDoneCFs() {

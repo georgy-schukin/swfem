@@ -67,23 +67,23 @@ void SHFEMController::exec(const size_t& num_of_steps) {
 	for (size_t s = 1; s <= num_of_steps; s++) {	// for each time step		
 
 		FOREACH(i, j) {
-			addCF(new CFInteraction(mesh(i, j), data_interaction(i, j), s*cnst::TAU), i*fx + j);	// compute interaction data			
-			addCF(new CFDiag(mesh(i, j), data_coef(i, j), data_interaction(i, j)), i*fx + j);		// compute interactions on s-th time step		
-			addCF(new CFJacobyDiag(mesh(i, j), data_diag(i, j), data_coef(i, j)), i*fx + j);			// compute diag Jacoby elems		
-			addCF(new CFCopy(data_prev(i, j), data(i, j)), i*fx + j);								// copy data to prev
+			addCF(new CFInteraction(mesh(i, j), data_interaction(i, j), s*cnst::TAU));	// compute interaction data			
+			addCF(new CFDiag(mesh(i, j), data_coef(i, j), data_interaction(i, j)));		// compute interactions on s-th time step		
+			addCF(new CFJacobyDiag(mesh(i, j), data_diag(i, j), data_coef(i, j)));			// compute diag Jacoby elems		
+			addCF(new CFCopy(data_prev(i, j), data(i, j)));								// copy data to prev
 		}
 
-		timer.start();
+		//timer.start();
 		processCFs();
-		tp += timer.stop();
+		//tp += timer.stop();
 		
 		sendUpdates(mesh, data_diag, upd_left, upd_right, upd_top, upd_bottom);
 		recvUpdates(mesh, data_diag, upd_left, upd_right, upd_top, upd_bottom);
 		//update(data_diag, dg_send_t, dg_recv_t, dg_send_b, dg_recv_b);	// update jacoby diag data
 
-		timer.start();
+		//timer.start();
 		processCFs();
-		tp += timer.stop();
+		//tp += timer.stop();
 
 		//timer.start();
 		//performUpdate(dg_send_t, dg_recv_t, dg_send_b, dg_recv_b);	// perform data diag update
@@ -94,17 +94,17 @@ void SHFEMController::exec(const size_t& num_of_steps) {
 			FOREACH(i, j)
 				addCF(new CFJacobyMultDirect(mesh(i, j), data_new(i, j), data(i, j), data_prev(i, j), data_coef(i, j)));	// multiplication for Jacoby method			
 
-			timer.start();
+			//timer.start();
 			processCFs();
-			tp += timer.stop();
+			//tp += timer.stop();
 			
 			sendUpdates(mesh, data_new, upd_left, upd_right, upd_top, upd_bottom);
 			recvUpdates(mesh, data_new, upd_left, upd_right, upd_top, upd_bottom);
 			//update(data_new, send_t, recv_t, send_b, recv_b);	// update jacoby diag data // update Jacoby mult data						
 
-			timer.start();
+			//timer.start();
 			processCFs();
-			tp += timer.stop();
+			//tp += timer.stop();
 
 			//timer.start();
 			//performUpdate(send_t, recv_t, send_b, recv_b);	// perform data new update
@@ -115,9 +115,9 @@ void SHFEMController::exec(const size_t& num_of_steps) {
 				addCF(new CFCopy(data(i, j), data_new(i, j)));	// copy data new to data
 			}
 
-			timer.start();
+			//timer.start();
 			processCFs();
-			tp += timer.stop();			
+			//tp += timer.stop();			
 			
 			timer.start();
 			eps = getReductionResult(red_id++);

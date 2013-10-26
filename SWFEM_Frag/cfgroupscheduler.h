@@ -1,16 +1,13 @@
 #pragma once
 
-#include "icfscheduler.h"
-#include "ithreadpool.h"
+#include "cfscheduler.h"
 #include <map>
 #include <set>
 #include <vector>
 
-class CFGroupScheduler : public ICFScheduler {
+class CFGroupScheduler : public CFScheduler {
 protected:
 	std::vector<std::set<size_t> > group_placement; // placement of groups on threads
-	IThreadPool *thread_pool;
-	size_t num_of_threads;
 
 protected:
 	size_t getThread(const size_t& group_id);
@@ -19,8 +16,7 @@ protected:
 	size_t getMinLoadedThread();
 
 public:
-	CFGroupScheduler(IThreadPool *pool) : 
-	  thread_pool(pool), group_placement(pool->getNumOfThreads()), num_of_threads(pool->getNumOfThreads()) {}
+	CFGroupScheduler(IThreadPool *pool) : CFScheduler(pool), group_placement(pool->getNumOfThreads()) {}
 	~CFGroupScheduler() {}
 
 	//void scheduleCF(CompFragment *cf);

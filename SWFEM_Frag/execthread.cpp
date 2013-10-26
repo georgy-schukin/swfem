@@ -21,9 +21,9 @@ ExecThread::~ExecThread() {
 	cond.notify_one();
 }*/
 
-void ExecThread::execCFGroup(const CompFragmentGroup& group) {
+void ExecThread::execCFs(const CompFragmentBunch& cf_bunch) {
 	boost::unique_lock<boost::mutex> lock(mutex);
-	cfs_groups.push(group);
+	exec_queue.push(boost::shared_ptr<CompFragmentBunch>(new CompFragmentBunch(cf_bunch)));
 	cond.notify_one();
 }
 
@@ -60,18 +60,18 @@ void ExecThread::threadFunc() {
 			ts += timer.stop();
 
 			cnt += cfs.size();*/			
-		if (!cfs_groups.empty()) {
-			const CompFragmentGroup group = cfs_groups.front();
-			cfs_groups.pop();
+		if (!exec_queue.empty()) {
+			boost::shared_ptr<CompFragmentBunch> cf_bunch = exec_queue.front();			
+			exec_queue.pop();
 			lock.unlock();
 
-			BOOST_FOREACH(CompFragment *cf, group.getContent())
+			BOOST_FOREACH(CompFragment *cf, *cf_bunch)
 				cf->execute();
 
 			BOOST_FOREACH(ICFListener *listener, cf_listeners)
-				listener->onCFGroupDone(group);
+				listener->onCFsDone(*cf_bunch);
 
-			cnt += group.getContent().size();
+			cnt += cf_bunch->size();
 		} else {
 			cond.timed_wait(lock, boost::posix_time::seconds(1)); // wait for next cfs or just for 1 second
 		}

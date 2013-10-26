@@ -21,6 +21,6 @@ public:
 	~DFArray2D() {}
 
 	T* operator()(const size_t& row, const size_t& col) {
-		return content[row*num_of_cols + col];
+		return &(content[row*num_of_cols + col]);
 	}
 };

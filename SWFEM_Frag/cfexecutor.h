@@ -22,6 +22,6 @@ public:
 	~CFExecutor() {}
 
 	//void execCF(CompFragment *cf);
-	void execCFs(const CompFragmentPtrArray& cfs);
-	void addCFListener(ICFListener *l);	
+	//void execCFs(const CompFragmentBunch& cf_bunch);
+	//void addCFListener(ICFListener *l);	
 };

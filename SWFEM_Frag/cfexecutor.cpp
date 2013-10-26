@@ -1,14 +1,14 @@
 #include "cfexecutor.h"
 #include "threadpool.h"
-#include "scheduler.h"
+//#include "scheduler.h"
 #include <boost/foreach.hpp>
 #include <stdio.h>
 #include <map>
 #include <vector>
 
 CFExecutor::CFExecutor(const size_t& nt, const int& rank) : num_of_threads(nt) {
-	threadPool.reset(new ThreadPool(num_of_threads, rank));
-	scheduler.reset(new Scheduler(num_of_threads));
+	//threadPool.reset(new ThreadPool(num_of_threads, rank));
+	//scheduler.reset(new Scheduler(num_of_threads));
 }
 
 /*void CFExecutor::execCF(CompFragment *cf) {
@@ -17,8 +17,8 @@ CFExecutor::CFExecutor(const size_t& nt, const int& rank) : num_of_threads(nt) {
 	threadPool->execCF(cf, thread_id); // place cf for exec on specified thread
 }*/
 
-void CFExecutor::execCFs(const CompFragmentPtrArray& cfs) {	
-	/*if (num_of_threads == 1) {	// there is only one thread
+/*void CFExecutor::execCFs(const CompFragmentPtrArray& cfs) {	
+	if (num_of_threads == 1) {	// there is only one thread
 		threadPool->execCFs(cfs, 0);
 	} else {	// there are several threads		
 		std::vector<size_t> thread_ids;
@@ -29,7 +29,7 @@ void CFExecutor::execCFs(const CompFragmentPtrArray& cfs) {
 		for (size_t t = 0; t < num_of_threads; t++) 
 			if (!tasks[t].empty()) 
 				threadPool->execCFs(tasks[t], t); // place cfs for exec on specified thread	
-	}*/
+	}
 	
 	typedef std::map<size_t, CompFragmentPtrArray> CompFragmentGroupMap;
 
@@ -50,4 +50,4 @@ void CFExecutor::execCFs(const CompFragmentPtrArray& cfs) {
 
 void CFExecutor::addCFListener(ICFListener *l) {
 	threadPool->addCFListener(l);
-}
+}*/

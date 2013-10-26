@@ -16,7 +16,7 @@ void SHFEMSeqController::exec(const size_t& mesh_size_x, const size_t& mesh_size
 	const double sx = (10.0 - bx)/(mesh_size_x - 1);
 	const double sy = (100.0 - by)/(mesh_size_y - 1);
 
-	MeshFragment mesh;
+	MeshBlockFragment mesh;
 	Data data, data_new, data_prev, data_diag, data_exact;	
 	DataCoef data_coef;	
 	DataInteraction data_interaction;

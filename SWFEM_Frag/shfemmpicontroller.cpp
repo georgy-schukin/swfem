@@ -16,7 +16,7 @@ SHFEMMPIController::SHFEMMPIController(IRuntimeSystem *s, size_t mx, size_t my) 
 	FPController(s), mesh_size_x(mx), mesh_size_y(my) {
 
 	node_rank = getNodeId();
-	node_size = getNodesNum();
+	node_size = getNumOfNodes();
 
 	aux::sliceMesh(mesh_size_y, node_size, start_y, ny); // slice mesh between nodes by Y
 }
@@ -27,7 +27,7 @@ void SHFEMMPIController::exec(size_t num_of_steps) {
 	const double sx = (10.0 - bx)/(mesh_size_x - 1);
 	const double sy = (100.0 - by)/(mesh_size_y - 1);
 
-	MeshFragment mesh;
+	MeshBlockFragment mesh;
 	Data data, data_new, data_prev, data_diag, data_exact;	
 	DataCoef data_coef;	
 	DataInteraction data_interaction;
@@ -86,12 +86,12 @@ void SHFEMMPIController::update(Data& data) {
 void SHFEMMPIController::update(Data& data, size_t start, size_t num, int rank, int tag) {
 	Data send(num);
 	Data recv(num);
-	CFJacobyUpdateSend(start, 1, num).exec(data, send);
+	//CFJacobyUpdateSend(start, 1, num).exec(data, send);
 	boost::scoped_array<double> buf(new double[num*3]);
 	copyToBuffer(send, buf.get());
 	getRTS()->getCommunicator()->sendRecvReplace(buf.get(), num*3*sizeof(double), tag, rank, tag, rank);
 	copyFromBuffer(recv, buf.get());
-	CFJacobyUpdateRecv(start, 1, num).exec(data, recv);
+	//CFJacobyUpdateRecv(start, 1, num).exec(data, recv);
 }
 
 void SHFEMMPIController::copyToBuffer(const Data& data, double* buf) {	

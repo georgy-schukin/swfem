@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
 	t.start();
 	switch(mode) {	// which program to run
 		case 0:	{	// fragmented program			
-			SHFEMController(&rts).exec(mesh_size_x, mesh_size_y, fragment_num_x, fragment_num_y, num_of_time_steps);				
+			SHFEMController(&rts, mesh_size_x, mesh_size_y, fragment_num_x, fragment_num_y).exec(num_of_time_steps);				
 			break;
 		}
 		case 1: {	// MPI program			

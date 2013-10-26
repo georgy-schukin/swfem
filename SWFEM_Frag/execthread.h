@@ -7,6 +7,7 @@
 #include <boost/thread/mutex.hpp>
 #include <boost/thread/condition_variable.hpp>
 #include <boost/atomic.hpp>
+#include <boost/shared_ptr.hpp>
 #include <vector>
 #include <queue>
 
@@ -18,9 +19,9 @@ private:
 	size_t thread_id;
 	int this_node;
 
-	std::vector<CompFragment*> cfs_queue;
-	std::queue<CompFragmentGroup> cfs_groups;
-	std::vector<ICFListener*> cf_listeners;	
+	//std::vector<CompFragment*> cfs_queue;
+	std::queue<boost::shared_ptr<CompFragmentBunch> > exec_queue;
+	std::vector<ICFListener*> cf_listeners;
 
 	boost::thread thread;
 	boost::mutex mutex;
@@ -39,6 +40,6 @@ public:
 	//void stop();
 
 	//void execCFs(const CompFragmentPtrArray& cfs);
-	void execCFGroup(const CompFragmentGroup& group);
+	void execCFs(const CompFragmentBunch& cf_group);
 	void addCFListener(ICFListener *listener);
 };

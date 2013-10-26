@@ -93,11 +93,14 @@
     <ClInclude Include="commsystem.h" />
     <ClInclude Include="commthread.h" />
     <ClInclude Include="communicator.h" />
+    <ClInclude Include="compfragmentbunch.h" />
     <ClInclude Include="compfragmentgroup.h" />
     <ClInclude Include="datafragment.h" />
     <ClInclude Include="cnst.h" />
     <ClInclude Include="data.h" />
     <ClInclude Include="compfragment.h" />
+    <ClInclude Include="datafragmentbunch.h" />
+    <ClInclude Include="datafragmentroute.h" />
     <ClInclude Include="dfarray.h" />
     <ClInclude Include="dfarray1d.h" />
     <ClInclude Include="dfarray2d.h" />
@@ -109,9 +112,7 @@
     <ClInclude Include="region.h" />
     <ClInclude Include="region2d.h" />
     <ClInclude Include="doublingdistribution2d.h" />
-    <ClInclude Include="event.h" />
     <ClInclude Include="eventcompfragment.h" />
-    <ClInclude Include="eventmanager.h" />
     <ClInclude Include="execthread.h" />
     <ClInclude Include="fpcontroller.h" />
     <ClInclude Include="icfdispatcher.h" />
@@ -121,7 +122,6 @@
     <ClInclude Include="icommunicator.h" />
     <ClInclude Include="idfdispatcher.h" />
     <ClInclude Include="idflistener.h" />
-    <ClInclude Include="ieventmanager.h" />
     <ClInclude Include="ireductionmanager.h" />
     <ClInclude Include="irts.h" />
     <ClInclude Include="icfscheduler.h" />
@@ -169,9 +169,9 @@
     <ClCompile Include="cfnull.cpp" />
     <ClCompile Include="communicator.cpp" />
     <ClCompile Include="compfragment.cpp" />
+    <ClCompile Include="compfragmentbunch.cpp" />
+    <ClCompile Include="datafragmentbunch.cpp" />
     <ClCompile Include="dfdispatcher.cpp" />
-    <ClCompile Include="event.cpp" />
-    <ClCompile Include="eventmanager.cpp" />
     <ClCompile Include="execthread.cpp" />
     <ClCompile Include="fpcontroller.cpp" />
     <ClCompile Include="logger.cpp" />

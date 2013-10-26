@@ -52,6 +52,9 @@
     <Filter Include="Header Files\df\distribution">
       <UniqueIdentifier>{71ca2ac6-bf83-4822-9b4f-8b3225d53b8a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\df">
+      <UniqueIdentifier>{0eb49375-6e3b-4989-a29e-fe407692315e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="meshnode.h">
@@ -128,15 +131,6 @@
     </ClInclude>
     <ClInclude Include="idflistener.h">
       <Filter>Header Files\interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="ieventmanager.h">
-      <Filter>Header Files\interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="eventmanager.h">
-      <Filter>Header Files\rts</Filter>
-    </ClInclude>
-    <ClInclude Include="event.h">
-      <Filter>Header Files\rts</Filter>
     </ClInclude>
     <ClInclude Include="reduction.h">
       <Filter>Header Files\rts</Filter>
@@ -288,6 +282,15 @@
     <ClInclude Include="compfragmentgroup.h">
       <Filter>Header Files\cf</Filter>
     </ClInclude>
+    <ClInclude Include="datafragmentroute.h">
+      <Filter>Header Files\df</Filter>
+    </ClInclude>
+    <ClInclude Include="compfragmentbunch.h">
+      <Filter>Header Files\cf</Filter>
+    </ClInclude>
+    <ClInclude Include="datafragmentbunch.h">
+      <Filter>Header Files\df</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -318,12 +321,6 @@
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="logger.cpp">
-      <Filter>Source Files\rts</Filter>
-    </ClCompile>
-    <ClCompile Include="eventmanager.cpp">
-      <Filter>Source Files\rts</Filter>
-    </ClCompile>
-    <ClCompile Include="event.cpp">
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="reduction.cpp">
@@ -406,6 +403,12 @@
     </ClCompile>
     <ClCompile Include="cfgroupscheduler.cpp">
       <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="compfragmentbunch.cpp">
+      <Filter>Source Files\cf</Filter>
+    </ClCompile>
+    <ClCompile Include="datafragmentbunch.cpp">
+      <Filter>Source Files\df</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

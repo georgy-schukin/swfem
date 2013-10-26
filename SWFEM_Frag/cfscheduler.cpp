@@ -1,11 +1,7 @@
-#include "scheduler.h"
+#include "cfscheduler.h"
 #include "datafragment.h"
 #include <boost/foreach.hpp>
 #include <iostream>
-
-Scheduler::Scheduler(const size_t& nt) : num_of_threads(nt), step(0) {	
-	//thread_weight.resize(num_of_threads, 0);	
-}
 
 /*size_t Scheduler::scheduleCF(CompFragment *cf) {	
 	vector<size_t> t_weight(num_of_threads, 0);
@@ -38,15 +34,15 @@ Scheduler::Scheduler(const size_t& nt) : num_of_threads(nt), step(0) {
 	return sched_thread;
 }*/
 
-void Scheduler::scheduleCFs(const CompFragmentPtrArray& cfs, std::vector<size_t>& thread_ids) {
+/*void Scheduler::scheduleCFs(const CompFragmentPtrArray& cfs, std::vector<size_t>& thread_ids) {
 	//static size_t step = 0;
 	thread_ids.resize(cfs.size());
 	for(size_t i = 0;i < cfs.size();i++)
 		thread_ids[i] = (i + step) % num_of_threads;
 	step = (step + cfs.size()) % num_of_threads;
-}
+}*/
 
-size_t Scheduler::getIndexWithMinValue(const std::vector<size_t>& v) {
+/*size_t Scheduler::getIndexWithMinValue(const std::vector<size_t>& v) {
 	size_t min_index = 0;
 	size_t min_value = v[0];
 	for(size_t i = 1;i < v.size();i++) {
@@ -68,4 +64,16 @@ size_t Scheduler::getIndexWithMaxValue(const std::vector<size_t>& v) {
 		}
 	}
 	return max_index;
+}*/
+
+void CFScheduler::scheduleCFs(const CompFragmentBunch& cf_bunch) {
+	static int thread = 0;
+	thread_pool->execCFs(cf_bunch, thread);
+	thread = (thread + 1) % thread_pool->getNumOfThreads();
+}
+
+void CFScheduler::scheduleCFGroup(const CompFragmentGroup& cf_group) {
+	static int thread = 0;
+	thread_pool->execCFs(cf_group, thread);
+	thread = (thread + 1) % thread_pool->getNumOfThreads();
 }

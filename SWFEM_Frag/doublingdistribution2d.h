@@ -22,6 +22,7 @@ protected:
 	}
 
 public:
+	DoublingDistribution2D() {}
 	DoublingDistribution2D(const size_t& sx, const size_t& sy, const size_t& nx, const size_t& ny) : Distribution2D(sx, sy, nx, ny) {
 		distribute(sx, sy, nx, ny);
 	}	

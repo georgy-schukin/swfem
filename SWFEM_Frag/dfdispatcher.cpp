@@ -46,7 +46,7 @@ void DFDispatcher::getReadyDFs(vector<DataFragment*>& dfs) {
 	}
 }*/
 
-void DFDispatcher::getReadyDFs(const DataFragmentPtrArray& src, DataFragmentPtrArray& ready_dfs) {
+/*void DFDispatcher::getReadyDFs(const DataFragmentPtrArray& src, DataFragmentPtrArray& ready_dfs) {
 	boost::unique_lock<boost::mutex> lock(mutex);
 	BOOST_FOREACH(DataFragment *df, src)
 		if (df->isReady())

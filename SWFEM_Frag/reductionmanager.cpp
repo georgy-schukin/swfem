@@ -38,14 +38,14 @@ double ReductionManager::waitForReductionResult(const size_t& red_id) {
 	}		
 }*/
 
-void ReductionManager::onCFsDone(const CompFragmentPtrArray& cfs) {		
+void ReductionManager::onCFsDone(CompFragmentBunch& cf_bunch) {		
 	size_t red_id = -1;	// ATTENTION: we think that there is only ONE active reduction among cfs
 	size_t cnt = 0;
 	double val = 0;
 	//typedef std::map<size_t, std::pair<size_t, double> > ReductionMap;
 	//ReductionMap red_map;
-	BOOST_FOREACH(CompFragment *cf, cfs) {
-		if (cf->isReductionCF()) {
+	BOOST_FOREACH(CompFragment *cf, cf_bunch) {
+		if (cf->getType() == CompFragment::REDUCTION) {
 			ReductionCompFragment *rcf = (ReductionCompFragment*)cf;
 			red_id = rcf->getReductionId();
 			//double &val = red_map[red_id].second;

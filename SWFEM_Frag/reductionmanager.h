@@ -23,5 +23,5 @@ public:
 	double waitForReductionResult(const size_t& red_id);
 
 	//void onCFDone(CompFragment *cf);
-	void onCFsDone(const CompFragmentPtrArray& cfs);
+	void onCFsDone(CompFragmentBunch& cf_bunch);
 };

@@ -5,5 +5,5 @@
 class Logger : public ICFListener {
 public:
 	//void onCFDone(CompFragment *cf);
-	void onCFsDone(const CompFragmentPtrArray& cfs);
+	void onCFsDone(CompFragmentBunch& cf_bunch);
 };

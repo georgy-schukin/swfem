@@ -1,23 +1,8 @@
 #include "cfgroupscheduler.h"
 #include <boost/foreach.hpp>
 
-/*void CFGroupScheduler::scheduleCF(CompFragment *cf) {
-	thread_pool->execCF(cf, getThread(cf->getGroupId()));
-}
-
-void CFGroupScheduler::scheduleCFs(CompFragmentPtrArray &cfs) {
-	std::vector<CompFragmentPtrArray> bunches(group_placement.size());
-
-	BOOST_FOREACH(CompFragment *cf, cfs)
-		bunches[getThread(cf->getGroupId())].push_back(cf);
-
-	for (size_t i = 0; i < bunches.size(); i++)
-		if (!bunches[i].empty())
-			thread_pool->execCFs(bunches[i], i);
-}*/
-
 void CFGroupScheduler::scheduleCFGroup(const CompFragmentGroup &group) {
-	thread_pool->execCFGroup(group, getThread(group.getGroupId()));
+	thread_pool->execCFs(group, getThread(group.getGroupId()));
 }
 
 size_t CFGroupScheduler::getThread(const size_t& group_id) {

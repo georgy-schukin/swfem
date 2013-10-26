@@ -18,11 +18,11 @@ public:
 	DFDispatcher() {}
 	~DFDispatcher() {}	
 
-	void getReadyDFs(const DataFragmentPtrArray& src, DataFragmentPtrArray& ready_dfs);	
+	/*void getReadyDFs(const DataFragmentPtrArray& src, DataFragmentPtrArray& ready_dfs);	
 	void getReadyDFsAndLock(const DataFragmentPtrArray& src, DataFragmentPtrArray& ready_dfs);	
 
 	void lockDFs(const DataFragmentPtrArray& dfs);
-	void unlockDFs(const DataFragmentPtrArray& dfs);
+	void unlockDFs(const DataFragmentPtrArray& dfs);*/
 
 	void addDFListener(IDFListener *l);
 };

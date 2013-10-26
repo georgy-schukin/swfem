@@ -19,7 +19,11 @@ public:
 	//void execCF(CompFragment *cf, const size_t& thread_id);
 	//void execCFs(const CompFragmentPtrArray& cfs, const size_t& thread_id);
 
-	void execCFGroup(const CompFragmentGroup& group, const size_t& thread_id);
+	void execCFs(const CompFragmentBunch& cf_bunch, const size_t& thread_id);
+
+	size_t getNumOfThreads() const {
+		return threads.size();
+	}
 
 	void addCFListener(ICFListener *listener);
 };

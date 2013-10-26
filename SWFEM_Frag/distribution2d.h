@@ -35,6 +35,7 @@ protected:
 	}
 
 protected:
+	Distribution2D() : size_x(0), size_y(0), num_of_nodes_by_x(0), num_of_nodes_by_y(0) {}	 
 	Distribution2D(const size_t& sx, const size_t& sy, const size_t& nx, const size_t& ny) :
 		size_x(sx), size_y(sy), num_of_nodes_by_x(nx), num_of_nodes_by_y(ny) {}	
 	//Distribution2D(const Distribution2D& d) : Distribution(d),

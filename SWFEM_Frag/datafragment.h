@@ -1,7 +1,8 @@
 #pragma once
 
-#include <queue>
+#include "datafragmentroute.h"
 #include <vector>
+#include <set>
 
 class CompFragment;
 
@@ -10,30 +11,15 @@ class CompFragment;
 */
 class DataFragment {
 public:
-	class RoutePoint {
-	private:
-		CompFragment* cf;
-		int node;
-	public:
-		RoutePoint() : cf(0), node(-1) {}
-		RoutePoint(CompFragment *c, const int& n): cf(c), node(n) {}		
-		~RoutePoint() {}
-
-		CompFragment* getCF() const {
-			return cf;
-		}
-
-		int getNode() const {
-			return node;
-		}
-	};
+	static const size_t NO_GROUP = (size_t)(-1);
 
 private:	
+	DataFragmentRoute route;
 	bool is_locked;
-	std::queue<DataFragment::RoutePoint> route;
+	size_t curr_group;
 
 public:
-	DataFragment() : is_locked(false) {}	
+	DataFragment() : is_locked(false), curr_group(DataFragment::NO_GROUP) {}	
 
 	void lock() {
 		this->is_locked = true;
@@ -48,24 +34,19 @@ public:
 	}
 
 	bool isReady() const {
-		return (!is_locked && !route.empty());
+		return (!is_locked && !route.isEmpty());
 	}
 
-	void addRoutePoint(const DataFragment::RoutePoint& point) {
-		route.push(point);
-	}	
-
-	DataFragment::RoutePoint getNextRoutePoint() {
-		if (!route.empty()) {
-			DataFragment::RoutePoint point = route.front();						
-			route.pop();		
-			return point;
-		}		
-		return DataFragment::RoutePoint(0, -1);
+	DataFragmentRoute& getRoute() {
+		return route;
 	}
 
-	bool isRouteEmpty() const {
-		return route.empty();
+	void setCurrentGroup(const size_t& group) {
+		curr_group = group;
+	}
+
+	const size_t& getCurrentGroup() const {
+		return curr_group;
 	}
 
 	virtual ~DataFragment() {}
@@ -73,3 +54,4 @@ public:
 };
 
 typedef std::vector<DataFragment*> DataFragmentPtrArray;
+typedef std::set<DataFragment*> DataFragmentPtrSet;
