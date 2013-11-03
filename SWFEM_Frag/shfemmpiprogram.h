@@ -1,13 +1,13 @@
 #pragma once
 
-#include "fpcontroller.h"
+#include "fragmentedprogram.h"
 #include "data.h"
 #include <vector>
 
 /**
 * MPI program for testing
 */
-class SHFEMMPIController: public FPController {
+class SHFEMMPIProgram: public FragmentedProgram {
 protected:		
 	std::vector<size_t> start_y;	// indices of first point of the mesh in nodes by Y
 	std::vector<size_t> ny;		// num of points in nodes by Y
@@ -25,8 +25,8 @@ protected:
 	void copyFromBuffer(Data& data, const double* buf);
 
 public:
-	SHFEMMPIController(IRuntimeSystem* s, size_t mx, size_t my);
-	~SHFEMMPIController() {}
+	SHFEMMPIProgram(IRuntimeSystem* s, size_t mx, size_t my);
+	~SHFEMMPIProgram() {}
 
 	void exec(size_t num_of_steps);
 };

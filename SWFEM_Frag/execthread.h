@@ -34,7 +34,7 @@ protected:
 
 public:
 	ExecThread(const size_t& thread_id, const int& this_node);
-	~ExecThread();
+	virtual ~ExecThread();
 
 	//void start();
 	//void stop();

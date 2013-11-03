@@ -13,34 +13,34 @@
 	}
 }*/
 
-void CFJacobyUpdate::init(MeshBlockFragment *mesh, const BorderType& border) {
+void CFJacobyUpdate::init(const size_t& size_x, const size_t& size_y, const BorderType& border) {		
 	switch (border) {
 		case CFJacobyUpdate::LEFT: // left vert
 			{
 				start = 0;
-				step = mesh->getSizeByX();
-				num = mesh->getSizeByY();
+				step = size_x;
+				num = size_y;
 				break;
 			}
 		case CFJacobyUpdate::RIGHT: // right vert
 			{
-				start = mesh->getSizeByX() - 1;
-				step = mesh->getSizeByX();
-				num = mesh->getSizeByY();
+				start = size_x - 1;
+				step = size_y;
+				num = size_y;
 				break;
 			}
 		case CFJacobyUpdate::TOP: // top horiz
 			{
 				start = 0;
 				step = 1;
-				num = mesh->getSizeByX();
+				num = size_x;
 				break;
 			}
 		case CFJacobyUpdate::BOTTOM: // bottom horiz
 			{
-				start = (mesh->getSizeByY() - 1)*mesh->getSizeByX();
+				start = (size_y - 1)*size_x;
 				step = 1;
-				num = mesh->getSizeByX();
+				num = size_x;
 				break;
 			}
 	}

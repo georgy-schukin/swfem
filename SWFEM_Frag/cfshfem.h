@@ -1,5 +1,6 @@
 #pragma once
 
+#include "cfalloc.h"
 #include "cfcoef.h"
 #include "cfcopy.h"
 #include "cfdiag.h"
@@ -15,3 +16,4 @@
 #include "cfjacobyupdatesend.h"
 #include "cfloadpoints.h"
 #include "cfloadtriangles.h"
+

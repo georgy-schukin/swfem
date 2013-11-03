@@ -1,7 +1,8 @@
 #include "cfgroupscheduler.h"
 #include <boost/foreach.hpp>
 
-void CFGroupScheduler::scheduleCFGroup(const CompFragmentGroup &group) {
+void CFGroupScheduler::scheduleCFs(const CompFragmentBunch& cf_bunch) {
+	const CompFragmentGroup& group = static_cast<const CompFragmentGroup&>(cf_bunch);
 	thread_pool->execCFs(group, getThread(group.getGroupId()));
 }
 

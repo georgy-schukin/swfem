@@ -24,6 +24,7 @@ public:
 	CompFragmentBunch(const CompFragmentPtrArray& cfs) : content(cfs) {
 		populateDFs(cfs);
 	}
+	CompFragmentBunch(const CompFragmentBunch& b) : content(b.content), used_dfs(b.used_dfs) {}
 	~CompFragmentBunch() {}
 
 	/*const CompFragmentPtrArray& getContent() const {

@@ -43,17 +43,20 @@
     <Filter Include="Header Files\df\dfs">
       <UniqueIdentifier>{cbaf2414-024a-44ce-b833-00bc55412b43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\controllers">
-      <UniqueIdentifier>{250f8ac8-8f01-4ceb-802d-2d15a0e39e78}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\controllers">
-      <UniqueIdentifier>{bf406047-61de-4e44-8568-044ab8858cde}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\df\distribution">
       <UniqueIdentifier>{71ca2ac6-bf83-4822-9b4f-8b3225d53b8a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\df">
       <UniqueIdentifier>{0eb49375-6e3b-4989-a29e-fe407692315e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\fp">
+      <UniqueIdentifier>{250f8ac8-8f01-4ceb-802d-2d15a0e39e78}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fp">
+      <UniqueIdentifier>{bf406047-61de-4e44-8568-044ab8858cde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\df\distribution">
+      <UniqueIdentifier>{99e1a22c-43a1-4a4a-8ea7-12926c085e1f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -102,12 +105,6 @@
     <ClInclude Include="remoteptr.h">
       <Filter>Header Files\base</Filter>
     </ClInclude>
-    <ClInclude Include="icfexecutor.h">
-      <Filter>Header Files\interfaces</Filter>
-    </ClInclude>
-    <ClInclude Include="cfexecutor.h">
-      <Filter>Header Files\rts</Filter>
-    </ClInclude>
     <ClInclude Include="icflistener.h">
       <Filter>Header Files\interfaces</Filter>
     </ClInclude>
@@ -142,10 +139,7 @@
       <Filter>Header Files\interfaces</Filter>
     </ClInclude>
     <ClInclude Include="updater.h">
-      <Filter>Header Files\controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="auxilary.h">
-      <Filter>Header Files\controllers</Filter>
+      <Filter>Header Files\fp</Filter>
     </ClInclude>
     <ClInclude Include="dfarray.h">
       <Filter>Header Files\df</Filter>
@@ -222,18 +216,6 @@
     <ClInclude Include="distribution2d.h">
       <Filter>Header Files\df\distribution</Filter>
     </ClInclude>
-    <ClInclude Include="fpcontroller.h">
-      <Filter>Header Files\controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="shfemmpicontroller.h">
-      <Filter>Header Files\controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="shfemseqcontroller.h">
-      <Filter>Header Files\controllers</Filter>
-    </ClInclude>
-    <ClInclude Include="shfemcontroller.h">
-      <Filter>Header Files\controllers</Filter>
-    </ClInclude>
     <ClInclude Include="commthread.h">
       <Filter>Header Files\rts</Filter>
     </ClInclude>
@@ -291,6 +273,24 @@
     <ClInclude Include="datafragmentbunch.h">
       <Filter>Header Files\df</Filter>
     </ClInclude>
+    <ClInclude Include="fragmentedprogram.h">
+      <Filter>Header Files\fp</Filter>
+    </ClInclude>
+    <ClInclude Include="shfemprogram.h">
+      <Filter>Header Files\fp</Filter>
+    </ClInclude>
+    <ClInclude Include="shfemmpiprogram.h">
+      <Filter>Header Files\fp</Filter>
+    </ClInclude>
+    <ClInclude Include="shfemseqprogram.h">
+      <Filter>Header Files\fp</Filter>
+    </ClInclude>
+    <ClInclude Include="auxilary.h">
+      <Filter>Header Files\fp</Filter>
+    </ClInclude>
+    <ClInclude Include="cfalloc.h">
+      <Filter>Header Files\cf\cfs</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -306,9 +306,6 @@
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="cfdispatcher.cpp">
-      <Filter>Source Files\rts</Filter>
-    </ClCompile>
-    <ClCompile Include="cfexecutor.cpp">
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="compfragment.cpp">
@@ -327,10 +324,7 @@
       <Filter>Source Files\rts</Filter>
     </ClCompile>
     <ClCompile Include="updater.cpp">
-      <Filter>Source Files\controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="auxilary.cpp">
-      <Filter>Source Files\controllers</Filter>
+      <Filter>Source Files\fp</Filter>
     </ClCompile>
     <ClCompile Include="cfcoef.cpp">
       <Filter>Source Files\cf\cfs</Filter>
@@ -386,18 +380,6 @@
     <ClCompile Include="mpelogger.cpp">
       <Filter>Source Files\rts</Filter>
     </ClCompile>
-    <ClCompile Include="fpcontroller.cpp">
-      <Filter>Source Files\controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="shfemmpicontroller.cpp">
-      <Filter>Source Files\controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="shfemseqcontroller.cpp">
-      <Filter>Source Files\controllers</Filter>
-    </ClCompile>
-    <ClCompile Include="shfemcontroller.cpp">
-      <Filter>Source Files\controllers</Filter>
-    </ClCompile>
     <ClCompile Include="cfscheduler.cpp">
       <Filter>Source Files\rts</Filter>
     </ClCompile>
@@ -409,6 +391,36 @@
     </ClCompile>
     <ClCompile Include="datafragmentbunch.cpp">
       <Filter>Source Files\df</Filter>
+    </ClCompile>
+    <ClCompile Include="fragmentedprogram.cpp">
+      <Filter>Source Files\fp</Filter>
+    </ClCompile>
+    <ClCompile Include="shfemmpiprogram.cpp">
+      <Filter>Source Files\fp</Filter>
+    </ClCompile>
+    <ClCompile Include="shfemseqprogram.cpp">
+      <Filter>Source Files\fp</Filter>
+    </ClCompile>
+    <ClCompile Include="shfemprogram.cpp">
+      <Filter>Source Files\fp</Filter>
+    </ClCompile>
+    <ClCompile Include="auxilary.cpp">
+      <Filter>Source Files\fp</Filter>
+    </ClCompile>
+    <ClCompile Include="cfalloc.cpp">
+      <Filter>Source Files\cf\cfs</Filter>
+    </ClCompile>
+    <ClCompile Include="cfgroupdispatcher.cpp">
+      <Filter>Source Files\rts</Filter>
+    </ClCompile>
+    <ClCompile Include="doublingdistribution2d.cpp">
+      <Filter>Source Files\df\distribution</Filter>
+    </ClCompile>
+    <ClCompile Include="blockdistribution2d.cpp">
+      <Filter>Source Files\df\distribution</Filter>
+    </ClCompile>
+    <ClCompile Include="distribution2d.cpp">
+      <Filter>Source Files\df\distribution</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

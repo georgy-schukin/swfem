@@ -6,8 +6,8 @@
 * Count diag elems for Jacoby method
 */
 void CFJacobyDiag::exec(MeshFragment& mesh, Data& data_diag, DataCoef& data_coef) {	
-	if(data_diag.empty()) 
-		data_diag.resize(mesh.nodes.size());
+	/*if(data_diag.empty()) 
+		data_diag.resize(mesh.nodes.size());*/
 
 	BOOST_FOREACH(NodeData& diag, data_diag) {
 		diag.u = 0.0;

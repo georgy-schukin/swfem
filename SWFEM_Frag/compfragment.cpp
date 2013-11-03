@@ -2,10 +2,6 @@
 #include <sstream>
 #include <boost/foreach.hpp>
 
-void CompFragment::addArg(DataFragment *arg) {
-	args.push_back(arg);	
-}
-
 bool CompFragment::pushArgAndCheckReady(DataFragment *arg) {
 	BOOST_FOREACH(DataFragment *df, args)
 		if (df == arg)

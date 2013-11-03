@@ -6,10 +6,11 @@
 * Generate mesh fragment (points and triangles)
 */
 void CFGen::exec(MeshBlockFragment& mesh) {	
+	assert (num_x > 0 && num_y > 0);
 	try {
 	//mesh.nodes.reserve(num_x*num_y);
 		mesh.setSizeByX(num_x);
-		mesh.setSizeByY(num_y);
+		mesh.setSizeByY(num_y);		
 	mesh.nodes.resize(num_x*num_y);
 	for(size_t i = 0;i < num_y;i++)		// generate points
 	for(size_t j = 0;j < num_x;j++) {

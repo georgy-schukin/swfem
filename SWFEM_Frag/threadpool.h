@@ -14,7 +14,7 @@ private:
 
 public:
 	ThreadPool(const size_t& num_of_threads, const int& rank);
-	~ThreadPool();
+	virtual ~ThreadPool();
 
 	//void execCF(CompFragment *cf, const size_t& thread_id);
 	//void execCFs(const CompFragmentPtrArray& cfs, const size_t& thread_id);

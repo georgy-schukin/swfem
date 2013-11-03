@@ -50,7 +50,7 @@ public:
 	}
 
 	virtual ~DataFragment() {}
-	virtual size_t getWeight() = 0;
+	virtual size_t getWeight() = 0;	
 };
 
 typedef std::vector<DataFragment*> DataFragmentPtrArray;

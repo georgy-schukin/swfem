@@ -5,8 +5,8 @@
 * Do iteration of Jacoby method for mesh fragment
 */ 
 void CFJacobyMultDirect::exec(MeshFragment& mesh, Data& data_new, Data& data, Data& data_prev, DataCoef& data_coef) {
-	if(data_new.empty()) 
-		data_new.resize(mesh.nodes.size());
+	/*if(data_new.empty()) 
+		data_new.resize(mesh.nodes.size());*/
 
 	BOOST_FOREACH(NodeData& dnew, data_new) {
 		dnew.u = 0.0;

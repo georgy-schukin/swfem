@@ -3,8 +3,8 @@
 #include <boost/foreach.hpp>
 
 void CFCoef::exec(MeshFragment& mesh, DataCoef& data_coef) {	
-	if (data_coef.empty())
-		data_coef.resize(mesh.nodes.size());
+	/*if (data_coef.empty())
+		data_coef.resize(mesh.nodes.size());*/
 
 	for (size_t i = 0; i < data_coef.size(); i++) {	// for each data elem
 		NodeDataCoef& dt = data_coef[i];

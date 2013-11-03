@@ -13,15 +13,14 @@
 }*/
 
 void ReductionManager::registerReductionCFs(const size_t& red_id, const ReductionCompFragmentPtrArray& cfs) {	
-	ReductionsMap::iterator it = reductions.find(red_id);
-	if (it == reductions.end()) {	// new reduction				
-		size_t rd_id = red_id;
-		reductions.insert(rd_id, new Reduction(cfs.size())); // create new reducer for reduction		
+	ReductionMap::iterator it = reductions.find(red_id);
+	if (it == reductions.end()) {	// new reduction						
+		reductions.insert(const_cast<size_t&>(red_id), new Reduction(cfs.size())); // create new reducer for reduction		
 	} else {	// redution already exists		
-		it->second->changeSize(cfs.size());		// increment local size by array size
+		it->second->addSize(cfs.size());		// increment local size by array size
 	}
-	BOOST_FOREACH(ReductionCompFragment *cf, cfs)
-		cf->setReductionId(red_id);
+	//BOOST_FOREACH(ReductionCompFragment *cf, cfs)
+		//cf->setReductionId(red_id);
 }
 
 double ReductionManager::waitForReductionResult(const size_t& red_id) {
@@ -42,14 +41,14 @@ void ReductionManager::onCFsDone(CompFragmentBunch& cf_bunch) {
 	size_t red_id = -1;	// ATTENTION: we think that there is only ONE active reduction among cfs
 	size_t cnt = 0;
 	double val = 0;
-	//typedef std::map<size_t, std::pair<size_t, double> > ReductionMap;
+	//typedef std::map<size_t, std::pair<size_t, double> > ReductionValueMap;
 	//ReductionMap red_map;
 	BOOST_FOREACH(CompFragment *cf, cf_bunch) {
 		if (cf->getType() == CompFragment::REDUCTION) {
 			ReductionCompFragment *rcf = (ReductionCompFragment*)cf;
 			red_id = rcf->getReductionId();
 			//double &val = red_map[red_id].second;
-			if (val < rcf->getReductionValue()) val = rcf->getReductionValue();			
+			if (val < rcf->getReductionValue()) val = rcf->getReductionValue();	// get max
 			cnt++;
 			//red_map[red_id].first++;
 		}

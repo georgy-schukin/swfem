@@ -69,11 +69,11 @@
   <ItemGroup>
     <ClInclude Include="auxilary.h" />
     <ClInclude Include="blockdistribution2d.h" />
+    <ClInclude Include="cfalloc.h" />
     <ClInclude Include="cfcoef.h" />
     <ClInclude Include="cfcopy.h" />
     <ClInclude Include="cfdiag.h" />
     <ClInclude Include="cfexact.h" />
-    <ClInclude Include="cfexecutor.h" />
     <ClInclude Include="cfgroupdispatcher.h" />
     <ClInclude Include="cfgroupscheduler.h" />
     <ClInclude Include="cfinteraction.h" />
@@ -114,10 +114,9 @@
     <ClInclude Include="doublingdistribution2d.h" />
     <ClInclude Include="eventcompfragment.h" />
     <ClInclude Include="execthread.h" />
-    <ClInclude Include="fpcontroller.h" />
+    <ClInclude Include="fragmentedprogram.h" />
     <ClInclude Include="icfdispatcher.h" />
     <ClInclude Include="icflistener.h" />
-    <ClInclude Include="icfexecutor.h" />
     <ClInclude Include="icommlistener.h" />
     <ClInclude Include="icommunicator.h" />
     <ClInclude Include="idfdispatcher.h" />
@@ -139,21 +138,23 @@
     <ClInclude Include="remoteptr.h" />
     <ClInclude Include="rts.h" />
     <ClInclude Include="cfscheduler.h" />
-    <ClInclude Include="shfemmpicontroller.h" />
-    <ClInclude Include="shfemseqcontroller.h" />
-    <ClInclude Include="shfemcontroller.h" />
+    <ClInclude Include="shfemmpiprogram.h" />
+    <ClInclude Include="shfemseqprogram.h" />
+    <ClInclude Include="shfemprogram.h" />
     <ClInclude Include="threadpool.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="updater.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="auxilary.cpp" />
+    <ClCompile Include="blockdistribution2d.cpp" />
+    <ClCompile Include="cfalloc.cpp" />
     <ClCompile Include="cfcoef.cpp" />
     <ClCompile Include="cfcopy.cpp" />
     <ClCompile Include="cfdiag.cpp" />
     <ClCompile Include="cfdispatcher.cpp" />
     <ClCompile Include="cfexact.cpp" />
-    <ClCompile Include="cfexecutor.cpp" />
+    <ClCompile Include="cfgroupdispatcher.cpp" />
     <ClCompile Include="cfgroupscheduler.cpp" />
     <ClCompile Include="cfinteraction.cpp" />
     <ClCompile Include="cfgen.cpp" />
@@ -172,8 +173,10 @@
     <ClCompile Include="compfragmentbunch.cpp" />
     <ClCompile Include="datafragmentbunch.cpp" />
     <ClCompile Include="dfdispatcher.cpp" />
+    <ClCompile Include="distribution2d.cpp" />
+    <ClCompile Include="doublingdistribution2d.cpp" />
     <ClCompile Include="execthread.cpp" />
-    <ClCompile Include="fpcontroller.cpp" />
+    <ClCompile Include="fragmentedprogram.cpp" />
     <ClCompile Include="logger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mpelogger.cpp" />
@@ -181,9 +184,9 @@
     <ClCompile Include="reductionmanager.cpp" />
     <ClCompile Include="rts.cpp" />
     <ClCompile Include="cfscheduler.cpp" />
-    <ClCompile Include="shfemmpicontroller.cpp" />
-    <ClCompile Include="shfemseqcontroller.cpp" />
-    <ClCompile Include="shfemcontroller.cpp" />
+    <ClCompile Include="shfemmpiprogram.cpp" />
+    <ClCompile Include="shfemseqprogram.cpp" />
+    <ClCompile Include="shfemprogram.cpp" />
     <ClCompile Include="threadpool.cpp" />
     <ClCompile Include="updater.cpp" />
   </ItemGroup>

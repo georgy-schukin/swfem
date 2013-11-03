@@ -37,41 +37,20 @@ void ExecThread::threadFunc() {
 	MPELogger::MPEEvent compute_event = mpe_logger.newEvent("Compute", "red");
 
 	while(is_working.load()) {		
-		boost::unique_lock<boost::mutex> lock(mutex);
-		/*if(!cfs_queue.empty()) {
-			CompFragmentPtrArray cfs(cfs_queue.begin(), cfs_queue.end());			
-			cfs_queue.clear();
-			lock.unlock();
-
-			mpe_logger.logStart(compute_event);
-			timer.start();
-			BOOST_FOREACH(CompFragment *cf, cfs) 				
-				cf->execute();	
-			tw += timer.stop();
-			mpe_logger.logEnd(compute_event);
-
-			/*ostringstream out;
-			out << "Thread " << thread_id << " : done " << cfs.size() << endl;
-			cout << out.str();*/
-
-			/*timer.start();
-			BOOST_FOREACH(ICFListener *l, cf_listeners) 
-				l->onCFsDone(cfs);			
-			ts += timer.stop();
-
-			cnt += cfs.size();*/			
+		boost::unique_lock<boost::mutex> lock(mutex);			
 		if (!exec_queue.empty()) {
-			boost::shared_ptr<CompFragmentBunch> cf_bunch = exec_queue.front();			
+			boost::shared_ptr<CompFragmentBunch> cf_bunch_ptr(exec_queue.front());
+			CompFragmentBunch& cf_bunch = *(cf_bunch_ptr.get());						
 			exec_queue.pop();
 			lock.unlock();
 
-			BOOST_FOREACH(CompFragment *cf, *cf_bunch)
+			BOOST_FOREACH(CompFragment *cf, cf_bunch)
 				cf->execute();
 
 			BOOST_FOREACH(ICFListener *listener, cf_listeners)
-				listener->onCFsDone(*cf_bunch);
+				listener->onCFsDone(cf_bunch);
 
-			cnt += cf_bunch->size();
+			cnt += cf_bunch.size();
 		} else {
 			cond.timed_wait(lock, boost::posix_time::seconds(1)); // wait for next cfs or just for 1 second
 		}

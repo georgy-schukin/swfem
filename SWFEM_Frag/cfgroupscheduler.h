@@ -20,6 +20,6 @@ public:
 	~CFGroupScheduler() {}
 
 	//void scheduleCF(CompFragment *cf);
-	//void scheduleCFs(CompFragmentPtrArray& cfs);
-	void scheduleCFGroup(const CompFragmentGroup& group);
+	virtual void scheduleCFs(const CompFragmentBunch& cf_bunch);
+	//void scheduleCFGroup(const CompFragmentGroup& group);
 };

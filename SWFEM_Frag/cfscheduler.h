@@ -19,9 +19,9 @@ protected:
 
 public:
 	CFScheduler(IThreadPool *pool) : thread_pool(pool) {}
-	~CFScheduler() {}
+	virtual ~CFScheduler() {}
 
 	//virtual void scheduleCF(CompFragment *cf);
 	virtual void scheduleCFs(const CompFragmentBunch& cf_bunch);	
-	virtual void scheduleCFGroup(const CompFragmentGroup& cf_group);	
+	//virtual void scheduleCFGroup(const CompFragmentGroup& cf_group);	
 };

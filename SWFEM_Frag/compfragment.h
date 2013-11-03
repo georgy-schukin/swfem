@@ -1,10 +1,8 @@
 #pragma once
 
-#include "remoteptr.h"
 #include "datafragment.h"
-#include <vector>
 #include <string>
-#include <set>
+#include <cassert>
 
 /**
 * Generic computing fragment
@@ -17,28 +15,31 @@ public:
 	};
 
 private:	
-	std::vector<DataFragment*> args;
+	DataFragmentPtrArray args;
 	size_t ready_cnt;
 	size_t group_id;
 	size_t priority;
 	bool is_done;
 
 protected:
-	void addArg(DataFragment *arg);
+	void addArg(DataFragment *arg) {
+		args.push_back(arg);
+	}
 
-public:
+	template<class T> T& getArg(const size_t& num) const {
+		return *(T*)(args[num]);
+	}
+
+public:	
 	bool pushArgAndCheckReady(DataFragment *arg);
 	bool isReady() const;
 
 public:	
 	CompFragment() : ready_cnt(0), group_id(0), priority(0), is_done(false) {}
+	virtual ~CompFragment() {}
 	
-	const std::vector<DataFragment*>& getArgs() const {
+	const DataFragmentPtrArray& getArgs() const {
 		return args;
-	}
-
-	template<class T> T& getArg(const size_t& num) const {
-		return *(T*)(args[num]);
 	}
 
 	void setGroupId(const size_t& group_id) {
@@ -58,7 +59,7 @@ public:
 	}
 
 	void setDone() {
-		this->is_done = true;
+		is_done = true;
 	}
 
 	bool isDone() const {
@@ -76,8 +77,6 @@ public:
 	/*virtual bool isEventCF() const {
 		return false;
 	}*/
-
-	virtual ~CompFragment() {}
 
 	virtual void execute() = 0;
 	virtual std::string toString() const;	

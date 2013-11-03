@@ -8,7 +8,7 @@
 class CFJacobyUpdateRecv: public CFJacobyUpdate {
 public:
 	CFJacobyUpdateRecv() {}	
-	CFJacobyUpdateRecv(MeshBlockFragment *mesh, Data *src, Data *buf, const CFJacobyUpdate::BorderType& border) : CFJacobyUpdate(mesh, src, buf, border) {}		
+	CFJacobyUpdateRecv(Data *src, Data *buf, const size_t& size_x, const size_t& size_y, const CFJacobyUpdate::BorderType& border) : CFJacobyUpdate(src, buf, size_x, size_y, border) {}		
 	~CFJacobyUpdateRecv() {}	
 
 	void exec(Data& dest, Data& buf);

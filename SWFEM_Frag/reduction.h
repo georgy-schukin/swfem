@@ -19,6 +19,6 @@ public:
 	~Reduction() {}
 
 	void processNewValue(const double& val, const int& num = 1);	
-	void changeSize(const int& num);
+	void addSize(const int& num);
 	double waitForResult();		
 };

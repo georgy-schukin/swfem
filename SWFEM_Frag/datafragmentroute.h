@@ -12,7 +12,8 @@ public:
 		int node;
 	public:
 		RoutePoint() : cf(0), node(-1) {}
-		RoutePoint(CompFragment *c, const int& n): cf(c), node(n) {}		
+		RoutePoint(CompFragment *c, const int& n): cf(c), node(n) {}	
+		RoutePoint(const RoutePoint& p) : cf(p.cf), node(p.node) {}
 		~RoutePoint() {}
 
 		CompFragment* getCF() const {
@@ -44,8 +45,12 @@ public:
 		return RoutePoint(0, -1);
 	}
 
-	const RoutePoint& peekNextPoint() {
+	const RoutePoint& peekNextPoint() const {
 		return route.front();
+	}
+
+	CompFragment* peekNextCF() const {
+		return route.front().getCF();
 	}
 
 	bool isEmpty() const {

@@ -8,11 +8,11 @@
 #include <boost/thread/condition_variable.hpp>
 
 /**
-* Generic controller of a fragmented program
+* Generic program of a fragmented program
 * To buid a structure of a program (spawn fragments, etc.)
 * and control execution of it
 */
-class FPController {
+class FragmentedProgram {
 private:
 	typedef std::map<size_t, ReductionCompFragmentPtrArray> ReductionCFsMap;
 	//typedef std::map<size_t, EventCompFragmentPtrArray> EventCFsMap;
@@ -57,6 +57,6 @@ protected:
 	}
 
 public:
-	FPController(IRuntimeSystem* s) : rts(s) {}
-	virtual ~FPController() {}	
+	FragmentedProgram(IRuntimeSystem* s) : rts(s) {}
+	virtual ~FragmentedProgram() {}	
 };

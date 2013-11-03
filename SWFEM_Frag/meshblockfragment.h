@@ -20,11 +20,11 @@ public:
 		size_y = sy;
 	}
 
-	size_t getSizeByX() const {
+	size_t getSizeByX() {
 		return size_x;
 	}
 
-	size_t getSizeByY() const {
+	size_t getSizeByY() {
 		return size_y;
 	}
 };

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fpcontroller.h"
+#include "fragmentedprogram.h"
 #include "meshfragment.h"
 #include "meshblockfragment.h"
 #include "data.h"
@@ -15,9 +15,9 @@ typedef DFDistributedArray2D<DataCoef> DataCoefArray;
 typedef DFDistributedArray2D<DataInteraction> DataInteractionArray;
 
 /*
-* Controller for our Shallow Water FEM program
+* Program for our Shallow Water FEM program
 */
-class SHFEMController: public FPController {
+class SHFEMProgram: public FragmentedProgram {
 private:
 	DoublingDistribution2D mesh_fragmentation; // block fragmentation of mesh
 	BlockDistribution2D mesh_distribution; // distribution of mesh fragments by nodes
@@ -26,12 +26,12 @@ private:
 	int num_of_nodes;
 
 private:		
-	void sendUpdates(MeshArray& mesh, DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom);
-	void recvUpdates(MeshArray& mesh, DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom);
+	void sendUpdates(DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom);
+	void recvUpdates(DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom);
 	
 public:
-	SHFEMController(IRuntimeSystem* s, const size_t& mesh_size_x, const size_t& mesh_size_y, const size_t& fragment_num_x, const size_t& fragment_num_y);
-	~SHFEMController() {}
+	SHFEMProgram(IRuntimeSystem* s, const size_t& mesh_size_x, const size_t& mesh_size_y, const size_t& fragment_num_x, const size_t& fragment_num_y);
+	~SHFEMProgram() {}
 
 	void exec(const size_t& num_of_steps);
 };

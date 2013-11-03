@@ -1,13 +1,10 @@
 #include "cfjacobyupdatesend.h"
+#include <cassert>
 
 void CFJacobyUpdateSend::exec(Data& src, Data& buf) {
+	assert (num > 0);
 	buf.resize(num);
-	for(size_t i = 0;i < num;i++) {		
-		buf[i] = src[start + i*step];
-		/*const NodeData& dt_src = src[start + i*step];		
-		NodeData& dt_dst = buf[i];	
-		dt_dst.u = dt_src.u;		
-		dt_dst.v = dt_src.v;		
-		dt_dst.xi = dt_src.xi;*/
+	for (size_t i = 0; i < num; i++) {		
+		buf[i] = src[start + i*step];		
 	}
 }

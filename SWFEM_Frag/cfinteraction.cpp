@@ -2,8 +2,8 @@
 #include "cnst.h"
 
 void CFInteraction::exec(MeshFragment& mesh, DataInteraction& data_interaction) {
-	if(data_interaction.empty()) 
-		data_interaction.resize(mesh.nodes.size());
+	/*if(data_interaction.empty()) 
+		data_interaction.resize(mesh.nodes.size());*/
 
 	const double lmbd0 = 0.0;
 	const double lmbd1 = cnst::PI/18.0;

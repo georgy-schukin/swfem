@@ -2,8 +2,8 @@
 #include "cnst.h"
 
 void CFDiag::exec(MeshFragment& mesh, DataCoef& data_coef, DataInteraction& data_interaction) {	
-	if(data_coef.empty()) 
-		data_coef.resize(mesh.nodes.size());
+	/*if(data_coef.empty()) 
+		data_coef.resize(mesh.nodes.size());*/
 
 	for(size_t i = 0;i < data_coef.size();i++) {
 		NodeDataCoef& dt = data_coef[i];

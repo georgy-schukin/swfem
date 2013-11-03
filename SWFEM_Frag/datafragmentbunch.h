@@ -16,6 +16,7 @@ private:
 
 public:
 	DataFragmentBunch() {}
+	DataFragmentBunch(const DataFragmentBunch& b) : content(b.content) {}
 	~DataFragmentBunch() {}	
 
 	iterator begin() { 

@@ -22,14 +22,14 @@ protected:
 	size_t num;
 
 protected:
-	void init(MeshBlockFragment *mesh, const BorderType& border);
+	void init(const size_t& size_x, const size_t& size_y, const BorderType& border);
 
 public:
 	CFJacobyUpdate() {}
-	CFJacobyUpdate(MeshBlockFragment *mesh, Data *data, Data *buf, const BorderType& border) {				
+	CFJacobyUpdate(Data *data, Data *buf, const size_t& size_x, const size_t& size_y, const BorderType& border) {				
 		addArg(data);		
 		addArg(buf);
-		init(mesh, border);
+		init(size_x, size_y, border);
 	}
 	virtual ~CFJacobyUpdate() {}
 

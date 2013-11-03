@@ -1,4 +1,4 @@
-#include "shfemseqcontroller.h"
+#include "shfemseqprogram.h"
 #include "cfshfem.h"
 #include "meshfragment.h"
 #include "data.h"
@@ -10,7 +10,7 @@ using namespace std;
 /*
 * Sequental program, without fragments
 */
-void SHFEMSeqController::exec(const size_t& mesh_size_x, const size_t& mesh_size_y, const size_t& num_of_steps) {
+void SHFEMSeqProgram::exec(const size_t& mesh_size_x, const size_t& mesh_size_y, const size_t& num_of_steps) {
 	const double bx = 0.0;
 	const double by = 90.0;	
 	const double sx = (10.0 - bx)/(mesh_size_x - 1);

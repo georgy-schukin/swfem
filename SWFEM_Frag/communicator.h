@@ -12,7 +12,7 @@ private:
 
 public:
 	Communicator(int argc, char **argv);
-	~Communicator();
+	virtual ~Communicator();
 
 	void send(void *buf, const int& buf_size, const int& tag, const int& dst_rank);
 	void recv(void *buf, const int& buf_size, const int& tag, const int& src_rank);

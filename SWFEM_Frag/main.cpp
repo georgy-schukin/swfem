@@ -1,6 +1,6 @@
-#include "shfemcontroller.h"
-#include "shfemseqcontroller.h"
-#include "shfemmpicontroller.h"
+#include "shfemprogram.h"
+#include "shfemseqprogram.h"
+#include "shfemmpiprogram.h"
 #include "rts.h"
 #include "timer.h"
 #include <sstream>
@@ -25,8 +25,8 @@ int main(int argc, char **argv) {
 	const size_t mode = a.arg(1, 0);					// mode
 	const size_t mesh_size_x = a.arg(2, 201);			// num of nodes in mesh by X
 	const size_t mesh_size_y = a.arg(3, 201);			// num of nodes in mesh by Y	
-	const size_t fragment_num_x = a.arg(4, 4);		// num of fragments by X
-	const size_t fragment_num_y = a.arg(5, 4);		// num of fragments by Y
+	const size_t fragment_num_x = a.arg(4, 2);		// num of fragments by X
+	const size_t fragment_num_y = a.arg(5, 2);		// num of fragments by Y
 	const size_t num_of_exec_threads = a.arg(6, 1);	// num of exec threads to run fragments
 	const size_t num_of_time_steps = a.arg(7, 5);		// num of time steps to do
 		
@@ -43,15 +43,15 @@ int main(int argc, char **argv) {
 	t.start();
 	switch(mode) {	// which program to run
 		case 0:	{	// fragmented program			
-			SHFEMController(&rts, mesh_size_x, mesh_size_y, fragment_num_x, fragment_num_y).exec(num_of_time_steps);				
+			SHFEMProgram(&rts, mesh_size_x, mesh_size_y, fragment_num_x, fragment_num_y).exec(num_of_time_steps);				
 			break;
 		}
 		case 1: {	// MPI program			
-			SHFEMMPIController(&rts, mesh_size_x, mesh_size_y).exec(num_of_time_steps);	
+			SHFEMMPIProgram(&rts, mesh_size_x, mesh_size_y).exec(num_of_time_steps);	
 			break;
 		}
 		case 2: {	// sequental program			
-			SHFEMSeqController(&rts).exec(mesh_size_x, mesh_size_y, num_of_time_steps);	
+			SHFEMSeqProgram(&rts).exec(mesh_size_x, mesh_size_y, num_of_time_steps);	
 			break;
 		}
 	} 		

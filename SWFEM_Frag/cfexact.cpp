@@ -5,8 +5,8 @@
 * Count exact solution by formulae
 */
 void CFExact::exec(MeshFragment& mesh, Data& data) {
-	if(data.empty()) 
-		data.resize(mesh.nodes.size());
+	/*if(data.empty()) 
+		data.resize(mesh.nodes.size());*/
 
 	const double lmbd0 = 0.0;
 	const double lmbd1 = cnst::PI/18.0; 

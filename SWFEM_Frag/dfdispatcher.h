@@ -16,7 +16,7 @@ private:
 
 public:
 	DFDispatcher() {}
-	~DFDispatcher() {}	
+	virtual ~DFDispatcher() {}	
 
 	/*void getReadyDFs(const DataFragmentPtrArray& src, DataFragmentPtrArray& ready_dfs);	
 	void getReadyDFsAndLock(const DataFragmentPtrArray& src, DataFragmentPtrArray& ready_dfs);	

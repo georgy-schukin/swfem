@@ -5,10 +5,10 @@
 * Init data
 */
 void CFInit::exec(MeshFragment& mesh, Data& data, DataCoef& data_coef) {
-	if(data.empty())
+	/*if(data.empty())
 		data.resize(mesh.nodes.size());	// create data elems
 	if(data_coef.empty())
-		data_coef.resize(mesh.nodes.size());	// create data elems
+		data_coef.resize(mesh.nodes.size());	// create data elems*/
 
 	BOOST_FOREACH(MeshTriangle& tr, mesh.triangles) {	// update mesh - count square of triangles
 		/*const size_t ind[3] = {
