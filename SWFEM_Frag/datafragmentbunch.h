@@ -36,7 +36,8 @@ public:
 	}
 
 	void add(DataFragment* df);
-	void add(const DataFragmentPtrArray& dfs);	
+	void add(const DataFragmentPtrArray& dfs);
+	void add(const DataFragmentBunch& df_bunch);
 
 	bool isIn(DataFragment *df) const;	
 

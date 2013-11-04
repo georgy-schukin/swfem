@@ -20,9 +20,12 @@ void CFGroupDispatcher::getGroups(const DataFragmentBunch& seed, CompFragmentGro
 
 	removeNotReadyArgs(ready_args);
 
-	CompFragmentPtrArray ready_cfs;
-	while (!ready_args.isEmpty()) {		
-		getGeneration(ready_args, ready_cfs);
+	CompFragmentBunch ready_cfs;
+	while (!ready_args.isEmpty()) {
+		CompFragmentBunch ready_generation;
+		getGeneration(ready_args, ready_generation);
+		ready_cfs.add(ready_generation);
+		ready_generation.unlockArgs();
 		removeNotReadyArgs(ready_args);		
 	}	
 

@@ -26,8 +26,8 @@ private:
 	int num_of_nodes;
 
 private:		
-	void sendUpdates(DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom);
-	void recvUpdates(DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom);
+	void update(DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom);
+	size_t getGroupId(const size_t& i, const size_t& j) const;
 	
 public:
 	SHFEMProgram(IRuntimeSystem* s, const size_t& mesh_size_x, const size_t& mesh_size_y, const size_t& fragment_num_x, const size_t& fragment_num_y);

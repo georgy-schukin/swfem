@@ -23,26 +23,23 @@ void CFDispatcher::executeCFs(const DataFragmentBunch& seed) {
 	DataFragmentBunch ready_args = seed;
 	removeNotReadyArgs(ready_args);
 
-	CompFragmentPtrArray ready_cfs;
+	CompFragmentBunch ready_cfs;
 	getGeneration(ready_args, ready_cfs);
 
-	if (ready_cfs.size() > 0) {
-		CompFragmentBunch cf_bunch(ready_cfs);
-		//cf_bunch.lockArgs();
-		cf_scheduler->scheduleCFs(cf_bunch);
+	if (ready_cfs.size() > 0) {		
+		cf_scheduler->scheduleCFs(ready_cfs);
 	}
 }
 
-void CFDispatcher::getGeneration(const DataFragmentBunch& args, CompFragmentPtrArray& ready_cfs) {
+void CFDispatcher::getGeneration(const DataFragmentBunch& args, CompFragmentBunch& ready_cfs) {
 	BOOST_FOREACH(DataFragment *df, args) {
 		if (df->isReady()) {			
 			const DataFragmentRoute::RoutePoint next_point = df->getRoute().getNextPoint();
-			CompFragment *cf = next_point.getCF();			
-			//std::cout << "Next " << cf->toString() << std::endl;
+			CompFragment *cf = next_point.getCF();						
 			df->setCurrentGroup(cf->getGroupId());
 			df->lock();
 			if (cf->pushArgAndCheckReady(df)) {				
-				ready_cfs.push_back(cf);
+				ready_cfs.add(cf);
 			}
 		}
 	}
@@ -72,11 +69,12 @@ void CFDispatcher::onCFsDone(CompFragmentBunch& cf_bunch) {
 	BOOST_FOREACH(CompFragment *cf, cf_bunch)
 		cf->setDone(); // mark cf as done		
 
+	cf_bunch.unlockArgs();
+
 	cfs_count -= cf_bunch.size();	
 	if(cfs_count == 0) {
 		cond.notify_all();
-	} else {
-		cf_bunch.unlockArgs();
+	} else {		
 		executeCFs(cf_bunch.getArgs());		
 	}
 }

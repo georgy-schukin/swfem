@@ -5,6 +5,7 @@
 #include "reduction.h"
 #include "icommunicator.h"
 #include <boost/ptr_container/ptr_map.hpp>
+#include <boost/thread/mutex.hpp>
 
 class ReductionManager : public IReductionManager, public ICFListener {
 private:
@@ -13,6 +14,7 @@ private:
 private:
 	ReductionMap reductions;
 	ICommunicator *comm;
+	boost::mutex mutex;
 
 public:
 	ReductionManager(ICommunicator *cm) : comm(cm) {}

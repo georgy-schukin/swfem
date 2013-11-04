@@ -1,49 +1,28 @@
 #include "fragmentedprogram.h"
 #include <boost/foreach.hpp>
 
-void FragmentedProgram::addCF(CompFragment* cf, const size_t& priority, const size_t& group_id, const int& node) {	
-	cf->setPriority(priority);
+void FragmentedProgram::addCF(CompFragment* cf, const size_t& group_id, const size_t& priority, const int& node) {	
 	cf->setGroupId(group_id);
+	cf->setPriority(priority);
 
 	added_cfs.add(cf);
 	cfs_storage.push_back(cf);
 }
 
-void FragmentedProgram::addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const size_t& priority, const size_t& group_id, const int& node) {		
+void FragmentedProgram::addReductionCF(ReductionCompFragment* cf, const size_t& red_id, const size_t& group_id, const size_t& priority, const int& node) {		
 	cf->setReductionId(red_id);
-	cf->setPriority(priority);
 	cf->setGroupId(group_id);
+	cf->setPriority(priority);
 
 	added_cfs.add(cf);
 	reduction_cfs[red_id].push_back(cf);
 	cfs_storage.push_back(cf);
 }
 
-/*void FragmentedProgram::addEventCF(const size_t& event_id, EventCompFragment* cf, const size_t& group_id) {
-	cf->setGroupId(group_id);
-	cfs_storage.push_back(cf);
-	new_cfs.push_back(cf);
-	event_cfs[event_id].push_back(cf);	
-}*/
-
-/*void FragmentedProgram::lockDFs(const DataFragmentPtrArray& dfs) {
-	rts->getCFDispatcher()->lockDFs(dfs);
-}
-
-void FragmentedProgram::unlockDFs(const DataFragmentPtrArray& dfs) {
-	rts->getCFDispatcher()->unlockDFs(dfs);
-}*/
-
 void FragmentedProgram::processCFs() {
 	//deleteDoneCFs(); // clear garbage first
 	BOOST_FOREACH(ReductionCFsMap::value_type& p, reduction_cfs)
 		rts->getReductionManager()->registerReductionCFs(p.first, p.second);
-	/*BOOST_FOREACH(EventCFsMap::value_type& p, event_cfs)
-		rts->getEventManager()->registerEventCFs(p.first, p.second);*/
-	//rts->getCFDispatcher()->addCFs(new_cfs);
-	//reduction_cfs.clear();
-	//event_cfs.clear();
-	//new_cfs.clear();	
 
 	rts->getCFDispatcher()->addCFs(added_cfs);
 

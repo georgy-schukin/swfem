@@ -171,6 +171,7 @@
     <ClCompile Include="communicator.cpp" />
     <ClCompile Include="compfragment.cpp" />
     <ClCompile Include="compfragmentbunch.cpp" />
+    <ClCompile Include="datafragment.cpp" />
     <ClCompile Include="datafragmentbunch.cpp" />
     <ClCompile Include="dfdispatcher.cpp" />
     <ClCompile Include="distribution2d.cpp" />

@@ -422,5 +422,8 @@
     <ClCompile Include="distribution2d.cpp">
       <Filter>Source Files\df\distribution</Filter>
     </ClCompile>
+    <ClCompile Include="datafragment.cpp">
+      <Filter>Source Files\df</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

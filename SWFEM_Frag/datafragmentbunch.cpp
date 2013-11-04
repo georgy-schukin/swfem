@@ -9,6 +9,10 @@ void DataFragmentBunch::add(const DataFragmentPtrArray& dfs) {
 	content.insert(dfs.begin(), dfs.end());
 }
 
+void DataFragmentBunch::add(const DataFragmentBunch& df_bunch) {
+	content.insert(df_bunch.begin(), df_bunch.end());
+}
+
 bool DataFragmentBunch::isIn(DataFragment *df) const {
 	return (content.find(df) != content.end());
 }

@@ -6,7 +6,7 @@ void Reduction::processNewValue(const double& val, const int& num) {
 		value = val; // get max	
 	size -= num;
 	if (size == 0) 
-		cond.notify_one();
+		cond.notify_all();
 }
 
 double Reduction::waitForResult() {

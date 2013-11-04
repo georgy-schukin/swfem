@@ -3,6 +3,7 @@
 #include "compfragment.h"
 #include "meshblockfragment.h"
 #include "data.h"
+#include "region2d.h"
 
 /**
 * Update bound values
@@ -22,14 +23,14 @@ protected:
 	size_t num;
 
 protected:
-	void init(const size_t& size_x, const size_t& size_y, const BorderType& border);
+	void init(const Region2D& reg, const BorderType& border);
 
 public:
 	CFJacobyUpdate() {}
-	CFJacobyUpdate(Data *data, Data *buf, const size_t& size_x, const size_t& size_y, const BorderType& border) {				
+	CFJacobyUpdate(Data *data, Data *buf, const Region2D& reg, const BorderType& border) {				
 		addArg(data);		
 		addArg(buf);
-		init(size_x, size_y, border);
+		init(reg, border);
 	}
 	virtual ~CFJacobyUpdate() {}
 

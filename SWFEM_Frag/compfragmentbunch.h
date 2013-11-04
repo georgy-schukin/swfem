@@ -15,21 +15,13 @@ protected:
 	CompFragmentPtrArray content;
 	DataFragmentBunch used_dfs;	
 
-private:
-	void populateDFs(const CompFragmentPtrArray& cfs);
-	void populateDFs(CompFragment *cf);
-
 public:
 	CompFragmentBunch() {}
-	CompFragmentBunch(const CompFragmentPtrArray& cfs) : content(cfs) {
-		populateDFs(cfs);
+	CompFragmentBunch(const CompFragmentPtrArray& cfs) {
+		add(cfs);
 	}
 	CompFragmentBunch(const CompFragmentBunch& b) : content(b.content), used_dfs(b.used_dfs) {}
 	~CompFragmentBunch() {}
-
-	/*const CompFragmentPtrArray& getContent() const {
-		return content;
-	}*/
 
 	const DataFragmentBunch& getArgs() const {
 		return used_dfs;
@@ -57,6 +49,7 @@ public:
 
 	void add(CompFragment *cf);
 	void add(const CompFragmentPtrArray& cfs);
+	void add(const CompFragmentBunch& bunch);
 
 	void lockArgs();
 	void unlockArgs();	

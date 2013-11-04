@@ -3,12 +3,18 @@
 
 void CompFragmentBunch::add(CompFragment *cf) {
 	content.push_back(cf);
-	populateDFs(cf);
+	used_dfs.add(cf->getArgs());
 }
 
 void CompFragmentBunch::add(const CompFragmentPtrArray& cfs) {
 	content.insert(content.end(), cfs.begin(), cfs.end());
-	populateDFs(cfs);
+	BOOST_FOREACH(CompFragment *cf, cfs)
+		used_dfs.add(cf->getArgs());
+}
+
+void CompFragmentBunch::add(const CompFragmentBunch& cf_bunch) {
+	content.insert(content.end(), cf_bunch.begin(), cf_bunch.end());
+	used_dfs.add(cf_bunch.getArgs());
 }
 
 void CompFragmentBunch::lockArgs() {
@@ -19,12 +25,4 @@ void CompFragmentBunch::unlockArgs() {
 	used_dfs.unlock();
 }
 
-void CompFragmentBunch::populateDFs(const CompFragmentPtrArray& cfs) {
-	BOOST_FOREACH(CompFragment *cf, cfs)
-		used_dfs.add(cf->getArgs());
-}
-
-void CompFragmentBunch::populateDFs(CompFragment *cf) {	
-	used_dfs.add(cf->getArgs());
-}
 

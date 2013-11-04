@@ -17,9 +17,11 @@ private:
 	DataFragmentRoute route;
 	bool is_locked;
 	size_t curr_group;
+	CompFragment *current_cf;
 
 public:
-	DataFragment() : is_locked(false), curr_group(DataFragment::NO_GROUP) {}	
+	DataFragment() : is_locked(false), curr_group(DataFragment::NO_GROUP), current_cf(0) {}	
+	virtual ~DataFragment() {}
 
 	void lock() {
 		this->is_locked = true;
@@ -49,7 +51,9 @@ public:
 		return curr_group;
 	}
 
-	virtual ~DataFragment() {}
+	CompFragment* moveToNextCF();
+	void freeFromCF();
+	
 	virtual size_t getWeight() = 0;	
 };
 

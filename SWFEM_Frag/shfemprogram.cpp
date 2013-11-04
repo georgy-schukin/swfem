@@ -51,60 +51,53 @@ void SHFEMProgram::exec(const size_t& num_of_steps) {
 		const Region2D& block = mesh_fragmentation.getBlock(i, j);				
 
 		addCF(new CFGen(mesh(i, j), beg_x, beg_y, step_x, step_y, mesh_size_x, mesh_size_y, 
-			block.getStartByX(), block.getStartByY(), block.getSizeByX(), block.getSizeByY()));	// generate mesh	
+			block.getStartByX(), block.getStartByY(), block.getSizeByX(), block.getSizeByY()), getGroupId(i, j));	// generate mesh	
 
 		addCF(new CFAlloc(mesh(i, j), data(i, j), data_new(i, j), data_prev(i, j), data_diag(i, j), data_exact(i, j),
-			data_coef(i, j), data_interaction(i, j)));
+			data_coef(i, j), data_interaction(i, j)), getGroupId(i, j));
 
-		addCF(new CFInit(mesh(i, j), data(i, j), data_coef(i, j)));	// init data	
-		addCF(new CFExact(mesh(i, j), data(i, j), 0));				// init by exact solution	
-		addCF(new CFExact(mesh(i, j), data_exact(i, j), 0));			// get exact solution	
-		addCF(new CFCoef(mesh(i, j), data_coef(i, j)));				// compute coefs
+		addCF(new CFInit(mesh(i, j), data(i, j), data_coef(i, j)), getGroupId(i, j));	// init data	
+		addCF(new CFExact(mesh(i, j), data(i, j), 0), getGroupId(i, j));				// init by exact solution	
+		addCF(new CFExact(mesh(i, j), data_exact(i, j), 0), getGroupId(i, j));			// get exact solution	
+		addCF(new CFCoef(mesh(i, j), data_coef(i, j)), getGroupId(i, j));				// compute coefs
 	}
 
-	timer.start();
+	//timer.start();
 	processCFs();
-	tp += timer.stop();
-	
-	size_t red_id = 0;
+	//tp += timer.stop();
+		
 	size_t iter = 0;
 	for (size_t s = 1; s <= num_of_steps; s++) {	// for each time step		
 
+		std::cout << "Time step: " << s << std::endl;						
+
 		FOREACH(i, j) {
-			addCF(new CFInteraction(mesh(i, j), data_interaction(i, j), s*cnst::TAU));	// compute interaction data			
-			addCF(new CFDiag(mesh(i, j), data_coef(i, j), data_interaction(i, j)));		// compute interactions on s-th time step		
-			addCF(new CFJacobyDiag(mesh(i, j), data_diag(i, j), data_coef(i, j)));			// compute diag Jacoby elems		
-			addCF(new CFCopy(data_prev(i, j), data(i, j)));								// copy data to prev
+			addCF(new CFInteraction(mesh(i, j), data_interaction(i, j), s*cnst::TAU), getGroupId(i, j)); // compute interaction data			
+			addCF(new CFDiag(mesh(i, j), data_coef(i, j), data_interaction(i, j)), getGroupId(i, j));	// compute interactions on s-th time step		
+			addCF(new CFJacobyDiag(mesh(i, j), data_diag(i, j), data_coef(i, j)), getGroupId(i, j));	// compute diag Jacoby elems		
+			addCF(new CFCopy(data_prev(i, j), data(i, j)), getGroupId(i, j));	// copy data to prev
 		}
 
 		//timer.start();
 		processCFs();
 		//tp += timer.stop();
 		
-		sendUpdates(data_diag, upd_left, upd_right, upd_top, upd_bottom);
-		recvUpdates(data_diag, upd_left, upd_right, upd_top, upd_bottom);
-		//update(data_diag, dg_send_t, dg_recv_t, dg_send_b, dg_recv_b);	// update jacoby diag data
+		update(data_diag, upd_left, upd_right, upd_top, upd_bottom);		
 
 		//timer.start();
 		processCFs();
 		//tp += timer.stop();
 
-		//timer.start();
-		//performUpdate(dg_send_t, dg_recv_t, dg_send_b, dg_recv_b);	// perform data diag update
-		//tpu += timer.stop();
-
 		double eps = 1.0;
 		while(eps > cnst::EPS) {	// Jacoby method			
 			FOREACH(i, j)
-				addCF(new CFJacobyMultDirect(mesh(i, j), data_new(i, j), data(i, j), data_prev(i, j), data_coef(i, j)));	// multiplication for Jacoby method			
+				addCF(new CFJacobyMultDirect(mesh(i, j), data_new(i, j), data(i, j), data_prev(i, j), data_coef(i, j)), getGroupId(i, j));	// multiplication for Jacoby method			
 
 			//timer.start();
 			processCFs();
 			//tp += timer.stop();
 			
-			sendUpdates(data_new, upd_left, upd_right, upd_top, upd_bottom);
-			recvUpdates(data_new, upd_left, upd_right, upd_top, upd_bottom);
-			//update(data_new, send_t, recv_t, send_b, recv_b);	// update jacoby diag data // update Jacoby mult data						
+			update(data_new, upd_left, upd_right, upd_top, upd_bottom);			
 
 			//timer.start();
 			processCFs();
@@ -115,17 +108,17 @@ void SHFEMProgram::exec(const size_t& num_of_steps) {
 			//tpu += timer.stop();
 							
 			FOREACH(i, j) {
-				addReductionCF(new CFJacobyReduce(mesh(i, j), data_new(i, j), data(i, j), data_diag(i, j)), iter);	// reduction										
-				addCF(new CFCopy(data(i, j), data_new(i, j)));	// copy data new to data
+				addReductionCF(new CFJacobyReduce(mesh(i, j), data_new(i, j), data(i, j), data_diag(i, j)), iter, getGroupId(i, j));	// reduction										
+				addCF(new CFCopy(data(i, j), data_new(i, j)), getGroupId(i, j));	// copy data new to data
 			}
 
 			//timer.start();
 			processCFs();
 			//tp += timer.stop();			
 			
-			timer.start();
+			//timer.start();
 			eps = getReductionResult(iter);
-			tr += timer.stop();							
+			//tr += timer.stop();							
 			
 			std::cout << "EPS: " << eps << std::endl;						
 			iter++;
@@ -147,36 +140,45 @@ void SHFEMProgram::exec(const size_t& num_of_steps) {
 	getRTS()->getCFDispatcher()->waitForAllDone();
 }
 
-void SHFEMProgram::sendUpdates(DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom) {
+void SHFEMProgram::update(DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom) {
 	const Region2D& this_block = mesh_distribution.getBlock(this_node);	
 
-	for (size_t i = this_block.getStartByY(); i < this_block.getEndByY(); i++)
-	for (size_t j = this_block.getStartByX(); j < this_block.getEndByX(); j++)  {			
-		const size_t size_x = mesh_fragmentation.getBlock(i, j).getSizeByX();
-		const size_t size_y = mesh_fragmentation.getBlock(i, j).getSizeByY();
-		addCF(new CFJacobyUpdateSend(data(i, j), left(i, j), size_x, size_y, CFJacobyUpdate::LEFT));
-		addCF(new CFJacobyUpdateSend(data(i, j), right(i, j), size_x, size_y, CFJacobyUpdate::RIGHT));
-		addCF(new CFJacobyUpdateSend(data(i, j), top(i, j), size_x, size_y, CFJacobyUpdate::TOP));
-		addCF(new CFJacobyUpdateSend(data(i, j), bottom(i, j), size_x, size_y, CFJacobyUpdate::BOTTOM));
-	}
-}
-
-void SHFEMProgram::recvUpdates(DataArray& data, DataArray& left, DataArray& right, DataArray& top, DataArray& bottom) {
-	const Region2D& this_block = mesh_distribution.getBlock(this_node);	
-
-	for (size_t i = this_block.getStartByY(); i < this_block.getEndByY(); i++)
-	for (size_t j = this_block.getStartByX(); j < this_block.getEndByX(); j++)  {
-		const size_t size_x = mesh_fragmentation.getBlock(i, j).getSizeByX();
-		const size_t size_y = mesh_fragmentation.getBlock(i, j).getSizeByY();
-		if (j > 0) 
-			addCF(new CFJacobyUpdateRecv(data(i, j), right(i, j - 1), size_x, size_y, CFJacobyUpdate::LEFT)); // upd left with right
+	FOREACH(i, j) {			
+		const Region2D& mesh_reg = mesh_fragmentation.getBlock(i, j);		
+		if (j > 0)
+			addCF(new CFJacobyUpdateSend(data(i, j), left(i, j), mesh_reg, CFJacobyUpdate::LEFT), getGroupId(i, j)); // save to left			
 		if (j < mesh_distribution.getSizeByX() - 1)
-			addCF(new CFJacobyUpdateRecv(data(i, j), left(i, j + 1), size_x, size_y, CFJacobyUpdate::RIGHT)); // upd right with left
+			addCF(new CFJacobyUpdateSend(data(i, j), right(i, j), mesh_reg, CFJacobyUpdate::RIGHT), getGroupId(i, j)); // save to right		
+	}
+
+	FOREACH(i, j) {			
+		const Region2D& mesh_reg = mesh_fragmentation.getBlock(i, j);		
+		if (j > 0) 			
+			addCF(new CFJacobyUpdateRecv(data(i, j), right(i, j - 1), mesh_reg, CFJacobyUpdate::LEFT), getGroupId(i, j)); // upd left with right
+		if (j < mesh_distribution.getSizeByX() - 1)
+			addCF(new CFJacobyUpdateRecv(data(i, j), left(i, j + 1), mesh_reg, CFJacobyUpdate::RIGHT), getGroupId(i, j)); // upd right with left
+	}
+
+	FOREACH(i, j) {			
+		const Region2D& mesh_reg = mesh_fragmentation.getBlock(i, j);		
 		if (i > 0)
-			addCF(new CFJacobyUpdateRecv(data(i, j), bottom(i - 1, j), size_x, size_y, CFJacobyUpdate::TOP)); // upd top with bottom
+			addCF(new CFJacobyUpdateSend(data(i, j), top(i, j), mesh_reg, CFJacobyUpdate::TOP), getGroupId(i, j)); // save to top
 		if (i < mesh_distribution.getSizeByY() - 1)
-			addCF(new CFJacobyUpdateRecv(data(i, j), top(i + 1, j), size_x, size_y, CFJacobyUpdate::BOTTOM)); // upd bottom with top
+			addCF(new CFJacobyUpdateSend(data(i, j), bottom(i, j), mesh_reg, CFJacobyUpdate::BOTTOM), getGroupId(i, j)); // save to bottom
+	}
+
+	FOREACH(i, j)  {
+		const Region2D& mesh_reg = mesh_fragmentation.getBlock(i, j);				
+		if (i > 0)
+			addCF(new CFJacobyUpdateRecv(data(i, j), bottom(i - 1, j), mesh_reg, CFJacobyUpdate::TOP), getGroupId(i, j)); // upd top with bottom
+		if (i < mesh_distribution.getSizeByY() - 1)
+			addCF(new CFJacobyUpdateRecv(data(i, j), top(i + 1, j), mesh_reg, CFJacobyUpdate::BOTTOM), getGroupId(i, j)); // upd bottom with top
 	}
 }
+
+size_t SHFEMProgram::getGroupId(const size_t& i, const size_t& j) const {
+	return i*mesh_fragmentation.getNumOfNodesByX() + j;
+}
+
 
 

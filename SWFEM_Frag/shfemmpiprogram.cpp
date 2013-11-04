@@ -45,7 +45,7 @@ void SHFEMMPIProgram::exec(size_t num_of_steps) {
 	CFCoef().exec(mesh, data_coef);		
 	
 	size_t iter = 0;
-	for(size_t s = 1;s <= num_of_steps;s++) {		
+	for (size_t s = 1; s <= num_of_steps; s++) {		
 		CFInteraction(s*cnst::TAU).exec(mesh, data_interaction);		
 		CFDiag().exec(mesh, data_coef, data_interaction);
 		CFJacobyDiag().exec(mesh, data_diag, data_coef);
@@ -56,7 +56,7 @@ void SHFEMMPIProgram::exec(size_t num_of_steps) {
 		//tu += timer_u.stop();
 
 		double eps = 1.0;
-		while(eps > cnst::EPS) {	// Jacoby method
+		while (eps > cnst::EPS) {	// Jacoby method
 			CFJacobyMultDirect().exec(mesh, data_new, data, data_prev, data_coef);									
 			//timer_u.start();
 			update(data_new);
