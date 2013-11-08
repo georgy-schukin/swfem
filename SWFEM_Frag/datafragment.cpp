@@ -2,7 +2,7 @@
 #include "compfragment.h"
 
 CompFragment* DataFragment::moveToNextCF() {
-	if (!current_cf || current_cf->isReady()) {
+	if (!current_cf || current_cf->isDone()) {
 		current_cf = shiftToNextCF();
 		return current_cf;
 	} else

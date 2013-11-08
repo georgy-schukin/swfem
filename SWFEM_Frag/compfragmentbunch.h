@@ -14,18 +14,17 @@ public:
 protected:
 	std::vector<CompFragment*> content;
 	DataFragmentBunch used_dfs;	
+	bool is_changed;
 
 public:
-	CompFragmentBunch() {}
+	CompFragmentBunch() : is_changed(false) {}
 	CompFragmentBunch(const CompFragmentPtrArray& cfs) {
 		add(cfs);
 	}
-	CompFragmentBunch(const CompFragmentBunch& b) : content(b.content), used_dfs(b.used_dfs) {}
+	CompFragmentBunch(const CompFragmentBunch& b) : content(b.content), used_dfs(b.used_dfs), is_changed(b.is_changed) {}
 	~CompFragmentBunch() {}
 
-	const DataFragmentBunch& getArgs() const {
-		return used_dfs;
-	}
+	const DataFragmentBunch& getArgs(); 
 
 	iterator begin() { 
 		return content.begin(); 
@@ -51,6 +50,6 @@ public:
 	void add(const CompFragmentPtrArray& cfs);
 	void add(const CompFragmentBunch& bunch);
 
-	void lockArgs();
-	void unlockArgs();	
+	//void lockArgs();
+	//void unlockArgs();	
 };

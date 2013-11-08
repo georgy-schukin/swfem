@@ -40,11 +40,11 @@ int main(int argc, char **argv) {
 	const size_t mode = a.arg(FRAG); // mode
 	const size_t mesh_size_x = a.arg(201); // num of nodes in mesh by X
 	const size_t mesh_size_y = a.arg(201); // num of nodes in mesh by Y	
-	const size_t fragment_num_x = a.arg(1); // num of fragments by X
+	const size_t fragment_num_x = a.arg(2); // num of fragments by X
 	const size_t fragment_num_y = a.arg(2);	 // num of fragments by Y
-	const size_t num_of_exec_threads = a.arg(1); // num of exec threads to run fragments
+	const size_t num_of_exec_threads = a.arg(4); // num of exec threads to run fragments
 	const size_t num_of_time_steps = a.arg(5); // num of time steps to do
-	const bool use_groups = (a.arg(1) == 1);
+	const bool use_groups = (a.arg(1) != 0);
 
 	RuntimeSystem::Config conf;
 	conf.num_of_threads = num_of_exec_threads;

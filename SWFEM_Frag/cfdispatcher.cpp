@@ -3,11 +3,10 @@
 #include <iostream>
 #include <set>
 
-void CFDispatcher::addCFs(const CompFragmentBunch& cf_bunch) {
+void CFDispatcher::addCFs(CompFragmentBunch& cf_bunch) {
 	boost::unique_lock<boost::mutex> lock(mutex);
 
-	BOOST_FOREACH(CompFragment *cf, cf_bunch) {
-		//std::cout << "ADD " << cf->toString() << std::endl;
+	BOOST_FOREACH(CompFragment *cf, cf_bunch) {		
 		BOOST_FOREACH(DataFragment *df, cf->getArgs()) {
 			df->getRoute().addPoint(DataFragmentRoute::RoutePoint(cf, this_node));			
 		}		

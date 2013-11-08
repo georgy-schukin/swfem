@@ -11,6 +11,7 @@
 
 void Logger::onCFsDone(CompFragmentBunch& cfs) {		
 	std::ostringstream out;
+	out << "LOGGING" << std::endl;
 	BOOST_FOREACH(CompFragment *cf, cfs)
 		out << "Done " << cf->toString() << std::endl;
 	std::cout << out.str();

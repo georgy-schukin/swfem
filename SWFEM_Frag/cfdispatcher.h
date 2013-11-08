@@ -29,7 +29,7 @@ public:
 	CFDispatcher(ICFScheduler *sched, const int& node) : cf_scheduler(sched), this_node(node), cfs_count(0) {}
 	virtual ~CFDispatcher() {}
 	
-	void addCFs(const CompFragmentBunch& cf_bunch);	// add new cfs on the node	
+	void addCFs(CompFragmentBunch& cf_bunch);	// add new cfs on the node	
 
 	void waitForAllDone();
 	
