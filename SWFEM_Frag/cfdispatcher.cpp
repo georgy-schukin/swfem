@@ -39,6 +39,14 @@ void CFDispatcher::waitForAllDone() {
 	boost::unique_lock<boost::mutex> lock(mutex);
 	while (cfs_count > 0) {
 		cond.timed_wait(lock, boost::posix_time::seconds(1));
+
+		if (cfs_count > 0) {
+			while(!seeds.empty()) {
+				const DataFragmentBunch& seed = seeds.front();
+				executeCFs(seed);
+				seeds.pop();
+			}
+		}
 	}
 }
 
@@ -53,12 +61,16 @@ void CFDispatcher::onCFsDone(CompFragmentBunch& cf_bunch) {
 
 	//cf_bunch.unlockArgs();
 
-	cfs_count -= cf_bunch.size();	
-	if(cfs_count == 0) {
+	cfs_count -= cf_bunch.size();
+
+	seeds.push(cf_bunch.getArgs());
+
+	cond.notify_all();
+	/*if(cfs_count == 0) {
 		cond.notify_all();
 	} else {		
 		executeCFs(cf_bunch.getArgs());		
-	}
+	}*/
 }
 
 /*void CFDispatcher::onDFsUnlocked(const DataFragmentPtrArray& dfs) {

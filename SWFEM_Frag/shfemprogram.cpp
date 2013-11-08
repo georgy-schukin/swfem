@@ -76,11 +76,7 @@ void SHFEMProgram::exec(const size_t& num_of_steps) {
 			addCF(new CFDiag(mesh(i, j), data_coef(i, j), data_interaction(i, j)), getGroupId(i, j));	// compute interactions on s-th time step		
 			addCF(new CFJacobyDiag(mesh(i, j), data_diag(i, j), data_coef(i, j)), getGroupId(i, j));	// compute diag Jacoby elems		
 			addCF(new CFCopy(data_prev(i, j), data(i, j)), getGroupId(i, j));	// copy data to prev
-		}
-
-		//timer.start();
-		//processCFs();
-		//tp += timer.stop();
+		}	
 		
 		update(data_diag, upd_left, upd_right, upd_top, upd_bottom);		
 
@@ -91,26 +87,15 @@ void SHFEMProgram::exec(const size_t& num_of_steps) {
 		double eps = 1.0;
 		while(eps > cnst::EPS) {	// Jacoby method			
 			FOREACH(i, j)
-				addCF(new CFJacobyMultDirect(mesh(i, j), data_new(i, j), data(i, j), data_prev(i, j), data_coef(i, j)), getGroupId(i, j));	// multiplication for Jacoby method			
-
-			//timer.start();
-			//processCFs();
-			//tp += timer.stop();
+				addCF(new CFJacobyMultDirect(mesh(i, j), data_new(i, j), data(i, j), data_prev(i, j), data_coef(i, j)), getGroupId(i, j));	// multiplication for Jacoby method						
 			
-			update(data_new, upd_left, upd_right, upd_top, upd_bottom);			
-
-			//timer.start();
-			//processCFs();
-			//tp += timer.stop();
-
-			//timer.start();
-			//performUpdate(send_t, recv_t, send_b, recv_b);	// perform data new update
-			//tpu += timer.stop();
+			update(data_new, upd_left, upd_right, upd_top, upd_bottom);						
 							
-			FOREACH(i, j) 
+			FOREACH(i, j) {
 				addReductionCF(new CFJacobyReduce(mesh(i, j), data_new(i, j), data(i, j), data_diag(i, j)), iter, getGroupId(i, j));	// reduction										
-			FOREACH(i, j) 
+			//FOREACH(i, j) 
 				addCF(new CFCopy(data(i, j), data_new(i, j)), getGroupId(i, j));	// copy data new to data
+			}
 			
 
 			//timer.start();
@@ -129,10 +114,10 @@ void SHFEMProgram::exec(const size_t& num_of_steps) {
 	out << this_node << " :"
 		//<< " Create " << tc
 		//<< " Data " << td
-		<< " Process " << tp 		
+		//<< " Process " << tp 		
 		//<< " Update " << tu 
-		<< " Perform " << tpu
-		<< " Reduce " << tr
+		//<< " Perform " << tpu
+		//<< " Reduce " << tr
 		<< " Iters " << iter
 		<< std::endl;	
 	std::cout << out.str();	

@@ -28,6 +28,8 @@ void FragmentedProgram::processCFs() {
 
 	reduction_cfs.clear();
 	added_cfs = CompFragmentBunch(); // clear
+
+	rts->getCFDispatcher()->waitForAllDone(); // wait for completion
 }
 
 void FragmentedProgram::deleteDoneCFs() {

@@ -9,6 +9,7 @@
 #include <boost/thread/condition_variable.hpp>
 #include <vector>
 #include <map>
+#include <queue>
 
 /**
 * CF Dispatcher - controls execution of computational fragments
@@ -20,6 +21,7 @@ protected:
 	boost::condition_variable cond;
 	size_t cfs_count;
 	int this_node;
+	std::queue<DataFragmentBunch> seeds;
 
 protected:		
 	virtual void executeCFs(const DataFragmentBunch& seed);	
