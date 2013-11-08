@@ -31,6 +31,7 @@ protected:
 	}
 
 public:	
+	void pushArg(DataFragment *arg);
 	bool pushArgAndCheckReady(DataFragment *arg);
 	bool isReady() const;
 

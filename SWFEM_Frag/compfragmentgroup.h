@@ -12,6 +12,10 @@ public:
 	CompFragmentGroup(const size_t& id, const CompFragmentPtrArray& cfs) : group_id(id), CompFragmentBunch(cfs) {}
 	~CompFragmentGroup() {}
 
+	void setGroupId(const size_t& id) {
+		group_id = id;
+	}
+
 	const size_t& getGroupId() const {
 		return group_id;
 	}	

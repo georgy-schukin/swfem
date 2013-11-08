@@ -12,7 +12,7 @@ public:
     typedef std::vector<CompFragment*>::const_iterator const_iterator;
 
 protected:
-	CompFragmentPtrArray content;
+	std::vector<CompFragment*> content;
 	DataFragmentBunch used_dfs;	
 
 public:

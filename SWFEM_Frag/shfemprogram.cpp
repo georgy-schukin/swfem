@@ -79,7 +79,7 @@ void SHFEMProgram::exec(const size_t& num_of_steps) {
 		}
 
 		//timer.start();
-		processCFs();
+		//processCFs();
 		//tp += timer.stop();
 		
 		update(data_diag, upd_left, upd_right, upd_top, upd_bottom);		
@@ -94,23 +94,24 @@ void SHFEMProgram::exec(const size_t& num_of_steps) {
 				addCF(new CFJacobyMultDirect(mesh(i, j), data_new(i, j), data(i, j), data_prev(i, j), data_coef(i, j)), getGroupId(i, j));	// multiplication for Jacoby method			
 
 			//timer.start();
-			processCFs();
+			//processCFs();
 			//tp += timer.stop();
 			
 			update(data_new, upd_left, upd_right, upd_top, upd_bottom);			
 
 			//timer.start();
-			processCFs();
+			//processCFs();
 			//tp += timer.stop();
 
 			//timer.start();
 			//performUpdate(send_t, recv_t, send_b, recv_b);	// perform data new update
 			//tpu += timer.stop();
 							
-			FOREACH(i, j) {
+			FOREACH(i, j) 
 				addReductionCF(new CFJacobyReduce(mesh(i, j), data_new(i, j), data(i, j), data_diag(i, j)), iter, getGroupId(i, j));	// reduction										
+			FOREACH(i, j) 
 				addCF(new CFCopy(data(i, j), data_new(i, j)), getGroupId(i, j));	// copy data new to data
-			}
+			
 
 			//timer.start();
 			processCFs();

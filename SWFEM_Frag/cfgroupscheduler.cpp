@@ -1,9 +1,13 @@
 #include "cfgroupscheduler.h"
 #include <boost/foreach.hpp>
+#include <iostream>
 
 void CFGroupScheduler::scheduleCFs(const CompFragmentBunch& cf_bunch) {
-	const CompFragmentGroup& group = static_cast<const CompFragmentGroup&>(cf_bunch);
-	thread_pool->execCFs(group, getThread(group.getGroupId()));
+	const CompFragmentGroup& cf_group = static_cast<const CompFragmentGroup&>(cf_bunch);
+	//std::cout << "Group " << cf_group.getGroupId() << std::endl;
+	//BOOST_FOREACH(CompFragment *cf, cf_group)
+		//std::cout << cf->toString() << std::endl;
+	thread_pool->execCFs(cf_group, getThread(cf_group.getGroupId()));
 }
 
 size_t CFGroupScheduler::getThread(const size_t& group_id) {

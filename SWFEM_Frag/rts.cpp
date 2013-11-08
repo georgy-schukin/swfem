@@ -2,12 +2,12 @@
 #include "cfgroupdispatcher.h"
 #include "cfgroupscheduler.h"
 
-RuntimeSystem::RuntimeSystem(int argc, char **argv, const size_t& num_of_threads, const bool& use_groups) {
+RuntimeSystem::RuntimeSystem(int argc, char **argv, const Config& conf) {
 	communicator.reset(new Communicator(argc, argv));	
 //	DFDispatcher *df_disp = new DFDispatcher();
-	thread_pool.reset(new ThreadPool(num_of_threads, communicator->getRank()));
+	thread_pool.reset(new ThreadPool(conf.num_of_threads, communicator->getRank()));
 
-	if (use_groups) {
+	if (conf.use_groups) {
 		cf_scheduler.reset(new CFGroupScheduler(thread_pool.get()));
 		cf_dispatcher.reset(new CFGroupDispatcher(cf_scheduler.get(), communicator->getRank()));
 	} else {
@@ -15,11 +15,13 @@ RuntimeSystem::RuntimeSystem(int argc, char **argv, const size_t& num_of_threads
 		cf_dispatcher.reset(new CFDispatcher(cf_scheduler.get(), communicator->getRank()));
 	}
 
-	reduction_manager.reset(new ReductionManager(communicator.get()));
-	//EventManager *event_manager = new EventManager();
-	logger.reset(new Logger());
-	
-	thread_pool->addCFListener(logger.get()); // add logging	
+	reduction_manager.reset(new ReductionManager(communicator.get()));	
+
+	if (conf.use_logging) {
+		logger.reset(new Logger());	
+		thread_pool->addCFListener(logger.get()); // add logging	
+	}
+
 	thread_pool->addCFListener(reduction_manager.get());
 	thread_pool->addCFListener(cf_dispatcher.get());		
 }

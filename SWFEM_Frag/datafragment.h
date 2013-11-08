@@ -19,6 +19,10 @@ private:
 	size_t curr_group;
 	CompFragment *current_cf;
 
+private:
+	CompFragment* shiftToNextCF();
+	CompFragment* shiftToNextCFInTheSameGroup();
+
 public:
 	DataFragment() : is_locked(false), curr_group(DataFragment::NO_GROUP), current_cf(0) {}	
 	virtual ~DataFragment() {}
@@ -52,6 +56,7 @@ public:
 	}
 
 	CompFragment* moveToNextCF();
+	CompFragment* moveToNextCFInTheSameGroup();
 	void freeFromCF();
 	
 	virtual size_t getWeight() = 0;	

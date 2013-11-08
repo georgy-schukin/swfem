@@ -1,12 +1,22 @@
 #include "compfragment.h"
 #include <sstream>
 #include <boost/foreach.hpp>
+#include <iostream>
+
+void CompFragment::pushArg(DataFragment *arg) {
+	BOOST_FOREACH(DataFragment *df, args) {
+		if (df == arg)
+			ready_cnt++;	
+	}
+	//std::cout << arg << " -> " << this->toString() << " : " << ready_cnt << " ( " << args.size() << " ) " << std::endl;
+}
 
 bool CompFragment::pushArgAndCheckReady(DataFragment *arg) {
-	BOOST_FOREACH(DataFragment *df, args)
+	BOOST_FOREACH(DataFragment *df, args) {
 		if (df == arg)
 			ready_cnt++;
-	//ready_cnt++;
+	}
+	//std::cout << this->toString() << " : " << ready_cnt << " ( " << args.size() << " ) " << std::endl;
 	return (ready_cnt == args.size());	
 }
 

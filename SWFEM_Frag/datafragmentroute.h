@@ -1,6 +1,7 @@
 #pragma once
 
 #include <queue>
+#include <cassert>
 
 class CompFragment;
 
@@ -37,6 +38,7 @@ public:
 	}	
 
 	RoutePoint getNextPoint() {
+		assert(!route.empty());
 		if (!route.empty()) {
 			RoutePoint point = route.front();						
 			route.pop();		
@@ -46,6 +48,7 @@ public:
 	}
 
 	const RoutePoint& peekNextPoint() const {
+		assert(!route.empty());
 		return route.front();
 	}
 

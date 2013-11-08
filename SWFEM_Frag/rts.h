@@ -13,6 +13,18 @@
 * Runtime system - for execution of fragmented program
 */
 class RuntimeSystem: public IRuntimeSystem {
+public:
+	class Config {
+	public:
+		size_t num_of_threads;
+		bool use_logging;
+		bool use_groups;
+
+	public:
+		Config() : num_of_threads(1), use_logging(false), use_groups(false) {}
+		~Config() {}
+	};
+
 private:	
 	//boost::scoped_ptr<ICFExecutor> cf_executor;
 	boost::scoped_ptr<CFScheduler> cf_scheduler;
@@ -25,7 +37,7 @@ private:
 	boost::scoped_ptr<Logger> logger;	
 
 public:
-	RuntimeSystem(int argc, char **argv, const size_t& num_of_threads, const bool& use_groups = false);
+	RuntimeSystem(int argc, char **argv, const Config& conf);
 	virtual ~RuntimeSystem();	
 
 	ICFDispatcher* getCFDispatcher();

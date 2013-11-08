@@ -44,9 +44,14 @@ int main(int argc, char **argv) {
 	const size_t fragment_num_y = a.arg(2);	 // num of fragments by Y
 	const size_t num_of_exec_threads = a.arg(1); // num of exec threads to run fragments
 	const size_t num_of_time_steps = a.arg(5); // num of time steps to do
-	const bool use_groups = (a.arg(0) == 1);
+	const bool use_groups = (a.arg(1) == 1);
 
-	RuntimeSystem rts(argc, argv, num_of_exec_threads, use_groups);	// create and start rts
+	RuntimeSystem::Config conf;
+	conf.num_of_threads = num_of_exec_threads;
+	conf.use_groups = use_groups;
+	conf.use_logging = false;
+
+	RuntimeSystem rts(argc, argv, conf);	// create and start rts
 	
 	if(rts.getCommunicator()->getRank() == 0) {
 		std::ostringstream out;

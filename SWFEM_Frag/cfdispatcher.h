@@ -14,9 +14,6 @@
 * CF Dispatcher - controls execution of computational fragments
 */
 class CFDispatcher: public ICFDispatcher, public ICFListener {
-protected:
-	typedef std::map<size_t, CompFragmentGroup> CompFragmentGroupMap;
-
 protected:	
 	ICFScheduler* cf_scheduler;	
 	boost::mutex mutex;
@@ -25,9 +22,7 @@ protected:
 	int this_node;
 
 protected:		
-	virtual void executeCFs(const DataFragmentBunch& seed);
-	virtual void removeNotReadyArgs(DataFragmentBunch& args);
-	
+	virtual void executeCFs(const DataFragmentBunch& seed);	
 	void getGeneration(const DataFragmentBunch& args, CompFragmentBunch& ready_cfs);
 		
 public:

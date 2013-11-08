@@ -7,11 +7,10 @@ void CFDispatcher::addCFs(const CompFragmentBunch& cf_bunch) {
 	boost::unique_lock<boost::mutex> lock(mutex);
 
 	BOOST_FOREACH(CompFragment *cf, cf_bunch) {
+		//std::cout << "ADD " << cf->toString() << std::endl;
 		BOOST_FOREACH(DataFragment *df, cf->getArgs()) {
-			df->getRoute().addPoint(DataFragmentRoute::RoutePoint(cf, this_node));
-			//std::cout << df << " add arg" << cf->toString() << std::endl;
-		}
-		//std::cout << "Add " << cf->toString() << std::endl;
+			df->getRoute().addPoint(DataFragmentRoute::RoutePoint(cf, this_node));			
+		}		
 	}
 
 	cfs_count += cf_bunch.size();
@@ -20,11 +19,8 @@ void CFDispatcher::addCFs(const CompFragmentBunch& cf_bunch) {
 }
 
 void CFDispatcher::executeCFs(const DataFragmentBunch& seed) {	
-	DataFragmentBunch ready_args = seed;
-	removeNotReadyArgs(ready_args);
-
 	CompFragmentBunch ready_cfs;
-	getGeneration(ready_args, ready_cfs);
+	getGeneration(seed, ready_cfs);
 
 	if (ready_cfs.size() > 0) {		
 		cf_scheduler->scheduleCFs(ready_cfs);
@@ -33,27 +29,11 @@ void CFDispatcher::executeCFs(const DataFragmentBunch& seed) {
 
 void CFDispatcher::getGeneration(const DataFragmentBunch& args, CompFragmentBunch& ready_cfs) {
 	BOOST_FOREACH(DataFragment *df, args) {
-		if (df->isReady()) {			
-			const DataFragmentRoute::RoutePoint next_point = df->getRoute().getNextPoint();
-			CompFragment *cf = next_point.getCF();						
-			df->setCurrentGroup(cf->getGroupId());
-			df->lock();
-			if (cf->pushArgAndCheckReady(df)) {				
-				ready_cfs.add(cf);
-			}
+		CompFragment *next_cf = df->moveToNextCF();
+		if (next_cf && next_cf->isReady()) { 		
+			ready_cfs.add(next_cf);	
 		}
 	}
-}
-
-void CFDispatcher::removeNotReadyArgs(DataFragmentBunch& args) {
-	DataFragmentPtrArray args_to_remove;
-	BOOST_FOREACH(DataFragment *df, args) {		
-		if (!df->isReady())			
-			args_to_remove.push_back(df);
-	}
-
-	BOOST_FOREACH(DataFragment *df, args_to_remove)
-		args.remove(df);
 }
 
 void CFDispatcher::waitForAllDone() {
@@ -68,8 +48,11 @@ void CFDispatcher::onCFsDone(CompFragmentBunch& cf_bunch) {
 
 	BOOST_FOREACH(CompFragment *cf, cf_bunch)
 		cf->setDone(); // mark cf as done		
+	
+	BOOST_FOREACH(DataFragment *df, cf_bunch.getArgs())
+		df->freeFromCF();
 
-	cf_bunch.unlockArgs();
+	//cf_bunch.unlockArgs();
 
 	cfs_count -= cf_bunch.size();	
 	if(cfs_count == 0) {

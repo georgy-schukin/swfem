@@ -3,54 +3,51 @@
 
 void CFGroupDispatcher::executeCFs(const DataFragmentBunch& seed) {
 	CompFragmentGroupMap cf_groups;
+
 	getGroups(seed, cf_groups);
 
 	BOOST_FOREACH(CompFragmentGroupMap::value_type& p, cf_groups) {
 		CompFragmentGroup& group = p.second;
-		group.lockArgs();
+		group.setGroupId(p.first);
+		//group.lockArgs();
 		cf_scheduler->scheduleCFs(group);
 	}
 }
 
 void CFGroupDispatcher::getGroups(const DataFragmentBunch& seed, CompFragmentGroupMap& cf_groups) {
-	DataFragmentBunch ready_args = seed;
+	DataFragmentBunch args = seed;
 
-	BOOST_FOREACH(DataFragment *df, ready_args)
-		df->setCurrentGroup(DataFragment::NO_GROUP);
-
-	removeNotReadyArgs(ready_args);
-
-	CompFragmentBunch ready_cfs;
-	while (!ready_args.isEmpty()) {
-		CompFragmentBunch ready_generation;
-		getGeneration(ready_args, ready_generation);
-		ready_cfs.add(ready_generation);
-		ready_generation.unlockArgs();
-		removeNotReadyArgs(ready_args);		
-	}	
-
-	BOOST_FOREACH(CompFragment *cf, ready_cfs) 
-		cf_groups[cf->getGroupId()].add(cf);
+	//BOOST_FOREACH(DataFragment *df, args)
+		//df->setCurrentGroup(DataFragment::NO_GROUP);	
+	
+	while (!args.isEmpty()) {		
+		CompFragmentBunch ready;
+		//std::cout << "GENERATION" << std::endl;
+		getGenerationWithGroups(args, cf_groups, ready);
+		//ready.unlockArgs();
+	}		
+	//std::cout << "END\n" << std::endl;
 }
 
-void CFGroupDispatcher::removeNotReadyArgs(DataFragmentBunch& args) {
+void CFGroupDispatcher::getGenerationWithGroups(DataFragmentBunch& args, CompFragmentGroupMap& cf_groups, CompFragmentBunch& ready) {
 	DataFragmentPtrArray args_to_remove;
+
 	BOOST_FOREACH(DataFragment *df, args) {
-		bool remove_df = false;
-
-		if (!df->isReady())
-			remove_df = true;
-		else {
-			const size_t& curr_group = df->getCurrentGroup();
-			if ((curr_group != DataFragment::NO_GROUP) && 
-				(curr_group != df->getRoute().peekNextCF()->getGroupId()))
-				remove_df = true;
+		CompFragment *next_cf = df->moveToNextCFInTheSameGroup();
+		if (next_cf) { // success move			
+			if (next_cf->isReady()) {
+				//std::cout << "READY " << next_cf->toString() << std::endl;
+				cf_groups[next_cf->getGroupId()].add(next_cf);
+				//ready.add(next_cf);
+				//BOOST_FOREACH(DataFragment *df, next_cf->getArgs())
+					//df->unlock();
+			}
+		} else {
+			args_to_remove.push_back(df); // can't move - remove arg
 		}
-
-		if (remove_df)
-			args_to_remove.push_back(df);
 	}
 
 	BOOST_FOREACH(DataFragment *df, args_to_remove)
 		args.remove(df);
 }
+
