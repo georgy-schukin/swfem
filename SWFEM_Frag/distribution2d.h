@@ -45,7 +45,7 @@ public:
 		return num_of_nodes_by_y;
 	}
 
-	const Region2D& getBlock(const size_t& node_x, const size_t& node_y) const {
+	const Region2D& getBlock(const size_t& node_y, const size_t& node_x) const {
 		return this->get(node_y*num_of_nodes_by_x + node_x);
 	}
 

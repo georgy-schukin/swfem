@@ -21,13 +21,14 @@ protected:
 	size_t start;
 	size_t step;	
 	size_t num;
+	BorderType border_type;
 
 protected:
 	void init(const Region2D& reg, const BorderType& border);
 
 public:
 	CFJacobyUpdate() {}
-	CFJacobyUpdate(Data *data, Data *buf, const Region2D& reg, const BorderType& border) {				
+	CFJacobyUpdate(Data *data, Data *buf, const Region2D& reg, const BorderType& border) : border_type(border) {				
 		addArg(data);		
 		addArg(buf);
 		init(reg, border);

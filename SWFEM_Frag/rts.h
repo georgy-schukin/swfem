@@ -1,7 +1,7 @@
 #pragma once
 
-#include "irts.h"
 #include "communicator.h"
+#include "irts.h"
 #include "threadpool.h"
 #include "cfscheduler.h"
 #include "cfdispatcher.h"

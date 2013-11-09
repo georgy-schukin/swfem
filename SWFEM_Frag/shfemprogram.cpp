@@ -7,7 +7,7 @@
 #include <sstream>
 #include <boost/foreach.hpp>
 
-#define FORX(i) for (size_t i = this_block.getStartByX(); i < this_block.getEndByX(); i++)
+#define FORX(j) for (size_t j = this_block.getStartByX(); j < this_block.getEndByX(); j++)
 #define FORY(i) for (size_t i = this_block.getStartByY(); i < this_block.getEndByY(); i++)
 #define FOREACH(i,j) FORY(i) FORX(j)
 
@@ -138,9 +138,12 @@ void SHFEMProgram::update(DataArray& data, DataArray& left, DataArray& right, Da
 	}
 
 	FOREACH(i, j) {			
-		const Region2D& mesh_reg = mesh_fragmentation.getBlock(i, j);		
-		if (j > 0) 			
+		const Region2D& mesh_reg = mesh_fragmentation.getBlock(i, j);
+		if (j > 0) {			
+			//const Region2D& left_reg = mesh_fragmentation.getBlock(i, j - 1);
+			//assert(mesh_reg.getSizeByY() == left_reg.getSizeByY());
 			addCF(new CFJacobyUpdateRecv(data(i, j), right(i, j - 1), mesh_reg, CFJacobyUpdate::LEFT), getGroupId(i, j)); // upd left with right
+		}
 		if (j < mesh_distribution.getSizeByX() - 1)
 			addCF(new CFJacobyUpdateRecv(data(i, j), left(i, j + 1), mesh_reg, CFJacobyUpdate::RIGHT), getGroupId(i, j)); // upd right with left
 	}

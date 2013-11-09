@@ -1,7 +1,7 @@
+#include "rts.h"
 #include "shfemprogram.h"
 #include "shfemseqprogram.h"
 #include "shfemmpiprogram.h"
-#include "rts.h"
 #include "timer.h"
 #include <sstream>
 #include <stdio.h>
@@ -27,9 +27,9 @@ public:
 };
 
 enum RunMode {
-	FRAG = 0,
-	MPI,
-	SEQ
+	USE_FRAG = 0,
+	USE_MPI,
+	USE_SEQ
 };
 
 const std::string mode_names[3] = {"FRAG", "MPI", "SEQ"};
@@ -37,14 +37,14 @@ const std::string mode_names[3] = {"FRAG", "MPI", "SEQ"};
 int main(int argc, char **argv) {
 
 	Args a(argc, argv);
-	const size_t mode = a.arg(FRAG); // mode
+	const size_t mode = a.arg(USE_FRAG); // mode
 	const size_t mesh_size_x = a.arg(201); // num of nodes in mesh by X
 	const size_t mesh_size_y = a.arg(201); // num of nodes in mesh by Y	
-	const size_t fragment_num_x = a.arg(2); // num of fragments by X
-	const size_t fragment_num_y = a.arg(2);	 // num of fragments by Y
-	const size_t num_of_exec_threads = a.arg(4); // num of exec threads to run fragments
-	const size_t num_of_time_steps = a.arg(5); // num of time steps to do
-	const bool use_groups = (a.arg(1) != 0);
+	const size_t fragment_num_x = a.arg(8); // num of fragments by X
+	const size_t fragment_num_y = a.arg(8);	 // num of fragments by Y
+	const size_t num_of_exec_threads = a.arg(1); // num of exec threads to run fragments
+	const size_t num_of_time_steps = a.arg(100); // num of time steps to do
+	const bool use_groups = (a.arg(0) != 0);
 
 	RuntimeSystem::Config conf;
 	conf.num_of_threads = num_of_exec_threads;
@@ -70,16 +70,16 @@ int main(int argc, char **argv) {
 
 	Timer timer;
 	timer.start();
-	switch(mode) {	// which program to run
-		case FRAG:	{	// fragmented program			
+	switch(mode) {	
+		case USE_FRAG:	{	// fragmented program			
 			SHFEMProgram(&rts, mesh_size_x, mesh_size_y, fragment_num_x, fragment_num_y).exec(num_of_time_steps);				
 			break;
 		}
-		case MPI: {	// MPI program			
+		case USE_MPI: {	// MPI program			
 			SHFEMMPIProgram(&rts, mesh_size_x, mesh_size_y).exec(num_of_time_steps);	
 			break;
 		}
-		case SEQ: {	// sequental program			
+		case USE_SEQ: {	// sequental program			
 			SHFEMSeqProgram(&rts).exec(mesh_size_x, mesh_size_y, num_of_time_steps);	
 			break;
 		}

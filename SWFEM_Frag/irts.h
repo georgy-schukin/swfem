@@ -1,9 +1,9 @@
 #pragma once
 
+#include "icommunicator.h"
 #include "icfdispatcher.h"
 #include "idfdispatcher.h"
 #include "ireductionmanager.h"
-#include "icommunicator.h"
 
 /**
 * Generic runtime system interface

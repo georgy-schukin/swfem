@@ -12,7 +12,7 @@ void CFJacobyUpdate::init(const Region2D& reg, const BorderType& border) {
 		case CFJacobyUpdate::RIGHT: // right vert
 			{
 				start = reg.getSizeByX() - 1;
-				step = reg.getSizeByY();
+				step = reg.getSizeByX();
 				num = reg.getSizeByY();
 				break;
 			}
