@@ -5,6 +5,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SWFEM", "SWFEM\SWFEM.vcxpro
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SWFEM_Frag", "SWFEM_Frag\SWFEM_Frag.vcxproj", "{16E00106-BBC7-47C0-8B0B-599D547265E1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MeshPartitioner", "MeshPartitioner\MeshPartitioner.vcxproj", "{607809A9-FBBE-42BA-A517-B06D48A8BEE7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +21,10 @@ Global
 		{16E00106-BBC7-47C0-8B0B-599D547265E1}.Debug|Win32.Build.0 = Debug|Win32
 		{16E00106-BBC7-47C0-8B0B-599D547265E1}.Release|Win32.ActiveCfg = Release|Win32
 		{16E00106-BBC7-47C0-8B0B-599D547265E1}.Release|Win32.Build.0 = Release|Win32
+		{607809A9-FBBE-42BA-A517-B06D48A8BEE7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{607809A9-FBBE-42BA-A517-B06D48A8BEE7}.Debug|Win32.Build.0 = Debug|Win32
+		{607809A9-FBBE-42BA-A517-B06D48A8BEE7}.Release|Win32.ActiveCfg = Release|Win32
+		{607809A9-FBBE-42BA-A517-B06D48A8BEE7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

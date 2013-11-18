@@ -141,6 +141,8 @@
     <ClInclude Include="shfemmpiprogram.h" />
     <ClInclude Include="shfemseqprogram.h" />
     <ClInclude Include="shfemprogram.h" />
+    <ClInclude Include="testconfig.h" />
+    <ClInclude Include="tester.h" />
     <ClInclude Include="threadpool.h" />
     <ClInclude Include="timer.h" />
     <ClInclude Include="updater.h" />
@@ -188,6 +190,8 @@
     <ClCompile Include="shfemmpiprogram.cpp" />
     <ClCompile Include="shfemseqprogram.cpp" />
     <ClCompile Include="shfemprogram.cpp" />
+    <ClCompile Include="testconfig.cpp" />
+    <ClCompile Include="tester.cpp" />
     <ClCompile Include="threadpool.cpp" />
     <ClCompile Include="updater.cpp" />
   </ItemGroup>

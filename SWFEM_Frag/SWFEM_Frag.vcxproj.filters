@@ -58,6 +58,12 @@
     <Filter Include="Source Files\df\distribution">
       <UniqueIdentifier>{99e1a22c-43a1-4a4a-8ea7-12926c085e1f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\test">
+      <UniqueIdentifier>{8f900af1-2600-42bb-b041-e57a17fe3eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\test">
+      <UniqueIdentifier>{37f6c58b-df1a-48c4-b197-ae0e44888120}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="meshnode.h">
@@ -291,6 +297,12 @@
     <ClInclude Include="cfalloc.h">
       <Filter>Header Files\cf\cfs</Filter>
     </ClInclude>
+    <ClInclude Include="tester.h">
+      <Filter>Header Files\test</Filter>
+    </ClInclude>
+    <ClInclude Include="testconfig.h">
+      <Filter>Header Files\test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -424,6 +436,12 @@
     </ClCompile>
     <ClCompile Include="datafragment.cpp">
       <Filter>Source Files\df</Filter>
+    </ClCompile>
+    <ClCompile Include="tester.cpp">
+      <Filter>Source Files\test</Filter>
+    </ClCompile>
+    <ClCompile Include="testconfig.cpp">
+      <Filter>Source Files\test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
